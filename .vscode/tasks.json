@@ -34,7 +34,7 @@
         {
             "label": "mypy",
             "type": "shell",
-            "command": "python -m mypy --config-file pyproject.toml octoprobe || true",
+            "command": "python -m mypy --config-file pyproject.toml . || true",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -47,7 +47,7 @@
         {
             "label": "pylint",
             "type": "shell",
-            "command": "python -m pylint octoprobe infrastructure_tutorial || true",
+            "command": "PYTHONPATH=${workspaceFolder} python -m pylint . tests || true",
             "options": {
                 "cwd": "${workspaceFolder}"
             },

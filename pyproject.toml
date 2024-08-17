@@ -76,7 +76,7 @@ module = "usb.*"
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-pythonpath = "./infrastructure_tutorial"
+pythonpath = "."
 addopts = [
   # "-m", "not live",
   "--strict-config",
@@ -116,19 +116,16 @@ filterwarnings = [
 parallel = true
 source = [
     "tests",
-    "octoprobe"
 ]
 context = '${CONTEXT}'
 omit = [
-    "docs_src/response_model/tutorial003_04.py",
-    "docs_src/response_model/tutorial003_04_py310.py",
 ]
 
 [tool.ruff]
 target-version = "py312"
 # All paths are relative to the project root, which is the directory containing the pyproject.toml.
-src = ["octoprobe", "infrastructure_tutorial"]
-exclude = ["assessments", "branding"]
+src = [".",]
+exclude = ["doc"]
 
 [tool.ruff.lint]
 select = [

@@ -1,5 +1,2 @@
-git+https://github.com/octoprobe/usbhubctl
-pyudev
-mpremote
-typer-slim
-Jinja2
+git+https://github.com/octoprobe/octoprobe.git
+pytest

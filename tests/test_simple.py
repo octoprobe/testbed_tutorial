@@ -1,7 +1,7 @@
 import pytest
+from octoprobe.lib_tentacle import Tentacle
 
 from config_constants import EnumFut
-from octoprobe.lib_tentacle import Tentacle
 
 
 @pytest.mark.required_futs(EnumFut.FUT_I2C)

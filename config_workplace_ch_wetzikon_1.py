@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from infrastructure_tutorial.config_constants import EnumFut, TentacleType
 from octoprobe.lib_infrastructure import Infrastructure
 from octoprobe.lib_tentacle import Tentacle
+
+from config_constants import EnumFut, TentacleType
 
 from .config_tentacles import (
     McuConfig,

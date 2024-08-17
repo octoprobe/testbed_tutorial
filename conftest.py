@@ -3,13 +3,12 @@ import pathlib
 from collections.abc import Iterator
 
 import pytest
-from pytest import fixture
-from usbhubctl.util_logging import init_logging
-
 from octoprobe.lib_tentacle import Tentacle
 from octoprobe.octoprobe import NTestRun
 from octoprobe.util_dut_programmers import FirmwareSpec
 from octoprobe.util_pytest import break_into_debugger_on_exception
+from pytest import fixture
+from usbhubctl.util_logging import init_logging
 
 from .config_constants import EnumFut, TentacleType
 from .config_workplace_ch_wetzikon_1 import INFRASTRUCTURE
