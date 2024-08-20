@@ -5,7 +5,7 @@
 	(uuid "188054c4-74b7-429a-b3f5-c6f3151e27de")
 	(paper "A4")
 	(title_block
-		(title "Octoprobe: Infrastructure Tutorial")
+		(title "Octoprobe: Testbed Tutorial")
 		(date "2024-07-16")
 		(company "Hans Märki, Märki Informatik")
 		(comment 1 "The MIT License (MIT)")
@@ -42,7 +42,7 @@
 			)
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de"
 					(page "5")
 				)
@@ -80,7 +80,7 @@
 			)
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de"
 					(page "2")
 				)
@@ -118,7 +118,7 @@
 			)
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de"
 					(page "3")
 				)
@@ -156,7 +156,7 @@
 			)
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de"
 					(page "4")
 				)

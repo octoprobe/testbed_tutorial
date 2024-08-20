@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "pytest infrastructure_tutorial RPI_PICO 1.23.0",
+            "name": "pytest RPI_PICO 1.23.0",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
@@ -20,7 +20,7 @@
             "justMyCode": false,
         },
         {
-            "name": "pytest infrastructure_tutorial RPI_PICO 1.22.1",
+            "name": "pytest RPI_PICO 1.22.1",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
@@ -35,7 +35,7 @@
             "justMyCode": false,
         },
         {
-            "name": "pytest infrastructure_tutorial PYBV11 1.22.2",
+            "name": "pytest PYBV11 1.22.2",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
@@ -50,7 +50,7 @@
             "justMyCode": false,
         },
         {
-            "name": "pytest infrastructure_tutorial PYBV11 1.23.0",
+            "name": "pytest PYBV11 1.23.0",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",

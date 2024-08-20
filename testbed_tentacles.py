@@ -4,7 +4,7 @@ import dataclasses
 
 from octoprobe.util_baseclasses import TentacleSpec
 
-from .config_constants import EnumFut, TentacleType
+from .testbed_constants import EnumFut, TentacleType
 
 
 @dataclasses.dataclass
@@ -20,7 +20,7 @@ class McuConfig:
 
 
 DOC_TENTACLE_PYBOARD = """
-See: https://github.com/hmaerki/experiment_microoctopus/tree/main/infrastructure_tutorial/tentacle_MCU_grobotics_pyboard
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_grobotics_pyboard
 """
 tentacle_spec_pyboard = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
@@ -43,7 +43,7 @@ tentacle_spec_pyboard = TentacleSpec(
 
 
 DOC_TENTACLE_RASPBERRY_PICO = """
-See: https://github.com/hmaerki/experiment_microoctopus/tree/main/infrastructure_tutorial/tentacle_MCU_raspberry_pico
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_raspberry_pico
 """
 tentacle_spec_raspberry_pico = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,

@@ -1,4 +1,4 @@
-# infrastructure_tutorial
+# testbed_tutorial
 
 This tutorial repos show how use octoprobe. Schematics &amp; pytest.
 

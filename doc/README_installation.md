@@ -1,4 +1,4 @@
-# This is how to install Octoprobe and infrastructure_tentacle 
+# This is how to install Octoprobe and testbed_tutorial 
 
 Target OS: Ubuntu 24.04 LTS.
 
@@ -20,11 +20,11 @@ sudo apt update \
 On Raspbian: Skip python3.12-venv
 
 
-## git clone infrastructure_tutorial
+## git clone testbed_tutorial
 
 ```bash
-git clone https://github.com/octoprobe/infrastructure_tutorial.git
-cd infrastructure_tutorial/
+git clone https://github.com/octoprobe/testbed_tutorial.git
+cd testbed_tutorial/
 ```
 
 ## python

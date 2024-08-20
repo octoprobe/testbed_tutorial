@@ -1,5 +1,5 @@
 """
-Constants required by this infrastructure.
+Constants required by this testbed.
 """
 
 from __future__ import annotations

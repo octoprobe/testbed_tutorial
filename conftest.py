@@ -10,8 +10,8 @@ from octoprobe.util_pytest import break_into_debugger_on_exception
 from pytest import fixture
 from usbhubctl.util_logging import init_logging
 
-from .config_constants import EnumFut, TentacleType
-from .config_workplace_ch_wetzikon_1 import INFRASTRUCTURE
+from .testbed_ch_wetzikon_1 import TESTBED
+from .testbed_constants import EnumFut, TentacleType
 
 logger = logging.getLogger(__file__)
 
@@ -56,7 +56,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
     if "mcu" in metafunc.fixturenames:
         tentacles = TentacleType.TENTACLE_MCU.get_tentacles_for_type(
-            tentacles=INFRASTRUCTURE.tentacles,
+            tentacles=TESTBED.tentacles,
             required_futs=_required_futs,
         )
         firmware_spec = get_firmware_spec(config=metafunc.config)
@@ -70,7 +70,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
     if "device_potpourry" in metafunc.fixturenames:
         tentacles = TentacleType.TENTACLE_DEVICE_POTPOURRY.get_tentacles_for_type(
-            INFRASTRUCTURE.tentacles,
+            TESTBED.tentacles,
             required_futs=_required_futs,
         )
         assert len(tentacles) > 0
@@ -78,7 +78,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
     if "daq_saleae" in metafunc.fixturenames:
         tentacles = TentacleType.TENTACLE_DAQ_SALEAE.get_tentacles_for_type(
-            INFRASTRUCTURE.tentacles,
+            TESTBED.tentacles,
             required_futs=_required_futs,
         )
         assert len(tentacles) > 0
@@ -110,7 +110,7 @@ def testrun(request: pytest.FixtureRequest) -> Iterator[NTestRun]:
     firmware_spec = get_firmware_spec(request.config)
     firmware_spec.download()
     _testrun = NTestRun(
-        infrastructure=INFRASTRUCTURE,
+        testbed=TESTBED,
         firmware_spec=firmware_spec,
     )
 

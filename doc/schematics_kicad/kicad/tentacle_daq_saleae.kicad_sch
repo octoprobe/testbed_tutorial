@@ -2117,7 +2117,7 @@
 			(uuid "b4066fb4-085c-4af2-bea5-2566cbd63f52")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(reference "T901")
 					(unit 1)
@@ -2203,7 +2203,7 @@
 			(uuid "94356755-1b05-41dc-a43f-cc4897697b4a")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(reference "T902")
 					(unit 1)
@@ -2310,7 +2310,7 @@
 			(uuid "54135bb4-ab68-46f2-9239-8ec1ee47685d")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(reference "T903")
 					(unit 1)
@@ -2376,7 +2376,7 @@
 			(uuid "ab99544f-d653-47de-ac53-e37dc72adb8c")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(reference "#PWR0502")
 					(unit 1)
@@ -2442,7 +2442,7 @@
 			(uuid "a99e74f1-f818-4bfe-b658-59481f682b67")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(reference "#PWR0501")
 					(unit 1)
@@ -2512,7 +2512,7 @@
 			(uuid "712f166c-1f19-43d0-bfe2-dac755c46393")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(reference "R502")
 					(unit 1)
@@ -2648,7 +2648,7 @@
 			(uuid "234c4e7d-adb8-41e1-9a4a-9d5a57f1d6d9")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(reference "#PWR0901")
 					(unit 1)
@@ -2769,7 +2769,7 @@
 			(uuid "0522bc54-f7e7-4a3a-84b0-639c7d8166a2")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/2c4ba952-55c5-4e16-806b-8dc205881760"
 					(page "12")
 				)

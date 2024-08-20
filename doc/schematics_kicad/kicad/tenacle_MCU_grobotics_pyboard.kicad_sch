@@ -1974,7 +1974,7 @@
 			(uuid "1a18c2cb-953f-42b2-82dd-b9c2d8b0e47d")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/a196d1ad-2a7e-47a3-8a53-65ea8ad08c90"
 					(reference "T301")
 					(unit 1)
@@ -2081,7 +2081,7 @@
 			(uuid "fe2d4bce-477c-4c35-bf5e-9854a3496107")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/a196d1ad-2a7e-47a3-8a53-65ea8ad08c90"
 					(reference "T302")
 					(unit 1)
@@ -2149,7 +2149,7 @@
 			(uuid "87af7de6-0b45-4d00-a960-6c7bd030fc17")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/a196d1ad-2a7e-47a3-8a53-65ea8ad08c90"
 					(reference "R301")
 					(unit 1)
@@ -2215,7 +2215,7 @@
 			(uuid "ae969526-9fe0-41ba-a89a-80c09dda58d1")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/a196d1ad-2a7e-47a3-8a53-65ea8ad08c90"
 					(reference "#PWR0303")
 					(unit 1)
@@ -2281,7 +2281,7 @@
 			(uuid "a5a38234-a088-43eb-8d6e-dcae11c47b7b")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/a196d1ad-2a7e-47a3-8a53-65ea8ad08c90"
 					(reference "#PWR0301")
 					(unit 1)
@@ -2348,7 +2348,7 @@
 			(uuid "c82d02fb-cd1a-4ed4-b44e-5225640fdf36")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/a196d1ad-2a7e-47a3-8a53-65ea8ad08c90"
 					(reference "#PWR0302")
 					(unit 1)
@@ -2469,7 +2469,7 @@
 			(uuid "aac3484d-a171-4236-82b9-db61e778003e")
 		)
 		(instances
-			(project "infrastructure"
+			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de/a196d1ad-2a7e-47a3-8a53-65ea8ad08c90"
 					(page "11")
 				)

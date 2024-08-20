@@ -1,17 +1,17 @@
-# Infrastructure `INFRASTRUCTURE_TUTORIAL`
+# Testbed `testbed_tutorial`
 
-Every infrastructure requires a unique label. This is `INFRASTRUCTURE_TUTORIAL`.
+Every testbed requires a unique label. This is `testbed_tutorial`.
 
-Other infrastructure labels could be:
-* `INFRASTRUCTURE_MODBUS`: Modbus RTU is very time critical, specially timeouts/retires. This infrastructure tests these timing aspects, specially in error and race condition.
-* `INFRASTRUCTURE_I2C_MULTCONTROLLER`: In multicontroller (multimaster) mode many special situations an race condition may occur. The infrastructure provides the hardware to create error conditions like shortening the bus. It may be tested if and how the software recovers from these errors.
+Other testbed labels could be:
+* `TESTBED_MODBUS`: Modbus RTU is very time critical, specially timeouts/retires. This testbed tests these timing aspects, specially in error and race condition.
+* `TESTBED_I2C_MULTCONTROLLER`: In multicontroller (multimaster) mode many special situations an race condition may occur. The testbed provides the hardware to create error conditions like shortening the bus. It may be tested if and how the software recovers from these errors.
 * ...
 
-This infrastructure demonstrates the various aspects of octoprobe.
+This testbed demonstrates the various aspects of octoprobe.
 
 It allows to write/run meaningful tests.
 
-Another aspect is how the documention/specification of the infrastructure and tentacles relate.
+Another aspect is how the documention/specification of the testbed and tentacles relate.
 
 ## How to use this specification / rationale
 
@@ -30,11 +30,11 @@ Another aspect is how the documention/specification of the infrastructure and te
   * tentacle configuration
   * Example `TENTACLE_MCU_xxx`/`TENTACLE_DEVICE_xxx`
 
-Define what may be tested with this infrastructure.
+Define what may be tested with this testbed.
 
-Define how test must be written to be able to run on this infrastructure.
+Define how test must be written to be able to run on this testbed.
 
-# Specification `INFRASTRUCTURE_TUTORIAL`
+# Specification `testbed_tutorial`
 
 ## Octobus
 
@@ -142,7 +142,7 @@ How to electrically override `SIGNAL_DATA1/2`:
   * I2C/ONEWIRE: `SIGNAL_DATA1/2` are pulled up. `TENTACLE_DAQ_SALEAE` may just override these outputs.
   * UART: The TX-signals outputs have low impedance. A serial 1k resitor is added (see `TENTACLE_MCU_x`/`TENTACLE_DEVICE_x`) which then allows `TENTACLE_DAQ_SALEAE` to override both TX-signals.
 
-# Impelmentation `INFRASTRUCTURE_TUTORIAL`
+# Impelmentation `testbed_tutorial`
 
 [Schematics](schematics_kicad/schematics.pdf)
 
