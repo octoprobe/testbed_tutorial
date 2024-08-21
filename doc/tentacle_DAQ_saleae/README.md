@@ -1,5 +1,11 @@
 # `TENTACLE_DAQ_saleae`
 
+![](top_view.jpg)
+
+## DAQ
+
+The DAQ is read out using sigrok.
+
 
 [sigrok / Saleae](https://sigrok.org/wiki/Noname_Saleae_Logic_clone)
 
@@ -15,8 +21,3 @@
 
 ![](weact_logic_analyzer_b.png)
 
-## DAQ
-
-The DAQ is read out using sigrok.
-
-![](top_view.jpg)
