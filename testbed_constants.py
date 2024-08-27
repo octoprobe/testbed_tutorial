@@ -5,10 +5,15 @@ Constants required by this testbed.
 from __future__ import annotations
 
 import enum
+import pathlib
 import typing
 
 if typing.TYPE_CHECKING:
     from octoprobe.lib_tentacle import Tentacle
+
+DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
+DIRECTORY_DOWNLOADS = DIRECTORY_OF_THIS_FILE / "downloads"
+DIRECTORY_TESTRESULTS = DIRECTORY_OF_THIS_FILE / "testresults"
 
 
 class TentacleType(enum.StrEnum):
@@ -40,6 +45,10 @@ class TentacleType(enum.StrEnum):
 
 
 class EnumFut(enum.StrEnum):
+    FUT_MCU_ONLY = enum.auto()
+    """
+    Do not provide a empty list, use FUT_MCU_ONLY instead!
+    """
     FUT_I2C = enum.auto()
     FUT_UART = enum.auto()
     FUT_ONEWIRE = enum.auto()

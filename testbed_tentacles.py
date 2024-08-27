@@ -24,12 +24,19 @@ See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_gr
 """
 tentacle_spec_pyboard = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
-    futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
+    futs=[
+        EnumFut.FUT_MCU_ONLY,
+        EnumFut.FUT_I2C,
+        EnumFut.FUT_UART,
+        EnumFut.FUT_ONEWIRE,
+        EnumFut.FUT_TIMER,
+    ],
     category="Micropython Board",
     label="pyboard_v1.0",
     doc=DOC_TENTACLE_PYBOARD,
     tags="board=PYBV11,mcu=stm32,programmer=dfu-util",
     relays_closed={
+        EnumFut.FUT_MCU_ONLY: [],
         EnumFut.FUT_I2C: [2, 3, 4, 5],
         EnumFut.FUT_ONEWIRE: [2, 3, 4],
     },
@@ -47,12 +54,19 @@ See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_ra
 """
 tentacle_spec_raspberry_pico = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
-    futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
+    futs=[
+        EnumFut.FUT_MCU_ONLY,
+        EnumFut.FUT_I2C,
+        EnumFut.FUT_UART,
+        EnumFut.FUT_ONEWIRE,
+        EnumFut.FUT_TIMER,
+    ],
     category="Micropython Board",
     label="raspberry_pico_v1.0",
     doc=DOC_TENTACLE_RASPBERRY_PICO,
     tags="board=RPI_PICO,mcu=rp2,programmer=picotool",
     relays_closed={
+        EnumFut.FUT_MCU_ONLY: [],
         EnumFut.FUT_I2C: [2, 3, 4, 5],
         EnumFut.FUT_ONEWIRE: [2, 3, 4],
     },
