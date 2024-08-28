@@ -165,11 +165,11 @@ def setup_tentacles(
         def duration_text(duration_s: float | None = None) -> str:
             if duration_s is None:
                 duration_s = time.monotonic() - begin_s
-            return f"duration={duration_s:0.1f}s"
+            return f"{duration_s:2.0f}s"
 
         try:
             logger.info(
-                f"TEST SETUP {artifacts_directory.test_nodeid} {duration_text(0.0)}"
+                f"TEST SETUP {duration_text(0.0)} {artifacts_directory.test_nodeid}"
             )
             testrun.function_prepare_dut()
             testrun.function_setup_infra()
@@ -177,19 +177,23 @@ def setup_tentacles(
 
             testrun.setup_relays(futs=required_futs, tentacles=active_tentacles)
             logger.info(
-                f"TEST BEGIN {artifacts_directory.test_nodeid} {duration_text()}"
+                f"TEST BEGIN {duration_text()} {artifacts_directory.test_nodeid}"
             )
             yield
 
+        except Exception as e:
+            logger.warning(f"Exception during test: {e!r}")
+            logger.exception(e)
+            raise
         finally:
             logger.info(
-                f"TEST TEARDOWN {artifacts_directory.test_nodeid} {duration_text()}"
+                f"TEST TEARDOWN {duration_text()} {artifacts_directory.test_nodeid}"
             )
             try:
                 testrun.function_teardown(active_tentacles=active_tentacles)
             except Exception as e:
                 logger.exception(e)
-            logger.info(f"TEST END {artifacts_directory.test_nodeid} {duration_text()}")
+            logger.info(f"TEST END {duration_text()} {artifacts_directory.test_nodeid}")
 
 
 @pytest.fixture(scope="function")

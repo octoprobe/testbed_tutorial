@@ -7,6 +7,16 @@ And then continue with this guide.
 
 ## Installation
 
+### Users
+
+Octoprobe user: `octoprobe`
+Github runner user: `githubrunner`
+
+Do not forget to config git:
+```
+git config --global user.name "Hans Maerki"
+git config --global user.email "buhtig.hans.maerki@ergoinfo.ch"
+```
 
 ### APT
 
@@ -30,6 +40,7 @@ cd testbed_tutorial/
 ## python
 
 ```bash
+echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
 python -m venv ~/venv_octoprobe
 
 source ~/venv_octoprobe/bin/activate

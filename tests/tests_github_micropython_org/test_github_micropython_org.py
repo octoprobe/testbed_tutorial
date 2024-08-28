@@ -6,8 +6,9 @@ from octoprobe.lib_tentacle import Tentacle
 from octoprobe.util_cached_git_repo import CachedGitRepo
 from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_subprocess import subprocess_run
+from octoprobe.util_vscode_un_monkey_patch import un_monkey_patch
 
-from testbed_constants import DIRECTORY_TESTRESULTS, EnumFut
+from testbed_constants import EnumFut
 from util_github_micropython_org import (
     DIRECTORY_MICROPYTHON_GIT,
     DIRECTORY_MICROPYTHON_GIT_TESTS,
@@ -16,9 +17,6 @@ from util_github_micropython_org import (
 )
 
 logger = logging.getLogger(__file__)
-
-TIME_MIN_S = 60.0
-TIME_H_S = 60.0 * TIME_MIN_S
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -31,6 +29,9 @@ def clone_git_micropython(request: pytest.FixtureRequest) -> None:
     git = CachedGitRepo()
     if not git.clone(directory=DIRECTORY_MICROPYTHON_GIT, git_spec=git_spec):
         pytest.skip("Micropython repo not cloned!")
+
+    # Avoid hanger in run-perfbench.py/run-tests.py
+    un_monkey_patch()
 
 
 @pytest.mark.required_futs(EnumFut.FUT_MCU_ONLY)
@@ -69,13 +70,13 @@ def test_tests(mcu: Tentacle, artifacts_directory: ResultsDir) -> None:
         f"--device={mcu.dut.get_tty()}",
         f"--target={git_micropython_target(mcu)}",
         "--jobs=1",
-        f"--result-dir={DIRECTORY_TESTRESULTS}",
+        f"--result-dir={artifacts_directory.directory_test}",
         "--test-dirs=misc",
         # "misc/cexample_class.py",
     ]
     stdout = subprocess_run(
         args=args,
         cwd=DIRECTORY_MICROPYTHON_GIT_TESTS,
-        timeout_s=TIME_H_S,
+        timeout_s=60.0,
     )
     artifacts_directory("run-tests.txt").filename.write_text(stdout)
