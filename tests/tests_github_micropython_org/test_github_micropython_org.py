@@ -8,27 +8,35 @@ from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_subprocess import subprocess_run
 from octoprobe.util_vscode_un_monkey_patch import un_monkey_patch
 
-from testbed_constants import EnumFut
+from testbed_constants import DIRECTORY_GIT_CACHE, EnumFut
 from util_github_micropython_org import (
-    DIRECTORY_MICROPYTHON_GIT,
-    DIRECTORY_MICROPYTHON_GIT_TESTS,
     PYTEST_OPT_GIT_MICROPYTHON,
     git_micropython_target,
 )
 
 logger = logging.getLogger(__file__)
 
+GIT_REPO: CachedGitRepo | None = None
+
 
 @pytest.fixture(scope="session", autouse=True)
 def clone_git_micropython(request: pytest.FixtureRequest) -> None:
+    """
+    We have to clone the micropython git repo and use the tests from the subfolder "test".
+    """
     git_spec = request.config.getoption(PYTEST_OPT_GIT_MICROPYTHON)
     if git_spec is None:
         pytest.skip(
             "Micropython repo not cloned - argument '{PYTEST_OPT_GIT_MICROPYTHON}'not given to pytest !"
         )
-    git = CachedGitRepo()
-    if not git.clone(directory=DIRECTORY_MICROPYTHON_GIT, git_spec=git_spec):
-        pytest.skip("Micropython repo not cloned!")
+
+    global GIT_REPO
+    GIT_REPO = CachedGitRepo(
+        directory_cache=DIRECTORY_GIT_CACHE,
+        git_spec=git_spec,
+        prefix="micropython_tests_",
+    )
+    GIT_REPO.clone()
 
     # Avoid hanger in run-perfbench.py/run-tests.py
     un_monkey_patch()
@@ -51,7 +59,7 @@ def test_perf_bench(mcu: Tentacle, artifacts_directory: ResultsDir) -> None:
     ]
     stdout = subprocess_run(
         args=args,
-        cwd=DIRECTORY_MICROPYTHON_GIT_TESTS,
+        cwd=GIT_REPO.directory / "tests",
         timeout_s=300.0,
     )
     artifacts_directory("run-perfbench.txt").filename.write_text(stdout)
@@ -76,7 +84,7 @@ def test_tests(mcu: Tentacle, artifacts_directory: ResultsDir) -> None:
     ]
     stdout = subprocess_run(
         args=args,
-        cwd=DIRECTORY_MICROPYTHON_GIT_TESTS,
+        cwd=GIT_REPO.directory / "tests",
         timeout_s=60.0,
     )
     artifacts_directory("run-tests.txt").filename.write_text(stdout)

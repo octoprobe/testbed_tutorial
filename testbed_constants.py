@@ -14,6 +14,7 @@ if typing.TYPE_CHECKING:
 DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
 DIRECTORY_DOWNLOADS = DIRECTORY_OF_THIS_FILE / "downloads"
 DIRECTORY_TESTRESULTS = DIRECTORY_OF_THIS_FILE / "testresults"
+DIRECTORY_GIT_CACHE = DIRECTORY_OF_THIS_FILE / "git_cache"
 
 
 class TentacleType(enum.StrEnum):
