@@ -10,7 +10,7 @@ def test_i2c(
     device_potpourry: Tentacle,
     daq_saleae: Tentacle,
 ) -> None:
-    assert mcu.dut is not None
+    assert mcu.is_mcu
     mp_program = """
 from machine import Pin, I2C
 
@@ -37,7 +37,7 @@ def test_onewire(
     device_potpourry: Tentacle,
     daq_saleae: Tentacle,
 ) -> None:
-    assert mcu.dut is not None
+    assert mcu.is_mcu
 
     mp_program = """
 from machine import Pin

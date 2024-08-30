@@ -5,6 +5,44 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "pytest RPI_PICO 1.23.0 - test_github_micropython_org --collect-only --firmware-json",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "--collect-only",
+                "-q",
+                "--git-micropython=https://github.com/micropython/micropython.git@master",
+                "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
+                "tests/tests_github_micropython_org/test_github_micropython_org.py"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYDEVD_DISABLE_FILE_VALIDATION": "1"
+            },
+            "justMyCode": false,
+        },
+        {
+            "name": "pytest RPI_PICO 1.23.0 - test_github_micropython_org --collect-only --firmware-build-url",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "--collect-only",
+                "-q",
+                "--git-micropython=https://github.com/micropython/micropython.git@master",
+                "--firmware-build-url=MOCK",
+                "tests/tests_github_micropython_org/test_github_micropython_org.py"
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYDEVD_DISABLE_FILE_VALIDATION": "1"
+            },
+            "justMyCode": false,
+        },
+        {
             "name": "pytest RPI_PICO 1.23.0 - test_github_micropython_org",
             "type": "debugpy",
             "request": "launch",
@@ -14,7 +52,7 @@
                 "-v",
                 "-s",
                 "--git-micropython=https://github.com/micropython/micropython.git@master",
-                "--firmware=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
+                "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
                 "tests/tests_github_micropython_org/test_github_micropython_org.py"
             ],
             "console": "integratedTerminal",
@@ -33,7 +71,7 @@
                 "-v",
                 "-s",
                 "tests/test_simple.py",
-                "--firmware=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json"
+                "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json"
             ],
             "console": "integratedTerminal",
             "justMyCode": false,
@@ -48,22 +86,7 @@
                 "-v",
                 "-s",
                 "tests/test_simple.py",
-                "--firmware=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.22.1.json"
-            ],
-            "console": "integratedTerminal",
-            "justMyCode": false,
-        },
-        {
-            "name": "pytest PYBV11 1.22.2",
-            "type": "debugpy",
-            "request": "launch",
-            "module": "pytest",
-            "cwd": "${workspaceFolder}",
-            "args": [
-                "-v",
-                "-s",
-                "tests",
-                "--firmware=${workspaceFolder}/pytest_args_firmware_PYBV11_v1.22.2.json"
+                "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.22.1.json"
             ],
             "console": "integratedTerminal",
             "justMyCode": false,
@@ -78,7 +101,22 @@
                 "-v",
                 "-s",
                 "tests",
-                "--firmware=${workspaceFolder}/pytest_args_firmware_PYBV11_v1.23.0.json"
+                "--firmware-json=${workspaceFolder}/pytest_args_firmware_PYBV11_v1.23.0.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+        },
+        {
+            "name": "pytest PYBV11 1.22.2",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-v",
+                "-s",
+                "tests",
+                "--firmware-json=${workspaceFolder}/pytest_args_firmware_PYBV11_v1.22.2.json"
             ],
             "console": "integratedTerminal",
             "justMyCode": false,

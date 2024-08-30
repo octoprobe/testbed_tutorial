@@ -1,3 +1,4 @@
+import copy
 import logging
 import pathlib
 import shutil
@@ -7,12 +8,17 @@ from collections.abc import Iterator
 import pytest
 from octoprobe.lib_tentacle import Tentacle
 from octoprobe.octoprobe import NTestRun
-from octoprobe.util_dut_programmers import FirmwareSpec
+from octoprobe.util_dut_programmers import FirmwareSpecBase
 from octoprobe.util_pytest import util_logging
 from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_pytest.util_vscode import break_into_debugger_on_exception
 from pytest import fixture
 
+from util_get_firmware_specs import (
+    PYTEST_OPT_BUILD_FIRMWARE,
+    PYTEST_OPT_DOWNLOAD_FIRMWARE,
+    get_firmware_specs,
+)
 from util_github_micropython_org import (
     DEFAULT_GIT_MICROPYTHON,
     PYTEST_OPT_GIT_MICROPYTHON,
@@ -28,19 +34,11 @@ DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
 DEFAULT_FIRMWARE_SPEC = (
     DIRECTORY_OF_THIS_FILE / "pytest_args_firmware_RPI_PICO_v1.22.1.json"
 )
-_PYTEST_OPT_FIRMWARE = "--firmware"
 
 
 # Uncomment to following line
 # to stop tests on exceptions
 break_into_debugger_on_exception(globals())
-
-
-def get_firmware_spec(config: pytest.Config) -> FirmwareSpec:
-    assert isinstance(config, pytest.Config)
-
-    firmware_spec_filename = config.getoption(_PYTEST_OPT_FIRMWARE)
-    return FirmwareSpec.factory(filename=firmware_spec_filename)
 
 
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
@@ -67,22 +65,24 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
         assert EnumFut(fut), fut
 
     if "mcu" in metafunc.fixturenames:
-        tentacles = TentacleType.TENTACLE_MCU.get_tentacles_for_type(
-            tentacles=TESTBED.tentacles,
-            required_futs=_required_futs,
-        )
-        firmware_spec = get_firmware_spec(config=metafunc.config)
-        tentacles = list(filter(firmware_spec.match_board, tentacles))
-        if len(tentacles) == 0:
-            futs_text = ", ".join(f.name for f in _required_futs)
-            msg = f"No tentacle where selected for testing. Required futs: {futs_text}"
-            logger.warning(msg)
-            pytest.skip(msg)
+        list_tentacles: list[Tentacle] = []
+        for firmware_spec in get_firmware_specs(config=metafunc.config):
+            assert isinstance(firmware_spec, FirmwareSpecBase)
+            tentacles = TentacleType.TENTACLE_MCU.get_tentacles_for_type(
+                tentacles=TESTBED.tentacles,
+                required_futs=_required_futs,
+            )
+            tentacles = list(filter(firmware_spec.match_board, tentacles))
+            if len(tentacles) == 0:
+                futs_text = ", ".join(f.name for f in _required_futs)
+                msg = f"No tentacle where selected for testing firmware '{firmware_spec.board_variant}'. Required futs: {futs_text}"
+                logger.warning(msg)
+            for tentacle in tentacles:
+                _tentacle = copy.copy(tentacle)
+                _tentacle.firmware_spec = firmware_spec
+                list_tentacles.append(_tentacle)
 
-        def get_id(t: Tentacle) -> str:
-            return t.pytest_id
-
-        metafunc.parametrize("mcu", tentacles, ids=get_id)
+        metafunc.parametrize("mcu", list_tentacles, ids=lambda t: t.pytest_id)
 
     if "device_potpourry" in metafunc.fixturenames:
         tentacles = TentacleType.TENTACLE_DEVICE_POTPOURRY.get_tentacles_for_type(
@@ -90,7 +90,11 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
             required_futs=_required_futs,
         )
         assert len(tentacles) > 0
-        metafunc.parametrize("device_potpourry", tentacles, ids=lambda t: t.pytest_id)
+        metafunc.parametrize(
+            "device_potpourry",
+            tentacles,
+            ids=lambda t: t.pytest_id,
+        )
 
     if "daq_saleae" in metafunc.fixturenames:
         tentacles = TentacleType.TENTACLE_DAQ_SALEAE.get_tentacles_for_type(
@@ -98,7 +102,11 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
             required_futs=_required_futs,
         )
         assert len(tentacles) > 0
-        metafunc.parametrize("daq_saleae", tentacles, ids=lambda t: t.pytest_id)
+        metafunc.parametrize(
+            "daq_saleae",
+            tentacles,
+            ids=lambda t: t.pytest_id,
+        )
 
 
 @pytest.fixture
@@ -132,12 +140,7 @@ def testrun(request: pytest.FixtureRequest) -> Iterator[NTestRun]:
 
     with util_logging.logs(DIRECTORY_TESTRESULTS):
 
-        firmware_spec = get_firmware_spec(request.config)
-        firmware_spec.download()
-        _testrun = NTestRun(
-            testbed=TESTBED,
-            firmware_spec=firmware_spec,
-        )
+        _testrun = NTestRun(testbed=TESTBED)
 
         _testrun.session_powercycle_tentacles()
 
@@ -209,10 +212,16 @@ def artifacts_directory(request: pytest.FixtureRequest) -> ResultsDir:
 
 def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption(
-        _PYTEST_OPT_FIRMWARE,
+        PYTEST_OPT_DOWNLOAD_FIRMWARE,
         action="store",
         default=str(DEFAULT_FIRMWARE_SPEC),
         help="A json file specifying the firmware",
+    )
+    parser.addoption(
+        PYTEST_OPT_BUILD_FIRMWARE,
+        action="store",
+        default=None,
+        help="The url to a git repo to be cloned and compiled",
     )
     parser.addoption(
         PYTEST_OPT_GIT_MICROPYTHON,

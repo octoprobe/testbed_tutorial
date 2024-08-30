@@ -32,9 +32,9 @@ tentacle_spec_pyboard = TentacleSpec(
         EnumFut.FUT_TIMER,
     ],
     category="Micropython Board",
-    label="pyboard_v1.0",
+    label="pyboard",
     doc=DOC_TENTACLE_PYBOARD,
-    tags="board=PYBV11,mcu=stm32,programmer=dfu-util",
+    tags="boards=PYBV11:PYBV11-DP:PYBV11-THREAD:PYBV11-DP_THREAD,mcu=stm32,programmer=dfu-util",
     relays_closed={
         EnumFut.FUT_MCU_ONLY: [],
         EnumFut.FUT_I2C: [2, 3, 4, 5],
@@ -62,9 +62,9 @@ tentacle_spec_raspberry_pico = TentacleSpec(
         EnumFut.FUT_TIMER,
     ],
     category="Micropython Board",
-    label="raspberry_pico_v1.0",
+    label="pico",
     doc=DOC_TENTACLE_RASPBERRY_PICO,
-    tags="board=RPI_PICO,mcu=rp2,programmer=picotool",
+    tags="boards=RPI_PICO,mcu=rp2,programmer=picotool",
     relays_closed={
         EnumFut.FUT_MCU_ONLY: [],
         EnumFut.FUT_I2C: [2, 3, 4, 5],
@@ -91,7 +91,7 @@ tentacle_spec_device_potpourry = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_DEVICE_POTPOURRY,
     futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
     category="Micropython Board",
-    label="potpourry_v1.0",
+    label="potpourry",
     doc=DOC_TENTACLE_DEVICE_POTPOURRY,
     tags="",
     relays_closed={
@@ -109,7 +109,7 @@ tentacle_spec_daq_saleae = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_DAQ_SALEAE,
     futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
     category="Micropython Board",
-    label="daq:saleae_clone_v1.0",
+    label="daq",
     doc=DOC_TENTACLE_DAQ_SALEAE,
     tags="daq=saleae_clone",
     relays_closed={

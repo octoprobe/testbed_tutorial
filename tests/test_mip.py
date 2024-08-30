@@ -22,7 +22,7 @@ def test_mip(mcu: Tentacle) -> None:
         args.mpy,
     )
     """
-    assert mcu.dut is not None
+    assert mcu.is_mcu
     url = "github:Thomascountz/micropython_i2c_lcd/hd44780.py"
     url = "https://github.com/micropython/micropython-lib/tree/master/python-stdlib/pprint"
     url = "github:micropython/micropython-lib/python-stdlib/pprint/pprint.py@master"
