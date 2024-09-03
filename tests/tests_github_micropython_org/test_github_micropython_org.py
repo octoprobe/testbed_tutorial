@@ -4,7 +4,7 @@ import sys
 import pytest
 from octoprobe.lib_tentacle import Tentacle
 from octoprobe.util_cached_git_repo import CachedGitRepo
-from octoprobe.util_dut_mcu import TAG_MCU
+from octoprobe.util_micropython_boards import BoardVariant
 from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_subprocess import subprocess_run
 from octoprobe.util_vscode_un_monkey_patch import un_monkey_patch
@@ -71,9 +71,19 @@ def test_tests(mcu: Tentacle, artifacts_directory: ResultsDir) -> None:
     https://github.com/micropython/micropython/blob/master/tests/README.md
     https://github.com/micropython/micropython/blob/master/tests/run-tests.py
     """
-    # Synonyms: target, mcu, port!
-    # This has to match with the firmware!!!
-    target = mcu.get_tag_mandatory(TAG_MCU)
+
+    def get_target(board_variant: BoardVariant) -> str:
+        """
+        This function implements the board/target mapping
+        introduced from `run-tests.py`.
+        """
+        if board_variant.board == "PYBV11":
+            return "pyboard"
+        if board_variant.board in ("RPI_PICO", "RPI_PICO2"):
+            return "rp2"
+        raise ValueError(f"Test target unknown for board variant {board_variant}!")
+
+    target = get_target(mcu.firmware_spec.board_variant)
 
     args = [
         sys.executable,

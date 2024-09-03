@@ -3,3 +3,4 @@ doc/schematics_kicad/kicad/testbed-backups/*
 testresults/**
 git_cache/**
 downloads/**
+testresults_*/**

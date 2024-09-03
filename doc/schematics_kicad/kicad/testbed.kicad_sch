@@ -61,7 +61,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "8349ec44-9db3-4e5f-885e-2d604c3fdea6")
-		(property "Sheetname" "tentacle_MCU_raspberry_pico"
+		(property "Sheetname" "tentacle_MCU_RPI_PICO  - RPI_PICO2"
 			(at 36.83 32.3084 0)
 			(effects
 				(font
@@ -70,7 +70,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "tenacle_MCU_raspberry_pico.kicad_sch"
+		(property "Sheetfile" "tenacle_MCU_RPI_PICO.kicad_sch"
 			(at 36.83 41.2246 0)
 			(effects
 				(font
@@ -99,7 +99,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "a196d1ad-2a7e-47a3-8a53-65ea8ad08c90")
-		(property "Sheetname" "tentacle_MCU_grobotics_pyboard"
+		(property "Sheetname" "tentacle_MCU_PYBV11"
 			(at 36.83 48.8184 0)
 			(effects
 				(font
@@ -108,7 +108,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "tenacle_MCU_grobotics_pyboard.kicad_sch"
+		(property "Sheetfile" "tenacle_MCU_PYBV11.kicad_sch"
 			(at 36.83 59.0046 0)
 			(effects
 				(font

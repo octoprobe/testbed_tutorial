@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 
+from octoprobe import util_mcu_pyboard, util_mcu_rp2
 from octoprobe.util_baseclasses import TentacleSpec
 
 from .testbed_constants import EnumFut, TentacleType
@@ -19,10 +20,10 @@ class McuConfig:
     onewire: str
 
 
-DOC_TENTACLE_PYBOARD = """
-See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_grobotics_pyboard
+DOC_TENTACLE_PYBV11 = """
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_PYBV11
 """
-tentacle_spec_pyboard = TentacleSpec(
+tentacle_spec_mcu_pybv11 = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
     futs=[
         EnumFut.FUT_MCU_ONLY,
@@ -33,7 +34,8 @@ tentacle_spec_pyboard = TentacleSpec(
     ],
     category="Micropython Board",
     label="pyboard",
-    doc=DOC_TENTACLE_PYBOARD,
+    doc=DOC_TENTACLE_PYBV11,
+    mcu_usb_id=util_mcu_pyboard.PYBOARD_USB_ID,
     tags="boards=PYBV11:PYBV11-DP:PYBV11-THREAD:PYBV11-DP_THREAD,mcu=stm32,programmer=dfu-util",
     relays_closed={
         EnumFut.FUT_MCU_ONLY: [],
@@ -49,10 +51,10 @@ tentacle_spec_pyboard = TentacleSpec(
 )
 
 
-DOC_TENTACLE_RASPBERRY_PICO = """
-See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_raspberry_pico
+DOC_TENTACLE_RPI_PICO = """
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_RPI_PICO
 """
-tentacle_spec_raspberry_pico = TentacleSpec(
+tentacle_spec_mcu_rpi_pico = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
     futs=[
         EnumFut.FUT_MCU_ONLY,
@@ -63,7 +65,8 @@ tentacle_spec_raspberry_pico = TentacleSpec(
     ],
     category="Micropython Board",
     label="pico",
-    doc=DOC_TENTACLE_RASPBERRY_PICO,
+    doc=DOC_TENTACLE_RPI_PICO,
+    mcu_usb_id=util_mcu_rp2.RPI_PICO_USB_ID,
     tags="boards=RPI_PICO,mcu=rp2,programmer=picotool",
     relays_closed={
         EnumFut.FUT_MCU_ONLY: [],
@@ -78,6 +81,36 @@ tentacle_spec_raspberry_pico = TentacleSpec(
     ),
 )
 
+
+DOC_TENTACLE_RPI_PICO2 = """
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_RPI_PICO
+"""
+tentacle_spec_mcu_rpi_pico2 = TentacleSpec(
+    tentacle_type=TentacleType.TENTACLE_MCU,
+    futs=[
+        EnumFut.FUT_MCU_ONLY,
+        EnumFut.FUT_I2C,
+        EnumFut.FUT_UART,
+        EnumFut.FUT_ONEWIRE,
+        EnumFut.FUT_TIMER,
+    ],
+    category="Micropython Board",
+    label="pico2",
+    doc=DOC_TENTACLE_RPI_PICO2,
+    mcu_usb_id=util_mcu_rp2.RPI_PICO2_USB_ID,
+    tags="boards=RPI_PICO2:RPI_PICO2-RISCV,mcu=rp2,programmer=picotool",
+    relays_closed={
+        EnumFut.FUT_MCU_ONLY: [],
+        EnumFut.FUT_I2C: [2, 3, 4, 5],
+        EnumFut.FUT_ONEWIRE: [2, 3, 4],
+    },
+    mcu_config=McuConfig(
+        trig1="GP20",
+        trig2="GP21",
+        i2c="i2c = I2C(1, scl=Pin('GP19'), sda=Pin('GP18'), freq=100_000)",
+        onewire="GP14",
+    ),
+)
 
 DOC_TENTACLE_DEVICE_POTPOURRY = """
 FT232RL

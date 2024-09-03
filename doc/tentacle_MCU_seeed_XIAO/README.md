@@ -1,3 +1,3 @@
-# `TENTACLE_MCU_RASPBERRY_PICO`
+# `tentacle_MCU_RPI_PICO`
 
 ![](top_view.jpg)

@@ -9,17 +9,22 @@ from .testbed_tentacles import (
     McuConfig,
     tentacle_spec_daq_saleae,
     tentacle_spec_device_potpourry,
-    tentacle_spec_pyboard,
-    tentacle_spec_raspberry_pico,
+    tentacle_spec_mcu_pybv11,
+    tentacle_spec_mcu_rpi_pico,
+    tentacle_spec_mcu_rpi_pico2,
 )
 
-tentacle_mcu_pyboard = Tentacle[McuConfig, TentacleType, EnumFut](
+tentacle_mcu_pybv11 = Tentacle[McuConfig, TentacleType, EnumFut](
     tentacle_serial_number="e46340474b174429",
-    tentacle_spec=tentacle_spec_pyboard,
+    tentacle_spec=tentacle_spec_mcu_pybv11,
 )
-tentacle_mcu_raspberry_pico = Tentacle[McuConfig, TentacleType, EnumFut](
+tentacle_mcu_rpi_pico = Tentacle[McuConfig, TentacleType, EnumFut](
     tentacle_serial_number="e46340474b551722",
-    tentacle_spec=tentacle_spec_raspberry_pico,
+    tentacle_spec=tentacle_spec_mcu_rpi_pico,
+)
+tentacle_mcu_rpi_pico2 = Tentacle[McuConfig, TentacleType, EnumFut](
+    tentacle_serial_number="e46340474b4e1831",
+    tentacle_spec=tentacle_spec_mcu_rpi_pico2,
 )
 tentacle_daq_saleae = Tentacle[McuConfig, TentacleType, EnumFut](
     tentacle_serial_number="e46340474b4c1331",
@@ -34,8 +39,9 @@ tentacle_device_potpourry = Tentacle[McuConfig, TentacleType, EnumFut](
 TESTBED = Testbed(
     workspace="ch_wetzikon_1",
     tentacles=[
-        tentacle_mcu_pyboard,
-        tentacle_mcu_raspberry_pico,
+        tentacle_mcu_pybv11,
+        tentacle_mcu_rpi_pico,
+        tentacle_mcu_rpi_pico2,
         tentacle_device_potpourry,
         tentacle_daq_saleae,
     ],

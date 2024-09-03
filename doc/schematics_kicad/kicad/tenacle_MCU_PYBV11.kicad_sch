@@ -5,7 +5,7 @@
 	(uuid "ad1f9b58-b707-42d2-a76c-8fadd9c96ff3")
 	(paper "A4")
 	(title_block
-		(title "tentacle_MCU_grobotics_pyboard")
+		(title "tentacle_MCU_PYBV11")
 		(date "2024-07-16")
 		(company "Hans Märki, Märki Informatik")
 		(comment 1 "The MIT License (MIT)")
@@ -2368,7 +2368,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "3dc062ec-09eb-4fd1-b05d-0a389e51fa7e")
-		(property "Sheetname" "pyboard3"
+		(property "Sheetname" "MCU_PYBV11"
 			(at 179.07 46.2784 0)
 			(effects
 				(font
@@ -2378,7 +2378,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sheetfile" "mcu_pyboard.kicad_sch"
+		(property "Sheetfile" "mcu_PYBV11.kicad_sch"
 			(at 179.07 100.9146 0)
 			(effects
 				(font

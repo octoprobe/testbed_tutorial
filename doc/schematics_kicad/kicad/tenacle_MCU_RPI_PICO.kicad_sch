@@ -5,7 +5,7 @@
 	(uuid "071d4046-c4d0-457d-b28b-5158c9355bfe")
 	(paper "A4")
 	(title_block
-		(title "tentacle_MCU_raspberry_pico")
+		(title "tentacle_MCU_RPI_PICO")
 		(date "2024-07-16")
 		(company "Hans Märki, Märki Informatik")
 		(comment 1 "The MIT License (MIT)")
@@ -2262,7 +2262,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "84632453-778b-4fc0-81ba-3e4b4d4e7f36")
-		(property "Sheetname" "raspberry rp3"
+		(property "Sheetname" "MCU_RPI_PICO"
 			(at 185.42 48.8184 0)
 			(effects
 				(font
@@ -2272,7 +2272,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sheetfile" "mcu_raspberry_rp2.kicad_sch"
+		(property "Sheetfile" "mcu_RPI_PICO.kicad_sch"
 			(at 185.42 88.2146 0)
 			(effects
 				(font
@@ -2301,7 +2301,7 @@
 			)
 			(uuid "0b4dd208-0946-4143-9e6f-2941222b8d52")
 		)
-		(pin "BOOTSEL" input
+		(pin "BOOTSEL {slash} TP6" input
 			(at 185.42 53.34 180)
 			(effects
 				(font

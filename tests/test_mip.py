@@ -30,4 +30,4 @@ def test_mip(mcu: Tentacle) -> None:
     url = "aiohttp"
     # https://micropython.org/pi/v2/index.json
     url = "aiohttp@0.0.2"
-    mcu.dut.mp_remote.mip_install_package(url=url)
+    mcu.dut.mp_remote.mip_install_package(package=url)

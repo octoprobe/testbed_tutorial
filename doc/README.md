@@ -146,13 +146,13 @@ How to electrically override `SIGNAL_DATA1/2`:
 
 [Schematics](schematics_kicad/schematics.pdf)
 
-## Implementation `TENTACLE_MCU_GROBOTICS_PYBAORD`
+## Implementation `TENTACLE_MCU_PYBV11`
 
-[README.md](tentacle_MCU_grobotics_pyboard/README.md)
+[README.md](tentacle_MCU_PYBV11/README.md)
 
-## Implementation `TENTACLE_MCU_RASPBERRY_PICO`
+## Implementation `tentacle_MCU_RPI_PICO`
 
-[README.md](tentacle_MCU_raspberry_pico/README.md)
+[README.md](tentacle_MCU_RPI_PICO/README.md)
 
 ## Implementation `TENTACLE_DEVICE_POTPOURRY`
 

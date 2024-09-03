@@ -389,11 +389,11 @@
     ],
     [
       "8349ec44-9db3-4e5f-885e-2d604c3fdea6",
-      "tentacle_MCU_raspberry_pico"
+      "tentacle_MCU_RPI_PICO  - RPI_PICO2"
     ],
     [
       "a196d1ad-2a7e-47a3-8a53-65ea8ad08c90",
-      "tentacle_MCU_grobotics_pyboard"
+      "tentacle_MCU_PYBV11"
     ],
     [
       "b7d8ead7-fd61-4ff1-b415-403502d5b75c",
@@ -405,11 +405,11 @@
     ],
     [
       "84632453-778b-4fc0-81ba-3e4b4d4e7f36",
-      "raspberry rp3"
+      "MCU_RPI_PICO"
     ],
     [
       "3dc062ec-09eb-4fd1-b05d-0a389e51fa7e",
-      "pyboard3"
+      "MCU_PYBV11"
     ],
     [
       "f10126ae-d4cb-46e5-8c61-40eb1b23ca32",

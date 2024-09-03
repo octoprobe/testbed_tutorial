@@ -24,7 +24,11 @@ git config --global user.email "buhtig.hans.maerki@ergoinfo.ch"
 sudo apt update \
   && sudo apt upgrade -y \
   && sudo apt install -y git uhubctl dfu-util \
-    python-is-python3 python3.12-venv
+    python-is-python3 python3.12-venv \
+    docker.io docker-buildx
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
 ```
 
 On Raspbian: Skip python3.12-venv
