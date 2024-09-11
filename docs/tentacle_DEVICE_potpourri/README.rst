@@ -1,8 +1,9 @@
-# `TENTACLE_DEVICE_POTPOURRY`
+Tentacle `DEVICE_POTPOURRY`
+=============================
 
 This tentacle comines many features, thus `potpourry`.
 
-![](top_view.jpg)
+.. image:: top_view.jpg
 
 
 ## FUT - Feature Tnder Test

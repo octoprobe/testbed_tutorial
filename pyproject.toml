@@ -125,7 +125,7 @@ omit = [
 target-version = "py312"
 # All paths are relative to the project root, which is the directory containing the pyproject.toml.
 src = [".",]
-exclude = ["doc"]
+exclude = ["docs"]
 
 [tool.ruff.lint]
 select = [

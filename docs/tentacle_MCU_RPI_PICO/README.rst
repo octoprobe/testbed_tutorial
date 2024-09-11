@@ -1,4 +1,5 @@
-# `tentacle_MCU_RPI_PICO`
+Tentacle `MCU_RPI_PICO`/`MCU_RPI_PICO2`
+===========================================
 
 The same tentacle may be applied for the
 
@@ -7,9 +8,9 @@ The same tentacle may be applied for the
 | Pico rp2040 | MCU_RPI_PICO | arm |
 | Pico rp2340 | MCU_RPI_PICO2 | arm and risc-V
 
-![](top_view.jpg)
+.. image:: top_view.jpg
 
-![](https://www.raspberrypi.com/documentation/microcontrollers/images/pico-pinout.svg)
+.. image:: https://www.raspberrypi.com/documentation/microcontrollers/images/pico-pinout.svg)
 
 
 ## Pins used

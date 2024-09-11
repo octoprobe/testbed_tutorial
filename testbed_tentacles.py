@@ -21,7 +21,7 @@ class McuConfig:
 
 
 DOC_TENTACLE_PYBV11 = """
-See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_PYBV11
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/docs/tentacle_MCU_PYBV11
 """
 tentacle_spec_mcu_pybv11 = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
@@ -52,7 +52,7 @@ tentacle_spec_mcu_pybv11 = TentacleSpec(
 
 
 DOC_TENTACLE_RPI_PICO = """
-See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_RPI_PICO
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/docs/tentacle_MCU_RPI_PICO
 """
 tentacle_spec_mcu_rpi_pico = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
@@ -83,7 +83,7 @@ tentacle_spec_mcu_rpi_pico = TentacleSpec(
 
 
 DOC_TENTACLE_RPI_PICO2 = """
-See: https://github.com/octoprobe/testbed_tutorial/tree/main/doc/tentacle_MCU_RPI_PICO
+See: https://github.com/octoprobe/testbed_tutorial/tree/main/docs/tentacle_MCU_RPI_PICO
 """
 tentacle_spec_mcu_rpi_pico2 = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,

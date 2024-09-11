@@ -1,4 +1,7 @@
-# Testbed `testbed_tutorial`
+Testbed `testbed_tutorial`
+==========================
+
+
 
 Every testbed requires a unique label. This is `testbed_tutorial`.
 
@@ -40,16 +43,18 @@ Define how test must be written to be able to run on this testbed.
 
 `Octobus` is the 40pin ribbon wire cable which connects the tentacles.
 
-| Pin | signal_label | `FUT_I2C` | `FUT_UART` | `FUT_ONEWIRE` | Comment |
-| - | - | - | - | - | - |
-| 5 | `SIGNAL_TRIGGER1` | - | trigger | - | logic analyzer, measures delays |
-| 7 | GND |
-| 9 | `SIGNAL_TRIGGER2` | - | trigger | - | logic analyzer, measures delays |
-| 11 | GND |
-| 13 | `SIGNAL_DATA1` | SCL | TX | data |
-| 15 | GND |
-| 17 | `SIGNAL_DATA2` | SDA | RX | - |
-| 19 | GND |
+===  =================  =========  ==========  =============  ===============================
+Pin  signal_label       `FUT_I2C`  `FUT_UART`  `FUT_ONEWIRE`  Comment                        
+===  =================  =========  ==========  =============  ===============================
+5    `SIGNAL_TRIGGER1`  \          trigger     \              logic analyzer, measures delays
+7    GND              
+9    `SIGNAL_TRIGGER2`  \          trigger     \              logic analyzer, measures delays
+11   GND              
+13   `SIGNAL_DATA1`     SCL        TX          data         
+15   GND              
+17   `SIGNAL_DATA2`     SDA        RX          \            
+19   GND              
+===  =================  =========  ==========  =============  ===============================
 
 All signals are 3.3V.
 
@@ -57,11 +62,13 @@ Why are the `SIGNAL_DATA1/2` lines shared for different protocols? The current t
 
 Tentacle roles
 
-| Tentacle role | Comment |
-| - | - |
-| `TENTACLE_MCU` | A microprocessor tentacle |
-| `TENTACLE_DEVICE_POTPOURRY` | A tentacle with several devices |
-| `TENTACLE_DAQ_SALEAE` | Dataaquisition and error provoking |
+===========================  ==================================
+Tentacle role                Comment 
+===========================  ==================================
+`TENTACLE_MCU`               A microprocessor tentacle 
+`TENTACLE_DEVICE_POTPOURRY`  A tentacle with several devices 
+`TENTACLE_DAQ_SALEAE`        Dataaquisition and error provoking 
+===========================  ==================================
 
 
 
@@ -148,16 +155,16 @@ How to electrically override `SIGNAL_DATA1/2`:
 
 ## Implementation `TENTACLE_MCU_PYBV11`
 
-[README.md](tentacle_MCU_PYBV11/README.md)
+[README.rst](tentacle_MCU_PYBV11/README.rst)
 
 ## Implementation `tentacle_MCU_RPI_PICO`
 
-[README.md](tentacle_MCU_RPI_PICO/README.md)
+[README.rst](tentacle_MCU_RPI_PICO/README.rst)
 
 ## Implementation `TENTACLE_DEVICE_POTPOURRY`
 
-[README.md](tentacle_DEVICE_potpourri/README.md)
+[README.rst](tentacle_DEVICE_potpourri/README.rst)
 
 ## Implementation `TENTACLE_DAQ_SALEAE`
 
-[README.md](tentacle_DAQ_saleae/README.md)
+[README.rst](tentacle_DAQ_saleae/README.rst)

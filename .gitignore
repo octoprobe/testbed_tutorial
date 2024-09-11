@@ -1,5 +1,6 @@
 **/__pycache__/
-doc/schematics_kicad/kicad/testbed-backups/*
+docs/schematics_kicad/kicad/testbed-backups/*
+docs/_build/**
 testresults/**
 git_cache/**
 downloads/**

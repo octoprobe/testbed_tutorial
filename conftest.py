@@ -13,7 +13,6 @@ from octoprobe.util_pytest import util_logging
 from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_pytest.util_vscode import break_into_debugger_on_exception
 from pytest import fixture
-from util_firmware_mpbuild import build_firmware
 
 from util_firmware_specs import (
     PYTEST_OPT_BUILD_FIRMWARE,
@@ -43,6 +42,18 @@ break_into_debugger_on_exception(globals())
 
 
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
+    """
+    This is a pytest hook,
+    see: https://docs.pytest.org/en/7.1.x/reference/reference.html?highlight=pytest_generate_tests#std-hook-pytest_generate_tests
+
+    Calls `metafunc.parametrize` which defines the tests that have been be collected.
+
+    :param metafunc: _description_
+    :type metafunc: pytest.Metafunc
+    :raises KeyError: _description_
+    :return: _description_
+    :rtype: _type_
+    """
     print(metafunc.definition.nodeid)
     for marker in metafunc.definition.own_markers:
         print(f" {marker!r}")
