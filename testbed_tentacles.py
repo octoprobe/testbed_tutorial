@@ -5,7 +5,7 @@ import dataclasses
 from octoprobe import util_mcu_pyboard, util_mcu_rp2
 from octoprobe.util_baseclasses import TentacleSpec
 
-from .testbed_constants import EnumFut, TentacleType
+from testbed_constants import EnumFut, TentacleType
 
 
 @dataclasses.dataclass

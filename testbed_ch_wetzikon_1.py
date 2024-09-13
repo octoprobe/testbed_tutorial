@@ -4,8 +4,7 @@ from octoprobe.lib_tentacle import Tentacle
 from octoprobe.lib_testbed import Testbed
 
 from testbed_constants import EnumFut, TentacleType
-
-from .testbed_tentacles import (
+from testbed_tentacles import (
     McuConfig,
     tentacle_spec_daq_saleae,
     tentacle_spec_device_potpourry,

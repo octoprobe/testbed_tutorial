@@ -33,16 +33,13 @@ class TentacleType(enum.StrEnum):
         """
 
         def has_required_futs(t: Tentacle) -> bool:
-            for required_fut in required_futs:
-                if required_fut in t.tentacle_spec.futs:
-                    return True
+            if t.tentacle_spec.tentacle_type == self:
+                for required_fut in required_futs:
+                    if required_fut in t.tentacle_spec.futs:
+                        return True
             return False
 
-        return [
-            t
-            for t in tentacles
-            if (t.tentacle_spec.tentacle_type is self) and (has_required_futs(t))
-        ]
+        return [t for t in tentacles if has_required_futs(t)]
 
 
 class EnumFut(enum.StrEnum):

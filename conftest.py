@@ -14,6 +14,7 @@ from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_pytest.util_vscode import break_into_debugger_on_exception
 from pytest import fixture
 
+import util_testbed
 from util_firmware_specs import (
     PYTEST_OPT_BUILD_FIRMWARE,
     PYTEST_OPT_DOWNLOAD_FIRMWARE,
@@ -24,11 +25,11 @@ from util_github_micropython_org import (
     PYTEST_OPT_GIT_MICROPYTHON,
 )
 
-from .testbed_ch_wetzikon_1 import TESTBED
 from .testbed_constants import DIRECTORY_TESTRESULTS, EnumFut, TentacleType
 
 logger = logging.getLogger(__file__)
 
+TESTBED = util_testbed.get_testbed()
 DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
 
 DEFAULT_FIRMWARE_SPEC = (
@@ -79,7 +80,8 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
     if "mcu" in metafunc.fixturenames:
         list_tentacles: list[Tentacle] = []
         for firmware_spec in get_firmware_specs(
-            config=metafunc.config, tentacles=TESTBED.tentacles
+            config=metafunc.config,
+            tentacles=TESTBED.tentacles,
         ):
             assert isinstance(firmware_spec, FirmwareSpecBase)
             tentacles = TentacleType.TENTACLE_MCU.get_tentacles_for_type(

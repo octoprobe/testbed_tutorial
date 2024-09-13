@@ -100,7 +100,7 @@
             "justMyCode": false,
         },
         {
-            "name": "pytest RPI_PICO 1.23.0",
+            "name": "pytest RPI_PICO 1.23.0 test_simple.py",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
@@ -115,7 +115,7 @@
             "justMyCode": false,
         },
         {
-            "name": "pytest RPI_PICO 1.22.1",
+            "name": "pytest RPI_PICO 1.22.1 test_simple.py",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
@@ -130,7 +130,7 @@
             "justMyCode": false,
         },
         {
-            "name": "pytest PYBV11 1.23.0",
+            "name": "pytest PYBV11 1.23.0 test_simple.py",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
@@ -145,7 +145,7 @@
             "justMyCode": false,
         },
         {
-            "name": "pytest PYBV11 1.22.2",
+            "name": "pytest PYBV11 1.22.2 test_simple.py",
             "type": "debugpy",
             "request": "launch",
             "module": "pytest",
