@@ -16,6 +16,8 @@ class McuConfig:
 
     trig1: str
     trig2: str
+    data1: str
+    data2: str
     i2c: str
     onewire: str
 
@@ -45,6 +47,8 @@ tentacle_spec_mcu_pybv11 = TentacleSpec(
     mcu_config=McuConfig(
         trig1="Y2",
         trig2="Y3",
+        data1="Y9",
+        data2="Y10",
         i2c="i2c = I2C(scl='Y9', sda='Y10', freq=100000)",
         onewire="Y9",
     ),
@@ -76,6 +80,8 @@ tentacle_spec_mcu_rpi_pico = TentacleSpec(
     mcu_config=McuConfig(
         trig1="GP20",
         trig2="GP21",
+        data1="GP19",
+        data2="GP18",
         i2c="i2c = I2C(1, scl=Pin('GP19'), sda=Pin('GP18'), freq=100_000)",
         onewire="GP14",
     ),
@@ -107,6 +113,8 @@ tentacle_spec_mcu_rpi_pico2 = TentacleSpec(
     mcu_config=McuConfig(
         trig1="GP20",
         trig2="GP21",
+        data1="GP19",
+        data2="GP18",
         i2c="i2c = I2C(1, scl=Pin('GP19'), sda=Pin('GP18'), freq=100_000)",
         onewire="GP14",
     ),

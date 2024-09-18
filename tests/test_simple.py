@@ -5,12 +5,45 @@ from testbed_constants import EnumFut
 
 
 @pytest.mark.required_futs(EnumFut.FUT_I2C)
+def test_i2c_pattern(
+    mcu: Tentacle,
+    device_potpourry: Tentacle,
+    daq_saleae: Tentacle,
+) -> None:
+    """
+    This tests creates pulses:
+    trig1: 1ms
+    trig2: 2ms
+    data1: 3ms
+    data2: 4ms
+
+    Have a look at docs/schematics_kicad/schematics.pdf to find testpoints to measure with a scope.
+    """
+    assert mcu.is_mcu
+    mcu_config = mcu.tentacle_spec.mcu_config
+    mp_program = """
+from machine import Pin, I2C, PWM
+
+# 'trig1' triggers the DAQ. So we initialize it last!
+ticks_ms=int((2**16)/10)
+PWM(Pin('{{mcu_config.data2}}'), freq=100, duty_u16=4*ticks_ms)
+PWM(Pin('{{mcu_config.data1}}'), freq=100, duty_u16=3*ticks_ms)
+PWM(Pin('{{mcu_config.trig2}}'), freq=100, duty_u16=2*ticks_ms)
+PWM(Pin('{{mcu_config.trig1}}'), freq=100, duty_u16=1*ticks_ms)
+"""
+    mcu.dut.mp_remote.exec_render(mp_program, mcu_config=mcu_config)
+    # mcu.dut.inspection_exit()
+
+
+@pytest.mark.required_futs(EnumFut.FUT_I2C)
 def test_i2c(
     mcu: Tentacle,
     device_potpourry: Tentacle,
     daq_saleae: Tentacle,
 ) -> None:
     assert mcu.is_mcu
+    mcu_config = mcu.tentacle_spec.mcu_config
+
     mp_program = """
 from machine import Pin, I2C
 
@@ -22,9 +55,7 @@ pin_trigger_1.value(1)
 i2c_data = i2c.readfrom(0x50, 10, True)
 pin_trigger_1.value(0)
 """
-    _ret = mcu.dut.mp_remote.exec_render(
-        mp_program, mcu_config=mcu.tentacle_spec.mcu_config
-    )
+    mcu.dut.mp_remote.exec_render(mp_program, mcu_config=mcu_config)
 
     i2c_data = mcu.dut.mp_remote.read_bytes("i2c_data")
     print(f"i2c_data: {i2c_data!r}")

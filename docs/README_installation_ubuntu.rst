@@ -6,9 +6,8 @@ Target OS: Ubuntu 24.04 LTS.
 You may also set up a Raspberry Pi 4/5 as described here: [README_installation_raspberry.md](README_installation_raspberry.md)
 And then continue with this guide.
 
-## Installation
-
-### Users
+Installation: Users
+-------------------
 
 Octoprobe user: `octoprobe`
 Github runner user: `githubrunner`
@@ -21,7 +20,8 @@ Do not forget to config git:
     git config --global user.email "buhtig.hans.maerki@ergoinfo.ch"
 
 
-### APT
+Installation: APT
+-----------------
 
 .. code::
 

@@ -1,7 +1,8 @@
 from __future__ import annotations
+
+import importlib
 import logging
 import os
-import importlib
 import pathlib
 
 from octoprobe.lib_testbed import Testbed

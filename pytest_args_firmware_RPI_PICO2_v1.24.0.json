@@ -1,0 +1,5 @@
+{
+    "board_variant": "RPI_PICO2",
+    "url": "https://micropython.org/resources/firmware/RPI_PICO2-20240809-v1.24.0-preview.201.g269a0e0e1.uf2",
+    "micropython_version_text": "3.4.0; MicroPython v1.24.0-preview.201.g269a0e0e1 on 2024-08-09"
+}

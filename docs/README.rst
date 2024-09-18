@@ -1,8 +1,6 @@
 Testbed `testbed_tutorial`
 ==========================
 
-
-
 Every testbed requires a unique label. This is `testbed_tutorial`.
 
 Other testbed labels could be:
@@ -24,9 +22,12 @@ Another aspect is how the documention/specification of the testbed and tentacles
   * Example `SIGNAL_DATA1`
 
 * Define **fut_labels** (`FUT`: Feature Under Test):
+
   * These labels have to be used in
+  
     * tentacle configuration
     * test code markers
+  
   * Example `FUT_I2C`
 
 * Define **tentacle_role**: These labels have to be used in

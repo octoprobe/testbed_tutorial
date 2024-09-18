@@ -33,7 +33,7 @@ TESTBED = util_testbed.get_testbed()
 DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
 
 DEFAULT_FIRMWARE_SPEC = (
-    DIRECTORY_OF_THIS_FILE / "pytest_args_firmware_RPI_PICO_v1.22.1.json"
+    DIRECTORY_OF_THIS_FILE / "pytest_args_firmware_RPI_PICO2_v1.24.0.json"
 )
 
 
@@ -98,6 +98,10 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
                 _tentacle.firmware_spec = firmware_spec
                 list_tentacles.append(_tentacle)
 
+        if len(tentacles) == 0:
+            msg = f"No tentacle where selected for testing firmware '{firmware_spec.board_variant}'."
+            raise ValueError(msg)
+        print(f"LEN={len(list_tentacles)}")
         metafunc.parametrize("mcu", list_tentacles, ids=lambda t: t.pytest_id)
 
     if "device_potpourry" in metafunc.fixturenames:
