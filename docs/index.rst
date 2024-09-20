@@ -10,7 +10,7 @@ Add your content using `reStructuredText` syntax. See the
 `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
 documentation for details.
 
-.. automodule:: tests
+.. automodule:: ./.
     :members:
 
 .. code::
@@ -21,8 +21,8 @@ documentation for details.
         :includehidden:
 
         license.rst
-        README_installation_ubuntu.rst
-        README_installation_raspberry.rst
+        installation/ubuntu.rst
+        installation/raspberry.rst
         README.rst
         tentacle_DAQ_saleae/README.rst
         tentacle_DEVICE_potpourri/README.rst

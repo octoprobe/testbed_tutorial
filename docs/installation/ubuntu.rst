@@ -1,10 +1,9 @@
 Installation Ubuntu
 ===================
 
-Target OS: Ubuntu 24.04 LTS.
+Target OS: Ubuntu Server 24.04.1 LTS.
 
-You may also set up a Raspberry Pi 4/5 as described here: [README_installation_raspberry.md](README_installation_raspberry.md)
-And then continue with this guide.
+To set up a Raspberry Pi 4/5, start with :doc:`/installation/raspberry`.
 
 Installation: Users
 -------------------
@@ -43,17 +42,17 @@ On Raspbian: Skip python3.12-venv
 .. code::
 
     git clone https://github.com/octoprobe/testbed_tutorial.git
-    cd testbed_tutorial/
 
 ## python
 
 .. code::
 
     echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
+    # Log out and in again
     python -m venv ~/venv_octoprobe
 
     source ~/venv_octoprobe/bin/activate
-    pip install --upgrade -r requirements.txt -r requirements_dev.txt
+    pip install --upgrade -r ~/testbed_tutorial/requirements.txt -r ~/testbed_tutorial/requirements_dev.txt
 
 ## Software requiring root access
 
@@ -68,8 +67,6 @@ APT
 
 .. code::
 
-    sudo usermod -a -G dialout $USER
-
     op install
 
 Now `op install` will instruct you to:
@@ -79,3 +76,22 @@ Now `op install` will instruct you to:
     sudo chown root:root ~/octoprobe_downloads/binaries/aarch64/*
     sudo chmod a+s ~/octoprobe_downloads/binaries/aarch64/*
     sudo cp -p ~/octoprobe_downloads/binaries/aarch64/* /usr/sbin
+
+
+Run your first tests
+--------------------
+
+Add to :code:`~/.profile`:
+
+.. code::
+
+    export OCTOPROBE_TESTBED=testbed_ch_wetzikon_1.py
+
+Verify if the tentacle serial numbers in above :code:`testbed_ch_wetzikon_1.py` match with the tentacle connected via USB.
+
+Start the tests
+
+.. code:: 
+
+   cd ~/testbed_tutorial
+   pytest --firmware-json=pytest_args_firmware_RPI_PICO2_v1.24.0.json tests/test_simple.py::test_i2c
