@@ -10,7 +10,7 @@ from octoprobe.util_dut_programmers import (
 )
 from octoprobe.util_micropython_boards import BoardVariant
 
-from util_firmware_mpbuild import build_firmwares
+from .util_firmware_mpbuild import build_firmwares
 
 logger = logging.getLogger(__file__)
 PYTEST_OPT_DOWNLOAD_FIRMWARE = "--firmware-json"

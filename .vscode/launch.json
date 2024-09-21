@@ -5,6 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "pytest --firmware-build-url",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                // "--collect-only",
+                // "-q",
+                "-s",
+                "-v",
+               "--firmware-build-url=https://github.com/dpgeorge/micropython.git@rp2-add-rp2350",
+               "tests/test_simple.py::test_i2c",
+            ],
+            "console": "integratedTerminal",
+            "env": {
+                "PYDEVD_DISABLE_FILE_VALIDATION": "1"
+            },
+            "justMyCode": false,
+        },
+
+        {
             "name": "pytest RPI_PICO 1.23.0 - test_github_micropython_org --collect-only --firmware-json",
             "type": "debugpy",
             "request": "launch",
@@ -22,8 +43,7 @@
                 "PYDEVD_DISABLE_FILE_VALIDATION": "1"
             },
             "justMyCode": false,
-        },
-        {
+        },        {
             "name": "pytest RPI_PICO 1.23.0 - test_github_micropython_org --collect-only --firmware-build-url MOCK",
             "type": "debugpy",
             "request": "launch",
@@ -130,6 +150,21 @@
             "justMyCode": false,
         },
         {
+            "name": "pytest RPI_PICO2 1.24.0 test_simple.py",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-v",
+                "-s",
+                "tests/test_simple.py",
+                "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO2_v1.24.0.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+        },
+        {
             "name": "pytest PYBV11 1.23.0 test_simple.py",
             "type": "debugpy",
             "request": "launch",
@@ -182,7 +217,8 @@
             "args": [
                 "--config-file",
                 "pyproject.toml",
-                ".",
+                "src",
+                "tests",
             ],
             "console": "integratedTerminal",
         },

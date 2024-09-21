@@ -3,14 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Octoprobe: testbed_tutorial documentation
-=========================================
+Welcome to Octoprobe: testbed_tutorial
+======================================
 
 Add your content using `reStructuredText` syntax. See the
 `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
 documentation for details.
 
-.. automodule:: ./.
+.. automodule:: testbed
+    :members:
+
+.. automodule:: tests
     :members:
 
 .. code::

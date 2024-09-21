@@ -34,7 +34,7 @@
         {
             "label": "mypy",
             "type": "shell",
-            "command": "python -m mypy --config-file pyproject.toml . || true",
+            "command": "python -m mypy --config-file pyproject.toml src tests || true",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
@@ -47,7 +47,7 @@
         {
             "label": "pylint",
             "type": "shell",
-            "command": "PYTHONPATH=${workspaceFolder} python -m pylint . tests || true",
+            "command": "PYTHONPATH=${workspaceFolder} python -m pylint src tests || true",
             "options": {
                 "cwd": "${workspaceFolder}"
             },

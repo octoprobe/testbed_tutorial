@@ -12,9 +12,12 @@ if typing.TYPE_CHECKING:
     from octoprobe.lib_tentacle import Tentacle
 
 DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
-DIRECTORY_DOWNLOADS = DIRECTORY_OF_THIS_FILE / "downloads"
-DIRECTORY_TESTRESULTS = DIRECTORY_OF_THIS_FILE / "testresults"
-DIRECTORY_GIT_CACHE = DIRECTORY_OF_THIS_FILE / "git_cache"
+DIRECTORY_REPO = DIRECTORY_OF_THIS_FILE.parent.parent
+print(DIRECTORY_REPO / "pytest.ini")
+assert (DIRECTORY_REPO / "pytest.ini").is_file()
+DIRECTORY_DOWNLOADS = DIRECTORY_REPO / "downloads"
+DIRECTORY_TESTRESULTS = DIRECTORY_REPO / "testresults"
+DIRECTORY_GIT_CACHE = DIRECTORY_REPO / "git_cache"
 
 
 class TentacleType(enum.StrEnum):

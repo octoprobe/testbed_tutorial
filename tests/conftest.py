@@ -14,26 +14,25 @@ from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_pytest.util_vscode import break_into_debugger_on_exception
 from pytest import fixture
 
-import util_testbed
-from util_firmware_specs import (
+import testbed.util_testbed
+from testbed.constants import DIRECTORY_TESTRESULTS, EnumFut, TentacleType
+from testbed.util_firmware_specs import (
     PYTEST_OPT_BUILD_FIRMWARE,
     PYTEST_OPT_DOWNLOAD_FIRMWARE,
     get_firmware_specs,
 )
-from util_github_micropython_org import (
+from testbed.util_github_micropython_org import (
     DEFAULT_GIT_MICROPYTHON,
     PYTEST_OPT_GIT_MICROPYTHON,
 )
 
-from .testbed_constants import DIRECTORY_TESTRESULTS, EnumFut, TentacleType
-
 logger = logging.getLogger(__file__)
 
-TESTBED = util_testbed.get_testbed()
+TESTBED = testbed.util_testbed.get_testbed()
 DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
 
 DEFAULT_FIRMWARE_SPEC = (
-    DIRECTORY_OF_THIS_FILE / "pytest_args_firmware_RPI_PICO2_v1.24.0.json"
+    testbed.constants.DIRECTORY_REPO / "pytest_args_firmware_RPI_PICO2_v1.24.0.json"
 )
 
 
@@ -142,7 +141,7 @@ def required_futs(request: pytest.FixtureRequest) -> list[EnumFut]:
 def active_tentacles(request: pytest.FixtureRequest) -> list[Tentacle]:
     def inner() -> Iterator[Tentacle]:
         if not hasattr(request.node, "callspec"):
-            return []
+            return
         for _param_name, param_value in request.node.callspec.params.items():
             if isinstance(param_value, Tentacle):
                 yield param_value
@@ -151,7 +150,7 @@ def active_tentacles(request: pytest.FixtureRequest) -> list[Tentacle]:
 
 
 @fixture(scope="session", autouse=True)
-def testrun(request: pytest.FixtureRequest) -> Iterator[NTestRun]:
+def testrun() -> Iterator[NTestRun]:
     if DIRECTORY_TESTRESULTS.exists():
         shutil.rmtree(DIRECTORY_TESTRESULTS, ignore_errors=False)
     DIRECTORY_TESTRESULTS.mkdir(parents=True, exist_ok=True)
@@ -221,8 +220,6 @@ def setup_tentacles(
 
 @pytest.fixture(scope="function")
 def artifacts_directory(request: pytest.FixtureRequest) -> ResultsDir:
-    """ """
-
     return ResultsDir(
         directory_top=DIRECTORY_TESTRESULTS,
         test_name=request.node.name,

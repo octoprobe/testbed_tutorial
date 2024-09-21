@@ -1,7 +1,7 @@
 import pytest
 from octoprobe.lib_tentacle import Tentacle
 
-from testbed_constants import EnumFut
+from testbed.constants import EnumFut
 
 
 @pytest.mark.required_futs(EnumFut.FUT_MCU_ONLY)

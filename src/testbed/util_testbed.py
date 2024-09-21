@@ -14,6 +14,7 @@ ENV_TESTBED = "OCTOPROBE_TESTBED"
 TESTBED_FALLBACK = "testbed_ch_wetzikon_1.py"
 
 
+
 def get_testbed() -> Testbed:
     python_testbed = os.environ.get(ENV_TESTBED)
     if python_testbed is None:
@@ -23,5 +24,6 @@ def get_testbed() -> Testbed:
         )
 
     module_name = python_testbed.replace(".py", "")
+    module_name = f"testbed.{module_name}"
     module = importlib.import_module(name=module_name)
     return module.TESTBED

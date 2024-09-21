@@ -9,8 +9,8 @@ from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_subprocess import subprocess_run
 from octoprobe.util_vscode_un_monkey_patch import un_monkey_patch
 
-from testbed_constants import DIRECTORY_GIT_CACHE, EnumFut
-from util_github_micropython_org import PYTEST_OPT_GIT_MICROPYTHON
+from testbed.constants import DIRECTORY_GIT_CACHE, EnumFut
+from testbed.util_github_micropython_org import PYTEST_OPT_GIT_MICROPYTHON
 
 logger = logging.getLogger(__file__)
 
@@ -29,6 +29,7 @@ def clone_git_micropython(request: pytest.FixtureRequest) -> None:
         )
 
     global GIT_REPO
+
     GIT_REPO = CachedGitRepo(
         directory_cache=DIRECTORY_GIT_CACHE,
         git_spec=git_spec,

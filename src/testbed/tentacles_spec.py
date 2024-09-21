@@ -5,7 +5,7 @@ import dataclasses
 from octoprobe import util_mcu_pyboard, util_mcu_rp2
 from octoprobe.util_baseclasses import TentacleSpec
 
-from testbed_constants import EnumFut, TentacleType
+from testbed.constants import EnumFut, TentacleType
 
 
 @dataclasses.dataclass
@@ -139,7 +139,7 @@ tentacle_spec_device_potpourry = TentacleSpec(
         EnumFut.FUT_I2C: [1, 2],
         EnumFut.FUT_ONEWIRE: [5],
     },
-)
+)  # type: ignore[var-annotated]
 
 DOC_TENTACLE_DAQ_SALEAE = """
 USB Logic Analyzer 24MHz 8 Channel
@@ -157,4 +157,4 @@ tentacle_spec_daq_saleae = TentacleSpec(
         EnumFut.FUT_I2C: [1, 2, 3, 4],
         EnumFut.FUT_ONEWIRE: [1, 2, 3, 4],
     },
-)
+)  # type: ignore[var-annotated]

@@ -17,7 +17,7 @@
 		"python.testing.pytestArgs": [
 			// "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
 			"--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO2_v1.24.0.json",
-			"."
+			"tests"
 		],
 		"python.testing.cwd": "${workspaceFolder}",
 		"python.testing.unittestEnabled": false,

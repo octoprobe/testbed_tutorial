@@ -4,10 +4,10 @@ import pathlib
 from octoprobe.lib_tentacle import Tentacle
 from octoprobe.util_cached_git_repo import CachedGitRepo
 from octoprobe.util_constants import TAG_BOARDS
-from octoprobe.util_dut_programmers import FirmwareBuildSpec
+from octoprobe.util_dut_programmers import FirmwareBuildSpec, FirmwareSpecBase
 from octoprobe.util_micropython_boards import BoardVariant, board_variants
 
-from testbed_constants import DIRECTORY_GIT_CACHE
+from .constants import DIRECTORY_GIT_CACHE
 
 
 def build_firmware(
@@ -25,12 +25,15 @@ def build_firmware(
     old_cwd = pathlib.Path.cwd()
     try:
         os.chdir(micropython_directory)
-        from mpbuild.build import build_board
-        from mpbuild.find_boards_hmaerki import Database
+        # pylint: disable=C0415:Import outside toplevel
+        import mpbuild  # type: ignore[import-untyped]
+        import mpbuild.find_boards_hmaerki  # type: ignore[import-untyped]
 
-        db = Database()
+        db = mpbuild.find_boards_hmaerki.Database()
         db_variant = db.get_variant(variant.board, variant.variant)
-        firmware_filename = build_board(**db_variant.buildparams.as_named_parameters)
+        firmware_filename = mpbuild.build.build_board(
+            **db_variant.buildparams.as_named_parameters
+        )
         return FirmwareBuildSpec(
             board_variant=variant,
             micropython_version_text=None,
@@ -44,7 +47,7 @@ def build_firmwares(
     tentacles: list[Tentacle],
     collectonly: bool,
     firmware_git_url: str,
-) -> list[FirmwareBuildSpec]:
+) -> list[FirmwareSpecBase]:
     list_variants: list[BoardVariant] = []
     for tentacle in tentacles:
         if not tentacle.is_mcu:
@@ -62,7 +65,7 @@ def build_firmwares(
         )
         git_repo.clone()
 
-    firmware_specs: list[FirmwareBuildSpec] = []
+    firmware_specs: list[FirmwareSpecBase] = []
     for variant in list_variants:
         if collectonly:
             spec = FirmwareBuildSpec(

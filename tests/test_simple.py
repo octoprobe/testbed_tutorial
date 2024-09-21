@@ -1,7 +1,9 @@
 import pytest
 from octoprobe.lib_tentacle import Tentacle
 
-from testbed_constants import EnumFut
+from testbed.constants import EnumFut
+
+# pylint: disable=W0613:unused-argument
 
 
 @pytest.mark.required_futs(EnumFut.FUT_I2C)
@@ -22,7 +24,13 @@ def test_i2c_pattern(
     assert mcu.is_mcu
     mcu_config = mcu.tentacle_spec.mcu_config
     mp_program = """
-from machine import Pin, I2C, PWM
+from machine import Pin, I2C
+
+import sys
+if sys.platform == 'pyboard':
+    from pyb import PWM
+else:
+    from machine import PWM
 
 # 'trig1' triggers the DAQ. So we initialize it last!
 ticks_ms=int((2**16)/10)
