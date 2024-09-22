@@ -3,7 +3,7 @@ Installation Ubuntu
 
 Target OS: Ubuntu Server 24.04.1 LTS.
 
-To set up a Raspberry Pi 4/5, start with :doc:`/installation/raspberry`.
+To set up a Raspberry Pi 4/5, start with :doc:`20_raspberry`.
 
 Installation: Users
 -------------------

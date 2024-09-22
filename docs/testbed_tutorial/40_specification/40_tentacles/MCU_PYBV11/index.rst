@@ -1,12 +1,18 @@
 Tentacle `MCU_MCU_PYBV11`
 ==================================
 
-.. image:: top_view.jpg
+:download:`Schematics </../schematics_kicad/schematics.pdf>`
 
+.. image:: top_view.jpg
+   :height: 500px
+   :align: center
 
 .. image:: https://micropython.org/resources/pybv11-pinout.jpg
+   :width: 500px
+   :align: center
 
-## Pins used
+Pins assignements
+-----------------
 
 ===  =====  ===========  =========
 CPU  Pin    signals      rationale

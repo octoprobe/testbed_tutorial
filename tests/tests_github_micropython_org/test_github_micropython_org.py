@@ -45,8 +45,9 @@ def clone_git_micropython(request: pytest.FixtureRequest) -> None:
 def test_perf_bench(mcu: Tentacle, artifacts_directory: ResultsDir) -> None:
     """
     This tests runs: run-perfbench.py
-    https://github.com/micropython/micropython/blob/master/tests/README.md
-    https://github.com/micropython/micropython/blob/master/tests/run-perfbench.py
+
+    * https://github.com/micropython/micropython/blob/master/tests/README.md
+    * https://github.com/micropython/micropython/blob/master/tests/run-perfbench.py
     """
     args = [
         sys.executable,

@@ -1,14 +1,5 @@
-.. Octoprobe: testbed_tutorial documentation master file, created by
-   sphinx-quickstart on Tue Sep 10 15:55:53 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to Octoprobe: testbed_tutorial
-======================================
-
-Add your content using `reStructuredText` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+Octoprobe: testbed_tutorial
+===========================
 
 .. automodule:: testbed
     :members:
@@ -16,30 +7,31 @@ documentation for details.
 .. automodule:: tests
     :members:
 
-.. code::
+.. toctree::
+    :glob:
+    :maxdepth: 2
 
-    .. toctree::
-        :maxdepth: 2
-        :caption: Contents:
-        :includehidden:
+    introduction/index
 
-        license.rst
-        installation/ubuntu.rst
-        installation/raspberry.rst
-        README.rst
-        tentacle_DAQ_saleae/README.rst
-        tentacle_DEVICE_potpourri/README.rst
-        tentacle_MCU_PYBV11/README.rst
-        tentacle_MCU_RPI_PICO/README.rst
+.. toctree::
+    :glob:
+    :maxdepth: 4
+
+    installation/index
 
 .. toctree::
     :glob:
     :maxdepth: 2
-    :caption: Contents:
-    :includehidden:
 
-    *
-    */*
+    tutorial/index
+
+.. toctree::
+    :glob:
+    :maxdepth: 4
+
+    testbed_tutorial/index
+
+
 
 Indices and tables
 ==================

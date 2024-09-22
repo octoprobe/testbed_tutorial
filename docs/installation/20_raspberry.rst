@@ -21,7 +21,7 @@ First boot
 :code:`ssh octoprobe@raspberrypi.local octoprobe/octoprobe`
 
 
-Now follow :doc:`/installation/ubuntu`.
+Now follow :doc:`10_ubuntu`.
 
 Upgrade python 3.11.2 → 3.12.6
 -------------------------------

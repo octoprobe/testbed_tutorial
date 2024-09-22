@@ -42,7 +42,7 @@ Delivery Inspection / Function check
 
 .. rubric::: Expected pulseview screenshot for test_i2c_pattern:
 
-.. image:: testbeds_manufactured_images/pulseview_i2c_pattern.png
+.. image:: images/pulseview_i2c_pattern.png
 
 .. code:: 
 
@@ -64,7 +64,7 @@ Delivery Inspection / Function check
 
 Expected pulseview screenshot for I2C:
 
-.. image:: testbeds_manufactured_images/pulseview_i2c.png
+.. image:: images/pulseview_i2c.png
 
 
 .. note::

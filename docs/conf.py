@@ -3,8 +3,12 @@ import sys
 
 from pallets_sphinx_themes import ProjectLink
 
-_SRC_DIRECTORY = pathlib.Path(__file__).parent.parent / "src"
-sys.path.insert(0, str(_SRC_DIRECTORY))
+# `sys.path` has to be extended as
+# we want to use `autodoc` in `conf.py`.
+_DIRECTORY_REPO = pathlib.Path(__file__).parent.parent
+assert (_DIRECTORY_REPO / ".git").is_dir(), _DIRECTORY_REPO
+sys.path.insert(0, str(_DIRECTORY_REPO))
+sys.path.insert(0, str(_DIRECTORY_REPO / "src"))
 
 release, version = "0.0.1", "0.0.1.dev0"
 
@@ -31,10 +35,12 @@ extensions = [
     "sphinx.ext.coverage",
     "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
     "sphinxmermaid",
 ]
 
-
+todo_include_todos = True
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 intersphinx_mapping = {

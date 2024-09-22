@@ -43,20 +43,18 @@ break_into_debugger_on_exception(globals())
 
 def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
     """
-    This is a pytest hook,
-    see: https://docs.pytest.org/en/7.1.x/reference/reference.html?highlight=pytest_generate_tests#std-hook-pytest_generate_tests
+    This is a pytest hook https://docs.pytest.org/en/7.1.x/reference/reference.html?highlight=pytest_generate_tests#std-hook-pytest_generate_tests
+
+    Give a test function like 'test_i2c()' in 'metafunc', this function will create test calls for possible combinations of tentacles and firmware versions.
 
     Calls `metafunc.parametrize` which defines the tests that have been be collected.
 
-    :param metafunc: _description_
+    :param metafunc: See https://docs.pytest.org/en/7.1.x/reference/reference.html#metafunc
     :type metafunc: pytest.Metafunc
-    :raises KeyError: _description_
-    :return: _description_
-    :rtype: _type_
     """
-    print(metafunc.definition.nodeid)
-    for marker in metafunc.definition.own_markers:
-        print(f" {marker!r}")
+    # print(metafunc.definition.nodeid)
+    # for marker in metafunc.definition.own_markers:
+    #     print(f" {marker!r}")
 
     def get_marker(name: str) -> pytest.Mark:
         for marker in metafunc.definition.own_markers:
@@ -97,10 +95,10 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
                 _tentacle.firmware_spec = firmware_spec
                 list_tentacles.append(_tentacle)
 
-        if len(tentacles) == 0:
+        if len(list_tentacles) == 0:
             msg = f"No tentacle where selected for testing firmware '{firmware_spec.board_variant}'."
             raise ValueError(msg)
-        print(f"LEN={len(list_tentacles)}")
+        # print(f"LEN={len(list_tentacles)}")
         metafunc.parametrize("mcu", list_tentacles, ids=lambda t: t.pytest_id)
 
     if "device_potpourry" in metafunc.fixturenames:
@@ -151,6 +149,12 @@ def active_tentacles(request: pytest.FixtureRequest) -> list[Tentacle]:
 
 @fixture(scope="session", autouse=True)
 def testrun() -> Iterator[NTestRun]:
+    """
+    Setup and teardown octoprobe and all connected tentacles.
+
+    Now we loop over all tests an return for every test a `NTestRun` structure.
+    Using this structure, the test find there tentacles, git-repos etc.
+    """
     if DIRECTORY_TESTRESULTS.exists():
         shutil.rmtree(DIRECTORY_TESTRESULTS, ignore_errors=False)
     DIRECTORY_TESTRESULTS.mkdir(parents=True, exist_ok=True)
@@ -175,6 +179,24 @@ def setup_tentacles(
     active_tentacles: list[Tentacle],  # pylint: disable=W0621:redefined-outer-name
     artifacts_directory: ResultsDir,  # pylint: disable=W0621:redefined-outer-name
 ) -> Iterator[None]:
+    """
+    Runs setup and teardown for every single test:
+
+    * Setup
+
+      * powercycle the tentacles
+      * Turns on the 'active' LED on the tentacles involved
+      * Flash firmware
+      * Set the relays according to `@pytest.mark.required_futs(EnumFut.FUT_I2C)`.
+
+    * yields to the test function
+    * Teardown
+
+      * Resets the relays.
+
+    :param testrun: The structure created by `testrun()`
+    :type testrun: NTestRun
+    """
     if len(active_tentacles) == 0:
         # No tentacle has been specified: This is just a normal pytest.
         # Do not call setup/teardown
@@ -228,6 +250,14 @@ def artifacts_directory(request: pytest.FixtureRequest) -> ResultsDir:
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
+    """
+    This function name is reserved by pytest.
+    See https://docs.pytest.org/en/7.1.x/reference/reference.html#initialization-hooks.
+
+    It will be called to determine the program arguments.
+
+    When calling :code:`pytest --help`, below arguments will be listed!
+    """
     parser.addoption(
         PYTEST_OPT_DOWNLOAD_FIRMWARE,
         action="store",
