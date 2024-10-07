@@ -1,5 +1,6 @@
+
 Flightlevel: micropython
-========================
+==============================================================================================
 
 .. note:: 
 
@@ -46,4 +47,3 @@ File: tests/test_simple.py
 * Line 17: `mcu.dut.mp_remote.exec_render`: Execute the micropython code on the *dut* on the *mcu* tentacle.
 * Line 17: `mcu_config=mcu.tentacle_spec.mcu_config` this will instruct jinja to replace `{{mcu_config.xyz}}` with the values of `mcu.tentacle_spec.mcu_config`. `mcu.tentacle_spec.mcu_config` is part of the tentacle specification. You can add new variables to `mcu.tentacle_spec.mcu_config` when ever needed.
 * Line 28: Read the variable *i2c_data* from the *dut* on the *mcu* tentacle. The expected datatype is *bytes*.
-

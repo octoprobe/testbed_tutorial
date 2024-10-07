@@ -42,14 +42,19 @@ extensions = [
 
 todo_include_todos = True
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = [
+    "_build",
+    "sandbox",
+]
+
+
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "micropython": ("https://docs.micropython.org/en/latest/", None),
-    "octoprobe": ("http://octoprobe.org/octoprobe/", None),
-    "tentacle": ("http://octoprobe.org/tentacle/", None),
-    "testbed_tutorial": ("http://octoprobe.org/testbed_tutorial/", None),
-    # "usbhubctl": ("http://octoprobe.org/usbhubctl/", None),
+    "octoprobe": ("http://docs.octoprobe.org/octoprobe/", None),
+    "tentacle": ("http://docs.octoprobe.org/tentacle/", None),
+    "testbed_tutorial": ("http://docs.octoprobe.org/testbed_tutorial/", None),
+    # "usbhubctl": ("http://docs.octoprobe.org/usbhubctl/", None),
 }
 sphinxmermaid_mermaid_init: dict[str, str | dict] = {
     # "theme": "base",
@@ -73,12 +78,12 @@ html_theme = "flask"
 html_static_path = ["_static"]
 html_context = {
     "project_links": [
-        ProjectLink("Octoprobe: Octoprobe", "http://octoprobe.org/octoprobe/"),
-        ProjectLink("Octoprobe: Tentacle", "http://octoprobe.org/tentacle/"),
+        ProjectLink("Octoprobe: Octoprobe", "https://www.octoprobe.org/octoprobe/"),
+        ProjectLink("Octoprobe: Tentacle", "https://www.octoprobe.org/tentacle/"),
         ProjectLink(
-            "Octoprobe: testbed_tutorial", "http://octoprobe.org/testbed_tutorial/"
+            "Octoprobe: testbed_tutorial", "https://www.octoprobe.org/testbed_tutorial/"
         ),
-        # ProjectLink("Octoprobe: usbhubctl", "http://octoprobe.org/usbhubctl/"),
+        # ProjectLink("Octoprobe: usbhubctl", "https://www.octoprobe.org/usbhubctl/"),
         # ProjectLink("Donate", "https://palletsprojects.com/donate"),
         # ProjectLink("PyPI Releases", "https://pypi.org/project/octoprobe"),
         ProjectLink("Source Code", "https://github.com/octoprobe"),
@@ -119,8 +124,19 @@ html_context = {
 # }
 
 html_sidebars = {
-    "index": ["project.html", "localtoc.html", "searchbox.html", "ethicalads.html"],
-    "**": ["localtoc.html", "relations.html", "searchbox.html", "ethicalads.html"],
+    "index": [
+        "project.html",
+        "localtoc.html",
+        "searchbox.html",
+        "ethicalads.html",
+    ],
+    "**": [
+        "project.html",
+        "localtoc.html",
+        "relations.html",
+        "searchbox.html",
+        "ethicalads.html",
+    ],
 }
 singlehtml_sidebars = {"index": ["project.html", "localtoc.html", "ethicalads.html"]}
 html_favicon = "_static/shortcut-icon.png"

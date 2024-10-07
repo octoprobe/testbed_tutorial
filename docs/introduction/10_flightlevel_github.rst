@@ -12,16 +12,15 @@ Tags of a github runner could be:
 * testbed_tutorial:  The testbed connected to the runner.
 * MCU_PICO2, MCU_PYBV11: The connected mcu boards. This allows github to run tests on various runners if the support different MCUs.
 
-Trigger: PR
-------------------------------
+Trigger testrun by PR (Pull Requst)
+---------------------------------------------------------------
 
 .. todo::
 
     Example of a github action which demonstrates to start tests on every PR.
 
-Trigger: Manual start
-------------------------------
-
+Trigger testrun manually
+---------------------------------------------------------------
 .. todo::
 
     Example of a github action which allows to start tests manually.
@@ -33,9 +32,8 @@ Trigger: Manual start
 
 
 
-Firmware built on Github
-------------------------------
-
+Firmware build on Github
+---------------------------------------------------------------
 The firmware is build and stored somewhere in the web, for example `RPI_PICO-20240602-v1.23.0.uf2 <https://micropython.org/resources/firmware/RPI_PICO-20240602-v1.23.0.uf2>`_.
 
 The url pointing to this firmware is passed to the runner.
@@ -49,8 +47,8 @@ The runner
 
     Proviede detailed github sample action
 
-Firmware built by Octoprobe
------------------------------------
+Firmware build by Octoprobe
+---------------------------------------------------------------
 
 A link to the micropython source repo is provided and the firmware is build on the runner.
 

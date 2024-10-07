@@ -73,7 +73,8 @@
         {
             "label": "sphinx-build",
             "type": "shell",
-            "command": "rm -rf _build && sphinx-build --write-all --fresh-env . _build && google-chrome _build/index.html",
+            // "command": "rm -rf _build && sphinx-build --write-all --fresh-env . _build && google-chrome _build/index.html",
+            "command": "rm -rf _build  && sphinx-build --write-all --fresh-env . _build && rst_sections_validator",
             "options": {
                 "cwd": "${workspaceFolder}/docs",
                 "env": {"LOG_LEVEL": "4"}

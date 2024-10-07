@@ -1,3 +1,6 @@
+.. Restructured text comment: IGNORE_SECTION_CHECK
+
+
 Octoprobe: testbed_tutorial
 ===========================
 
@@ -11,30 +14,30 @@ Octoprobe: testbed_tutorial
     :glob:
     :maxdepth: 2
 
-    introduction/index
+    /introduction/index
 
 .. toctree::
     :glob:
     :maxdepth: 4
 
-    installation/index
+    /installation/index
 
 .. toctree::
     :glob:
     :maxdepth: 2
 
-    tutorial/index
+    /tutorial/index
 
 .. toctree::
     :glob:
     :maxdepth: 4
 
-    testbed_tutorial/index
-
+    /testbed_tutorial/index
 
 
 Indices and tables
 ==================
+
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`

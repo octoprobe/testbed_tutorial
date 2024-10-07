@@ -1,5 +1,6 @@
+
 Flightlevel: pytest
-===================
+==============================================================================================
 
 .. note:: 
 
@@ -22,7 +23,7 @@ Be warned tha pytest is quite a complex beast. If you are not familiar with pyte
   All tests are located in the folder `<repo>/tests` !
 
 pytest Parameters
------------------
+---------------------------------------------------------------
 
 The parameters are implmented here:
 
@@ -41,7 +42,7 @@ The parameters are implmented here:
 
 
 Parameter `--firmware-json`
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. literalinclude:: ../../pytest_args_firmware_RPI_PICO_v1.23.0.json
    :language: json
@@ -55,7 +56,7 @@ Parameter `--firmware-json`
 * Verify the installed version (see *micropython_version_text* on line 4)
 
 Parameter `--firmware-build-url`
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 `$ pytest --firmware-build-url=https://github.com/dpgeorge/micropython.git@rp2-add-rp2350` will
 
@@ -69,7 +70,8 @@ Parameter `--firmware-build-url`
   * run the tests
 
 Parameter `--git-micropython`
------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 `$ pytest --git-micropython=https://github.com/micropython/micropython.git@master` will
 
@@ -82,7 +84,7 @@ The pytest wrapper is implemented here:
 .. autofunction:: tests.tests_github_micropython_org.test_github_micropython_org::test_perf_bench
 
 pytest test collection
-----------------------
+---------------------------------------------------------------
 
 Pytest automatically collects tests.
 
@@ -140,11 +142,12 @@ Line 7: `1831pico2(RPI_PICO2-RISCV)`: This is tentacle number *1831* which is a 
 
 .. rubric:: The testcollection is implemented here:
 
+
 .. autofunction:: tests.conftest.pytest_generate_tests()
 
 
 conftest.py
-----------------------
+---------------------------------------------------------------
 
 This file configures pytest and contains many important hooks.
 
@@ -159,7 +162,7 @@ This file configures pytest and contains many important hooks.
 
 
 testsuites
--------------
+---------------------------------------------------------------
 
 There are currently 3 *testsuites*:
 

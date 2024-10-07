@@ -1,5 +1,6 @@
+
 Flightlevel: testbed
-====================
+==============================================================================================
 
 .. note:: 
 
@@ -13,7 +14,7 @@ Tests always run against a specific `testbed`. See: :doc:`/testbed_tutorial/inde
 This secion is about specifying such a testbed.
 
 Specification of the testbed
-------------------------------
+---------------------------------------------------------------
 
 .. rubric:: Supported **FUTS**
 
@@ -43,7 +44,7 @@ File: src/testbed/constants.py
 
 
 Configure the tentacles
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 File: src/testbed/tentacles_spec.py
 
@@ -106,7 +107,7 @@ File: src/testbed/tentacle_specs.py
 * Line 21: `trig1="GP20",`: This fragment will be injected into micropython code. See :doc:`40_flightlevel_micropython`.
 
 Configure of the testbed-instance
------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * A *testbed* is the specification of how the tentacles are populated and wired and how to test the different FUT.
 
