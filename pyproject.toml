@@ -3,10 +3,10 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "octoprobe"
+name = "octoprobe_testbed_tutorial"
 dynamic = ["version"]
 description = "Octoprobe HIL Testenvironment"
-readme = "README.md"
+readme = "README.rst"
 requires-python = ">=3.12"
 license = {text = "MIT"}
 authors = [
@@ -27,7 +27,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 dependencies = [
-    "usbhubctl"
+    "octoprobe@git+https://github.com/octoprobe/octoprobe#egg=main[dev,doc]",
 ]
 
 [project.urls]
@@ -36,23 +36,27 @@ Documentation = "https://github.com/octoprobe/octoprobe"
 Repository = "https://github.com/octoprobe/octoprobe"
 
 [project.scripts]
-op = "octoprobe.scripts.op:app"
 
 [project.optional-dependencies]
-
-standard = [
-]
 
 all = [
 ]
 
+dev = [
+    # "-e .",
+]
+
+doc = [
+    "octoprobe@git+https://github.com/octoprobe/octoprobe#egg=main[doc]",
+]
+
 [tool.pdm]
-version = { source = "file", path = "octoprobe/__init__.py" }
+version = { source = "file", path = "src/testbed/__init__.py" }
 distribution = true
 
 [tool.pdm.build]
-package-dir = "."
-includes = ["octoprobe"]
+package-dir = "src"
+includes = ["src/testbed"]
 # source-includes = [
 #     "octoprobe/",
 #     "requirements*.txt",
@@ -61,19 +65,6 @@ includes = ["octoprobe"]
 [tool.mypy]
 # strict = true
 enable_incomplete_feature = ["NewGenericSyntax"]
-
-[[tool.mypy.overrides]]
-module = "octoprobe.tests.*"
-ignore_missing_imports = true
-check_untyped_defs = true
-
-[[tool.mypy.overrides]]
-module = "serial.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "usb.*"
-ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 pythonpath = "."
@@ -147,7 +138,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"octoprobe/__init__.py" = ["F401", "I001"]
+"testbed/__init__.py" = ["F401", "I001"]
 
 [tool.ruff.lint.isort]
 # known-third-party = ["usbhubctl"]

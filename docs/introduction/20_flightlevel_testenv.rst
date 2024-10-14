@@ -6,7 +6,7 @@ Flightlevel: testbed
 
     This section explains:
 
-    * How to a *testbed* is configured.
+    * How a *testbed* is configured.
     * How a *testbed instance* is configured.
 
 Tests always run against a specific `testbed`. See: :doc:`/testbed_tutorial/index`.
@@ -112,10 +112,15 @@ Configure of the testbed-instance
 * A *testbed* is the specification of how the tentacles are populated and wired and how to test the different FUT.
 
   * Testbed/Tentacle specification
+
     * src/testbed/tentacle_spec_mcuconfig.py
     * src/testbed/tentacles_spec.py
 
-* A *testbed* may be instanciated (soldered) serveral times: The same testbed may run in Switzerland with MCUs Pico and pyboard and also in Australia using MCUs Esp32, esp8266 and Arduino Portenta C33.
+* A *testbed* may be instanciated (pysically assembled and soldered)
+  serveral times:
+  The same testbed may run in Switzerland with MCUs Pico and
+  pyboard and also in Australia using MCUs Esp32, esp8266
+  and Arduino Portenta C33.
 
   * Testbed instance specification
   
@@ -133,5 +138,5 @@ File: src/testbed/testbed_ch_wetzikon_1.py
 
 In this file we list all tentacles which are connected to our computer.
 
-* Line 6: `tentacle_serial_number="e46340474b174429",` The effective serial number has to be provided!
-* Line 7: `tentacle_spec=tentacle_spec_mcu_rpi_pico2` This refers to the tentacle specification further up in this document.
+* Line 6: `tentacle_serial_number="e46340474b174429"`: The effective serial number has to be provided!
+* Line 7: `tentacle_spec=tentacle_spec_mcu_rpi_pico2`: This refers to the tentacle specification further up in this document.

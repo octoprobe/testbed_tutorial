@@ -1,5 +1,0 @@
-# -e .
-pylint
-coverage[toml] 
-mypy 
-ruff 

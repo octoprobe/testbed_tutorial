@@ -1,5 +1,5 @@
-Flightlevel: github
-===================
+WIP Flightlevel: github
+===========================
 
 octoprobe may run as a selfhosted gitlab runner.
 Tests may than be triggered by github actions.
@@ -12,14 +12,14 @@ Tags of a github runner could be:
 * testbed_tutorial:  The testbed connected to the runner.
 * MCU_PICO2, MCU_PYBV11: The connected mcu boards. This allows github to run tests on various runners if the support different MCUs.
 
-Trigger testrun by PR (Pull Requst)
+WIP: Trigger testrun by PR (Pull Requst)
 ---------------------------------------------------------------
 
 .. todo::
 
     Example of a github action which demonstrates to start tests on every PR.
 
-Trigger testrun manually
+WIP: Trigger testrun manually
 ---------------------------------------------------------------
 .. todo::
 
@@ -32,7 +32,7 @@ Trigger testrun manually
 
 
 
-Firmware build on Github
+WIP: Firmware build on Github
 ---------------------------------------------------------------
 The firmware is build and stored somewhere in the web, for example `RPI_PICO-20240602-v1.23.0.uf2 <https://micropython.org/resources/firmware/RPI_PICO-20240602-v1.23.0.uf2>`_.
 
@@ -47,7 +47,7 @@ The runner
 
     Proviede detailed github sample action
 
-Firmware build by Octoprobe
+WIP: Firmware build by Octoprobe
 ---------------------------------------------------------------
 
 A link to the micropython source repo is provided and the firmware is build on the runner.

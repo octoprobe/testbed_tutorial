@@ -8,26 +8,33 @@ Flightlevel: pytest
 
     * How to use pytest parameters to select the firmware to be tested.
     * How to run the different test suites.
-    * How a pytest selects tentacles and FUT (Feature Unter Test)
-    * How the pytest testcollection works.
+    * How pytest selects tentacles and FUT (Feature Unter Test)
+    * How pytest does testcollection.
 
     Required knowhow:
 
     *  `Pytest <https://docs.pytest.org/>`_
 
 
-Be warned tha pytest is quite a complex beast. If you are not familiar with pytest, take time to read a tutorial about test collection and fixtures. This time is a good investment as pytest is extremly powerful and widely used.
+Be warned that pytest is quite a complex beast.
+If you are not familiar with pytest, take time to read
+a pytest tutorial about test collection and fixtures.
+This time is a good investment as pytest is extremly powerful
+and widely used.
 
 .. note::
 
   All tests are located in the folder `<repo>/tests` !
 
-pytest Parameters
+pytest command line arguments
 ---------------------------------------------------------------
 
-The parameters are implmented here:
+.. note:: 
+  pytest already provides many command line arguments. This section is about the octoprobe specific command line arguments.
+ 
+The arguments are implmented here:
 
-.. autofunction:: tests.conftest.pytest_addoption
+.. autofunction:: tests.conftest.pytest_addoption()
 
 .. code-block:: bash
 
@@ -41,7 +48,7 @@ The parameters are implmented here:
                         The micropython repo to check out. Syntax https://github.com/micropython/micropython.git@master
 
 
-Parameter `--firmware-json`
+Arguments `--firmware-json`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. literalinclude:: ../../pytest_args_firmware_RPI_PICO_v1.23.0.json
@@ -55,7 +62,7 @@ Parameter `--firmware-json`
 * Install this firmware an matching tentacles (see *board_variant* on line 2)
 * Verify the installed version (see *micropython_version_text* on line 4)
 
-Parameter `--firmware-build-url`
+Arguments `--firmware-build-url`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 `$ pytest --firmware-build-url=https://github.com/dpgeorge/micropython.git@rp2-add-rp2350` will
@@ -69,7 +76,7 @@ Parameter `--firmware-build-url`
   * install the firmware
   * run the tests
 
-Parameter `--git-micropython`
+Arguments `--git-micropython`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -81,7 +88,8 @@ Parameter `--git-micropython`
 
 The pytest wrapper is implemented here:
 
-.. autofunction:: tests.tests_github_micropython_org.test_github_micropython_org::test_perf_bench
+.. autofunction:: tests.tests_github_micropython_org.test_github_micropython_org::test_perf_bench()
+  :noindex:
 
 pytest test collection
 ---------------------------------------------------------------
@@ -143,7 +151,8 @@ Line 7: `1831pico2(RPI_PICO2-RISCV)`: This is tentacle number *1831* which is a 
 .. rubric:: The testcollection is implemented here:
 
 
-.. autofunction:: tests.conftest.pytest_generate_tests()
+.. autofunction:: tests.conftest::pytest_generate_tests()
+  :noindex:
 
 
 conftest.py
@@ -153,13 +162,14 @@ This file configures pytest and contains many important hooks.
 
 .. rubric:: This function will setup and tear down octoprobe
 
-.. autofunction:: tests.conftest.testrun()
+.. autofunction:: tests.conftest::session_setup()
+  :no-index:
 
 
 .. rubric:: This function will setup and tear down the tentacles for every test
 
-.. autofunction:: tests.conftest.setup_tentacles()
-
+.. autofunction:: tests.conftest::setup_tentacles()
+  :no-index:
 
 testsuites
 ---------------------------------------------------------------

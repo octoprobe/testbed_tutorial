@@ -148,7 +148,7 @@ def active_tentacles(request: pytest.FixtureRequest) -> list[Tentacle]:
 
 
 @fixture(scope="session", autouse=True)
-def testrun() -> Iterator[NTestRun]:
+def session_setup() -> Iterator[NTestRun]:
     """
     Setup and teardown octoprobe and all connected tentacles.
 
@@ -174,7 +174,7 @@ def testrun() -> Iterator[NTestRun]:
 
 @fixture(scope="function", autouse=True)
 def setup_tentacles(
-    testrun: NTestRun,  # pylint: disable=W0621:redefined-outer-name
+    session_setup: NTestRun,  # pylint: disable=W0621:redefined-outer-name
     required_futs: tuple[EnumFut],  # pylint: disable=W0621:redefined-outer-name
     active_tentacles: list[Tentacle],  # pylint: disable=W0621:redefined-outer-name
     artifacts_directory: ResultsDir,  # pylint: disable=W0621:redefined-outer-name
@@ -215,11 +215,11 @@ def setup_tentacles(
             logger.info(
                 f"TEST SETUP {duration_text(0.0)} {artifacts_directory.test_nodeid}"
             )
-            testrun.function_prepare_dut()
-            testrun.function_setup_infra()
-            testrun.function_setup_dut(active_tentacles=active_tentacles)
+            session_setup.function_prepare_dut()
+            session_setup.function_setup_infra()
+            session_setup.function_setup_dut(active_tentacles=active_tentacles)
 
-            testrun.setup_relays(futs=required_futs, tentacles=active_tentacles)
+            session_setup.setup_relays(futs=required_futs, tentacles=active_tentacles)
             logger.info(
                 f"TEST BEGIN {duration_text()} {artifacts_directory.test_nodeid}"
             )
@@ -234,7 +234,7 @@ def setup_tentacles(
                 f"TEST TEARDOWN {duration_text()} {artifacts_directory.test_nodeid}"
             )
             try:
-                testrun.function_teardown(active_tentacles=active_tentacles)
+                session_setup.function_teardown(active_tentacles=active_tentacles)
             except Exception as e:
                 logger.exception(e)
             logger.info(f"TEST END {duration_text()} {artifacts_directory.test_nodeid}")
