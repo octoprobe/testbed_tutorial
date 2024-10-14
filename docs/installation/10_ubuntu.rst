@@ -33,6 +33,8 @@ Installation: APT
     sudo groupadd docker
     sudo usermod -aG docker $USER
 
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
 
 On Raspbian: Skip python3.12-venv
 
@@ -49,10 +51,10 @@ On Raspbian: Skip python3.12-venv
 
     echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
     # Log out and in again
-    python -m venv ~/venv_octoprobe
+    uv venv ~/venv_octoprobe
 
     source ~/venv_octoprobe/bin/activate
-    pip install --upgrade -r ~/testbed_tutorial/requirements.txt -r ~/testbed_tutorial/requirements_dev.txt
+    uv pip install -e ~/testbed_tutorial
 
 ## Software requiring root access
 
