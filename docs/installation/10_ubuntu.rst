@@ -51,7 +51,7 @@ On Raspbian: Skip python3.12-venv
 
     echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
     # Log out and in again
-    uv venv ~/venv_octoprobe
+    uv venv --python 3.13.0 ~/venv_octoprobe
 
     source ~/venv_octoprobe/bin/activate
     uv pip install -e ~/testbed_tutorial
