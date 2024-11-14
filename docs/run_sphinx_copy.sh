@@ -13,7 +13,7 @@ do
         cp -r $dir_src $dir_target
     done
 
-    for filename in conf.py run_sphinx_copy.sh  run_sphinx_upload.sh
+    for filename in conf.py run_sphinx_copy.sh run_sphinx_upload.sh
     do
         cp -r ~/work_octoprobe_${proj_src}/docs/${filename} ~/work_octoprobe_${proj_target}/docs/
     done

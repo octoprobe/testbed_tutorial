@@ -42,7 +42,7 @@ PWM(Pin('{{mcu_config.trig1}}'), freq=100, duty_u16=1*ticks_ms)
 # Pyboard only
 from pyb import Pin, Timer
 
-def run_timer(pin, tim, channel, pulse_width_percent): 
+def run_timer(pin, tim, channel, pulse_width_percent):
     tim.channel(channel,
                 Timer.PWM,
                 pin=Pin(pin),

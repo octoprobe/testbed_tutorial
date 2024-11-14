@@ -1,4 +1,3 @@
-import os
 import pathlib
 
 from octoprobe.lib_tentacle import Tentacle
@@ -22,25 +21,24 @@ def build_firmware(
     assert isinstance(micropython_directory, pathlib.Path)
     assert isinstance(variant, BoardVariant)
 
-    old_cwd = pathlib.Path.cwd()
-    try:
-        os.chdir(micropython_directory)
-        # pylint: disable=C0415:Import outside toplevel
-        import mpbuild  # type: ignore[import-untyped]
-        import mpbuild.find_boards_hmaerki  # type: ignore[import-untyped]
+    # pylint: disable=C0415 # Import outside toplevel
+    from mpbuild.board_database import Database
+    from mpbuild.build_api import build_by_variant_str
 
-        db = mpbuild.find_boards_hmaerki.Database()
-        db_variant = db.get_variant(variant.board, variant.variant)
-        firmware_filename = mpbuild.build.build_board(
-            **db_variant.buildparams.as_named_parameters
-        )
-        return FirmwareBuildSpec(
-            board_variant=variant,
-            micropython_version_text=None,
-            _filename=firmware_filename,
-        )
-    finally:
-        os.chdir(old_cwd)
+    db = Database(micropython_directory)
+    firmware = build_by_variant_str(
+        db=db,
+        variant_str=variant.name_normalized,
+        do_clean=False,
+    )
+    return FirmwareBuildSpec(
+        board_variant=BoardVariant(
+            board=firmware.variant.board.name,
+            variant=firmware.variant.name,
+        ),
+        _filename=firmware.filename,
+        micropython_version_text=firmware.micropython_version_text,
+    )
 
 
 def build_firmwares(
