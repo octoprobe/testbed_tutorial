@@ -72,8 +72,8 @@
             "args": [
                 "--collect-only",
                 "-q",
-                "--git-micropython=https://github.com/micropython/micropython.git@master",
-                "--firmware-build-url=https://github.com/dpgeorge/micropython.git@rp2-add-rp2350",
+                "--git-micropython=https://github.com/micropython/micropython.git@v1.24.0",
+                "--firmware-build-url=https://github.com/micropython/micropython.git@v1.23.0",
                 "tests/tests_github_micropython_org/test_github_micropython_org.py"
             ],
             "console": "integratedTerminal",
@@ -91,8 +91,8 @@
             "args": [
                 "-s",
                 "-v",
-                "--git-micropython=https://github.com/micropython/micropython.git@master",
-                "--firmware-build-url=https://github.com/dpgeorge/micropython.git@rp2-add-rp2350",
+                "--git-micropython=https://github.com/micropython/micropython.git@v1.24.0",
+                "--firmware-build-url=https://github.com/micropython/micropython.git@v1.23.0",
                 "tests/tests_github_micropython_org/test_github_micropython_org.py"
             ],
             "console": "integratedTerminal",

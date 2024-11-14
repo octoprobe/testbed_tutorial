@@ -11,6 +11,11 @@ Installation: Users
 Octoprobe user: `octoprobe`
 Github runner user: `githubrunner`
 
+.. code::
+
+    adduser octoprobe
+    adduser githubrunner
+
 Do not forget to config git:
 
 .. code::
@@ -31,21 +36,24 @@ Installation: APT
         docker.io docker-buildx
 
     sudo groupadd docker
-    sudo usermod -aG docker $USER
+    sudo usermod -aG docker octoprobe
+    sudo usermod -aG docker githubrunner
 
-    curl -LsSf https://astral.sh/uv/install.sh | sh
+    sudo snap install astral-uv --classic
 
 
 On Raspbian: Skip python3.12-venv
 
 
-## git clone testbed_tutorial
+git clone testbed_tutorial
+--------------------------
 
 .. code::
 
     git clone https://github.com/octoprobe/testbed_tutorial.git
 
-## python
+python
+------
 
 .. code::
 
@@ -56,16 +64,14 @@ On Raspbian: Skip python3.12-venv
     source ~/venv_octoprobe/bin/activate
     uv pip install -e ~/testbed_tutorial
 
-## Software requiring root access
+Software requiring root access
+------------------------------
 
 Will be used by mpremote and others
 
 .. code::
 
-    sudo usermod -a -G dialout $USER
-
-
-APT
+    sudo usermod -a -G dialout octoprobe
 
 .. code::
 
