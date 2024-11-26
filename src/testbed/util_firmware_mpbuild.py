@@ -1,5 +1,8 @@
+import logging
 import pathlib
 
+from mpbuild.board_database import Database
+from mpbuild.build_api import build_by_variant_str
 from octoprobe.lib_tentacle import Tentacle
 from octoprobe.util_cached_git_repo import CachedGitRepo
 from octoprobe.util_constants import TAG_BOARDS
@@ -7,6 +10,8 @@ from octoprobe.util_dut_programmers import FirmwareBuildSpec, FirmwareSpecBase
 from octoprobe.util_micropython_boards import BoardVariant, board_variants
 
 from .constants import DIRECTORY_GIT_CACHE
+
+logger = logging.getLogger(__file__)
 
 
 def build_firmware(
@@ -21,9 +26,7 @@ def build_firmware(
     assert isinstance(micropython_directory, pathlib.Path)
     assert isinstance(variant, BoardVariant)
 
-    # pylint: disable=C0415 # Import outside toplevel
-    from mpbuild.board_database import Database
-    from mpbuild.build_api import build_by_variant_str
+    logger.info(f"build firmware {variant.name_normalized} in {micropython_directory}")
 
     db = Database(micropython_directory)
     firmware = build_by_variant_str(

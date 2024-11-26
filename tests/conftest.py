@@ -155,19 +155,11 @@ def session_setup() -> Iterator[NTestRun]:
     Now we loop over all tests an return for every test a `NTestRun` structure.
     Using this structure, the test find there tentacles, git-repos etc.
     """
-    if DIRECTORY_TESTRESULTS.exists():
-        shutil.rmtree(DIRECTORY_TESTRESULTS, ignore_errors=False)
-    DIRECTORY_TESTRESULTS.mkdir(parents=True, exist_ok=True)
+    _testrun = NTestRun(testbed=TESTBED)
 
-    util_logging.init_logging()
+    _testrun.session_powercycle_tentacles()
 
-    with util_logging.logs(DIRECTORY_TESTRESULTS):
-
-        _testrun = NTestRun(testbed=TESTBED)
-
-        _testrun.session_powercycle_tentacles()
-
-        yield _testrun
+    yield _testrun
 
     _testrun.session_teardown()
 
@@ -203,7 +195,7 @@ def setup_tentacles(
         yield
         return
 
-    with util_logging.logs(artifacts_directory.directory_test):
+    with util_logging.Logs(artifacts_directory.directory_test):
         begin_s = time.monotonic()
 
         def duration_text(duration_s: float | None = None) -> str:
@@ -247,6 +239,19 @@ def artifacts_directory(request: pytest.FixtureRequest) -> ResultsDir:
         test_name=request.node.name,
         test_nodeid=request.node.nodeid,
     )
+
+
+def pytest_sessionstart(session: pytest.Session):
+    """
+    Called after the Session object has been created and
+    before performing collection and entering the run test loop.
+    """
+    if DIRECTORY_TESTRESULTS.exists():
+        shutil.rmtree(DIRECTORY_TESTRESULTS, ignore_errors=False)
+    DIRECTORY_TESTRESULTS.mkdir(parents=True, exist_ok=True)
+
+    util_logging.init_logging()
+    util_logging.Logs(DIRECTORY_TESTRESULTS)
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:

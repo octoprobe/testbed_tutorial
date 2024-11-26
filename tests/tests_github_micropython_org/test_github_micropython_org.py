@@ -90,8 +90,8 @@ def test_tests(mcu: Tentacle, artifacts_directory: ResultsDir) -> None:
     args = [
         sys.executable,
         "run-tests.py",
-        f"--device={mcu.dut.get_tty()}",
-        f"--target={target}",
+        f"-t=port:{mcu.dut.get_tty()}",
+        # f"--target={target}",
         "--jobs=1",
         f"--result-dir={artifacts_directory.directory_test}",
         "--test-dirs=misc",
