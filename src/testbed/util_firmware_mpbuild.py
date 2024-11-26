@@ -9,9 +9,43 @@ from octoprobe.util_constants import TAG_BOARDS
 from octoprobe.util_dut_programmers import FirmwareBuildSpec, FirmwareSpecBase
 from octoprobe.util_micropython_boards import BoardVariant, board_variants
 
-from .constants import DIRECTORY_GIT_CACHE
+from testbed.constants import DIRECTORY_GIT_CACHE
 
 logger = logging.getLogger(__file__)
+
+
+class FirmwareBuilder:
+    """
+    It is difficult in pytest to keep track if git has
+    already been cloned and if a firmware alread
+    has been compiled.
+    This class will build every variant only once, even if
+    many tests might require it.
+    """
+
+    def __init__(self, firmware_git_url: str) -> None:
+        self._already_build_firmwares: dict[str, FirmwareBuildSpec] = {}
+        self.firmware_git_url = firmware_git_url
+        self.git_repo = CachedGitRepo(
+            directory_cache=DIRECTORY_GIT_CACHE,
+            git_spec=firmware_git_url,
+            prefix="micropython_firmware_",
+        )
+        self.git_repo.clone()
+
+    def build_firmware(self, firmware_spec: FirmwareSpecBase) -> FirmwareBuildSpec:
+        assert isinstance(firmware_spec, FirmwareBuildSpec)
+
+        variant = firmware_spec.board_variant
+
+        spec = self._already_build_firmwares.get(variant.name_normalized, None)
+        if spec is None:
+            spec = build_firmware(
+                micropython_directory=self.git_repo.directory,
+                variant=variant,
+            )
+        self._already_build_firmwares[variant.name_normalized] = spec
+        return spec
 
 
 def build_firmware(
@@ -44,42 +78,22 @@ def build_firmware(
     )
 
 
-def build_firmwares(
-    tentacles: list[Tentacle],
-    collectonly: bool,
-    firmware_git_url: str,
-) -> list[FirmwareSpecBase]:
-    list_variants: list[BoardVariant] = []
+def collect_firmware_specs(tentacles: list[Tentacle]) -> list[FirmwareSpecBase]:
+    """
+    Loops over all tentacles and finds
+    the board variants that have to be
+    build/downloaded.
+    """
+    set_variants: set[BoardVariant] = set()
     for tentacle in tentacles:
         if not tentacle.is_mcu:
             continue
         boards = tentacle.get_tag_mandatory(TAG_BOARDS)
         for variant in board_variants(boards):
-            list_variants.append(variant)
-    list_variants.sort(key=lambda v: v.name_normalized)
+            set_variants.add(variant)
+    list_variants = sorted(set_variants, key=lambda v: v.name_normalized)
 
-    if not collectonly:
-        git_repo = CachedGitRepo(
-            directory_cache=DIRECTORY_GIT_CACHE,
-            git_spec=firmware_git_url,
-            prefix="micropython_firmware_",
-        )
-        git_repo.clone()
-
-    firmware_specs: list[FirmwareSpecBase] = []
-    for variant in list_variants:
-        if collectonly:
-            spec = FirmwareBuildSpec(
-                board_variant=variant,
-                micropython_version_text=None,
-                _filename=pathlib.Path("dummy (collect-only)"),
-            )
-        else:
-            spec = build_firmware(
-                micropython_directory=git_repo.directory,
-                variant=variant,
-            )
-
-        firmware_specs.append(spec)
-
-    return firmware_specs
+    return [
+        FirmwareBuildSpec(board_variant=variant, micropython_version_text=None)
+        for variant in list_variants
+    ]

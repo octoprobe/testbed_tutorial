@@ -91,6 +91,8 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
                 msg = f"No tentacle where selected for testing firmware '{firmware_spec.board_variant}'. Required futs: {futs_text}"
                 logger.warning(msg)
             for tentacle in tentacles:
+                # Need to create a copy to the tentacle as we
+                # modify it for the test.
                 _tentacle = copy.copy(tentacle)
                 _tentacle.firmware_spec = firmware_spec
                 list_tentacles.append(_tentacle)
@@ -148,14 +150,15 @@ def active_tentacles(request: pytest.FixtureRequest) -> list[Tentacle]:
 
 
 @fixture(scope="session", autouse=True)
-def session_setup() -> Iterator[NTestRun]:
+def session_setup(request: pytest.FixtureRequest) -> Iterator[NTestRun]:
     """
     Setup and teardown octoprobe and all connected tentacles.
 
     Now we loop over all tests an return for every test a `NTestRun` structure.
     Using this structure, the test find there tentacles, git-repos etc.
     """
-    _testrun = NTestRun(testbed=TESTBED)
+    firmware_git_url = request.config.getoption(PYTEST_OPT_BUILD_FIRMWARE)
+    _testrun = NTestRun(testbed=TESTBED, firmware_git_url=firmware_git_url)
 
     _testrun.session_powercycle_tentacles()
 
@@ -207,6 +210,7 @@ def setup_tentacles(
             logger.info(
                 f"TEST SETUP {duration_text(0.0)} {artifacts_directory.test_nodeid}"
             )
+            session_setup.function_build_firmwares(active_tentacles=active_tentacles)
             session_setup.function_prepare_dut()
             session_setup.function_setup_infra()
             session_setup.function_setup_dut(active_tentacles=active_tentacles)

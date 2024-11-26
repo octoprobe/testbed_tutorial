@@ -10,7 +10,7 @@ from octoprobe.util_dut_programmers import (
 )
 from octoprobe.util_micropython_boards import BoardVariant
 
-from .util_firmware_mpbuild import build_firmwares
+from .util_firmware_mpbuild import collect_firmware_specs
 
 logger = logging.getLogger(__file__)
 PYTEST_OPT_DOWNLOAD_FIRMWARE = "--firmware-json"
@@ -52,11 +52,7 @@ def get_firmware_specs(
                 ),
             ]
 
-        return build_firmwares(
-            tentacles=tentacles,
-            collectonly=config.option.collectonly,
-            firmware_git_url=firmware_git_url,
-        )
+        return collect_firmware_specs(tentacles=tentacles)
 
     firmware_download_json = config.getoption(PYTEST_OPT_DOWNLOAD_FIRMWARE)
     assert firmware_download_json is not None
