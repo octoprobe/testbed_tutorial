@@ -14,7 +14,6 @@ ENV_TESTBED = "OCTOPROBE_TESTBED"
 TESTBED_FALLBACK = "testbed_ch_wetzikon_1.py"
 
 
-
 def get_testbed() -> Testbed:
     python_testbed = os.environ.get(ENV_TESTBED)
     if python_testbed is None:

@@ -1,11 +1,20 @@
 from __future__ import annotations
 
 import dataclasses
+import enum
 
 from octoprobe import util_mcu_pyboard, util_mcu_rp2
 from octoprobe.util_baseclasses import TentacleSpec
 
 from testbed.constants import EnumFut, TentacleType
+
+
+class EnumTentacleSpec(enum.StrEnum):
+    DAQ_SALEAE = "DAQ_SALEAE"
+    DEVICE_POTPOURRY = "DEVICE_POTPOURRY"
+    MCU_PYBV11 = "MCU_PYBV11"
+    MCU_RPI_PICO = "MCU_RPI_PICO"
+    MCU_RPI_PICO2 = "MCU_RPI_PICO2"
 
 
 @dataclasses.dataclass
@@ -27,6 +36,7 @@ See: https://github.com/octoprobe/testbed_tutorial/tree/main/docs/tentacle_MCU_P
 """
 tentacle_spec_mcu_pybv11 = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_spec=EnumTentacleSpec.MCU_PYBV11,
     futs=[
         EnumFut.FUT_MCU_ONLY,
         EnumFut.FUT_I2C,
@@ -60,6 +70,7 @@ See: https://github.com/octoprobe/testbed_tutorial/tree/main/docs/tentacle_MCU_R
 """
 tentacle_spec_mcu_rpi_pico = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_spec=EnumTentacleSpec.MCU_RPI_PICO,
     futs=[
         EnumFut.FUT_MCU_ONLY,
         EnumFut.FUT_I2C,
@@ -93,6 +104,7 @@ See: https://github.com/octoprobe/testbed_tutorial/tree/main/docs/tentacle_MCU_R
 """
 tentacle_spec_mcu_rpi_pico2 = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_spec=EnumTentacleSpec.MCU_RPI_PICO2,
     futs=[
         EnumFut.FUT_MCU_ONLY,
         EnumFut.FUT_I2C,
@@ -130,6 +142,7 @@ I2C EEPROM AT24C08
 """
 tentacle_spec_device_potpourry = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_DEVICE_POTPOURRY,
+    tentacle_spec=EnumTentacleSpec.DEVICE_POTPOURRY,
     futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
     category="Micropython Board",
     label="potpourry",
@@ -148,6 +161,7 @@ https://sigrok.org/wiki/Noname_Saleae_Logic_clone
 """
 tentacle_spec_daq_saleae = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_DAQ_SALEAE,
+    tentacle_spec=EnumTentacleSpec.DAQ_SALEAE,
     futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
     category="Micropython Board",
     label="daq",
@@ -158,3 +172,15 @@ tentacle_spec_daq_saleae = TentacleSpec(
         EnumFut.FUT_ONEWIRE: [1, 2, 3, 4],
     },
 )  # type: ignore[var-annotated]
+
+
+TENTACLES_SPECS: dict[str, TentacleSpec] = {
+    tentacle_spec.tentacle_spec: tentacle_spec
+    for tentacle_spec in (
+        tentacle_spec_daq_saleae,
+        tentacle_spec_device_potpourry,
+        tentacle_spec_mcu_pybv11,
+        tentacle_spec_mcu_rpi_pico,
+        tentacle_spec_mcu_rpi_pico2,
+    )
+}

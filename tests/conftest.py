@@ -7,6 +7,7 @@ from collections.abc import Iterator
 
 import pytest
 from octoprobe.lib_tentacle import Tentacle
+from octoprobe.lib_testbed import Testbed
 from octoprobe.octoprobe import NTestRun
 from octoprobe.util_dut_programmers import FirmwareSpecBase
 from octoprobe.util_pytest import util_logging
@@ -14,6 +15,7 @@ from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_pytest.util_vscode import break_into_debugger_on_exception
 from pytest import fixture
 
+from testbed.tentacles_spec import TENTACLES_SPECS, McuConfig
 import testbed.util_testbed
 from testbed.constants import DIRECTORY_TESTRESULTS, EnumFut, TentacleType
 from testbed.util_firmware_specs import (
@@ -25,10 +27,12 @@ from testbed.util_github_micropython_org import (
     DEFAULT_GIT_MICROPYTHON,
     PYTEST_OPT_GIT_MICROPYTHON,
 )
+from testbed.tentacles_inventory import TENTACLES_INVENTORY
 
 logger = logging.getLogger(__file__)
 
-TESTBED = testbed.util_testbed.get_testbed()
+# TESTBED = testbed.util_testbed.get_testbed()
+TESTBED: Testbed | None = None
 DIRECTORY_OF_THIS_FILE = pathlib.Path(__file__).parent
 
 DEFAULT_FIRMWARE_SPEC = (
@@ -55,6 +59,8 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
     # print(metafunc.definition.nodeid)
     # for marker in metafunc.definition.own_markers:
     #     print(f" {marker!r}")
+
+    assert TESTBED is not None
 
     def get_marker(name: str) -> pytest.Mark:
         for marker in metafunc.definition.own_markers:
@@ -166,10 +172,12 @@ def session_setup(request: pytest.FixtureRequest) -> Iterator[NTestRun]:
     Now we loop over all tests an return for every test a `NTestRun` structure.
     Using this structure, the test find there tentacles, git-repos etc.
     """
+    assert TESTBED is not None
+
     firmware_git_url = request.config.getoption(PYTEST_OPT_BUILD_FIRMWARE)
     _testrun = NTestRun(testbed=TESTBED, firmware_git_url=firmware_git_url)
 
-    _testrun.session_powercycle_tentacles()
+    # _testrun.session_powercycle_tentacles()
 
     yield _testrun
 
@@ -268,6 +276,34 @@ def pytest_sessionstart(session: pytest.Session):
 
     util_logging.init_logging()
     util_logging.Logs(DIRECTORY_TESTRESULTS)
+
+    query_result_tentacles = NTestRun.session_powercycle_tentacles()
+    tentacles: list[Tentacle] = []
+    for query_result_tentacle in query_result_tentacles:
+        serial = query_result_tentacle.rp2_serial_number
+        assert serial is not None
+        enum_spec = TENTACLES_INVENTORY.get(serial, None)
+        if enum_spec is None:
+            logger.warning(
+                f"Tentacle with serial {serial} is not specified in TENTACLES_INVENTORY."
+            )
+            continue
+
+        spec = TENTACLES_SPECS[enum_spec]
+
+        tentacle = Tentacle[McuConfig, TentacleType, EnumFut](
+            tentacle_serial_number=serial,
+            tentacle_spec=spec,
+        )
+        tentacle.assign_connected_hub(query_result_tentacle=query_result_tentacle)
+        tentacles.append(tentacle)
+
+    if len(tentacles) == 0:
+        raise ValueError(f"No tentacles is connected!")
+
+    global TESTBED
+    assert TESTBED is None
+    TESTBED = Testbed(workspace="based-on-connected-boards", tentacles=tentacles)
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
