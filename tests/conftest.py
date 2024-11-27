@@ -130,6 +130,10 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
 @pytest.fixture
 def required_futs(request: pytest.FixtureRequest) -> list[EnumFut]:
+    """
+    Returns all FUTS (Feature Under Test) which are required
+    by the test function referencing this fixture.
+    """
     for m in request.node.own_markers:
         assert isinstance(m, pytest.Mark)
         if m.name == "required_futs":
@@ -139,6 +143,11 @@ def required_futs(request: pytest.FixtureRequest) -> list[EnumFut]:
 
 @pytest.fixture
 def active_tentacles(request: pytest.FixtureRequest) -> list[Tentacle]:
+    """
+    Returns all active tentacles which are required
+    by the test function referencing this fixture.
+    """
+
     def inner() -> Iterator[Tentacle]:
         if not hasattr(request.node, "callspec"):
             return
@@ -238,6 +247,9 @@ def setup_tentacles(
 
 @pytest.fixture(scope="function")
 def artifacts_directory(request: pytest.FixtureRequest) -> ResultsDir:
+    """
+    Returns the log directory for the test function referencing this fixture.
+    """
     return ResultsDir(
         directory_top=DIRECTORY_TESTRESULTS,
         test_name=request.node.name,

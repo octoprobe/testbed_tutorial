@@ -1,4 +1,4 @@
-Tentacle `MCU_MCU_PYBV11`
+Tentacle `MCU_PYBV11`
 ==================================
 
 :download:`Schematics </../schematics_kicad/schematics.pdf>`

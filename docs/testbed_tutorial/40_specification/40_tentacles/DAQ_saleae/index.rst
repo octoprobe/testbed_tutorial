@@ -1,4 +1,4 @@
-Tentacle `DAQ_saleae`
+Tentacle `DAQ_SALEAE`
 =====================
 
 :download:`Schematics </../schematics_kicad/schematics.pdf>`
