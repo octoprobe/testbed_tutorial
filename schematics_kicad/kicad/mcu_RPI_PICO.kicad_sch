@@ -10,9 +10,21 @@
 		(comment 1 "The MIT License (MIT)")
 	)
 	(lib_symbols)
-	(hierarchical_label "GND"
+	(hierarchical_label "GPIO1 {slash} uart 0 rx"
 		(shape input)
 		(at 82.55 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "034779d9-29a6-449b-ab28-2cff69e21304")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 82.55 99.06 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -45,6 +57,18 @@
 			(justify left)
 		)
 		(uuid "38b44045-9cf7-4540-a856-7795a52e1042")
+	)
+	(hierarchical_label "GPIO0 {slash} uart 0 tx"
+		(shape input)
+		(at 82.55 95.25 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "49e33acb-69ea-4b30-92fe-4b9d4adaa2a7")
 	)
 	(hierarchical_label "GP14 {slash} onewire"
 		(shape input)

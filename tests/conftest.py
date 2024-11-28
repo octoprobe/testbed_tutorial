@@ -13,11 +13,18 @@ from octoprobe.util_dut_programmers import FirmwareSpecBase
 from octoprobe.util_pytest import util_logging
 from octoprobe.util_pytest.util_resultdir import ResultsDir
 from octoprobe.util_pytest.util_vscode import break_into_debugger_on_exception
+from octoprobe.util_testbed_lock import TestbedLock
 from pytest import fixture
 
-from testbed.tentacles_spec import TENTACLES_SPECS, McuConfig
 import testbed.util_testbed
-from testbed.constants import DIRECTORY_TESTRESULTS, EnumFut, TentacleType
+from testbed.constants import (
+    DIRECTORY_TESTRESULTS,
+    EnumFut,
+    FILENAME_TESTBED_LOCK,
+    TentacleType,
+)
+from testbed.tentacles_inventory import TENTACLES_INVENTORY
+from testbed.tentacles_spec import McuConfig, TENTACLES_SPECS
 from testbed.util_firmware_specs import (
     PYTEST_OPT_BUILD_FIRMWARE,
     PYTEST_OPT_DOWNLOAD_FIRMWARE,
@@ -27,7 +34,6 @@ from testbed.util_github_micropython_org import (
     DEFAULT_GIT_MICROPYTHON,
     PYTEST_OPT_GIT_MICROPYTHON,
 )
-from testbed.tentacles_inventory import TENTACLES_INVENTORY
 
 logger = logging.getLogger(__file__)
 
@@ -39,6 +45,8 @@ DEFAULT_FIRMWARE_SPEC = (
     testbed.constants.DIRECTORY_REPO / "pytest_args_firmware_RPI_PICO2_v1.24.0.json"
 )
 
+
+_TESTBED_LOCK = TestbedLock()
 
 # Uncomment to following line
 # to stop tests on exceptions
@@ -105,7 +113,9 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
 
         if len(list_tentacles) == 0:
             msg = f"No tentacle where selected for testing firmware '{firmware_spec.board_variant}'."
-            raise ValueError(msg)
+            # raise ValueError(msg)
+            logger.warning(msg)
+            return
         # print(f"LEN={len(list_tentacles)}")
         metafunc.parametrize("mcu", list_tentacles, ids=lambda t: t.pytest_id)
 
@@ -189,7 +199,7 @@ def setup_tentacles(
     session_setup: NTestRun,  # pylint: disable=W0621:redefined-outer-name
     required_futs: tuple[EnumFut],  # pylint: disable=W0621:redefined-outer-name
     active_tentacles: list[Tentacle],  # pylint: disable=W0621:redefined-outer-name
-    artifacts_directory: ResultsDir,  # pylint: disable=W0621:redefined-outer-name
+    testresults_directory: ResultsDir,  # pylint: disable=W0621:redefined-outer-name
 ) -> Iterator[None]:
     """
     Runs setup and teardown for every single test:
@@ -215,7 +225,7 @@ def setup_tentacles(
         yield
         return
 
-    with util_logging.Logs(artifacts_directory.directory_test):
+    with util_logging.Logs(testresults_directory.directory_test):
         begin_s = time.monotonic()
 
         def duration_text(duration_s: float | None = None) -> str:
@@ -225,16 +235,19 @@ def setup_tentacles(
 
         try:
             logger.info(
-                f"TEST SETUP {duration_text(0.0)} {artifacts_directory.test_nodeid}"
+                f"TEST SETUP {duration_text(0.0)} {testresults_directory.test_nodeid}"
             )
-            session_setup.function_build_firmwares(active_tentacles=active_tentacles)
+            session_setup.function_build_firmwares(
+                active_tentacles=active_tentacles,
+                testresults_mpbuild=testresults_directory.directory_top / "mpbuild",
+            )
             session_setup.function_prepare_dut()
             session_setup.function_setup_infra()
             session_setup.function_setup_dut(active_tentacles=active_tentacles)
 
             session_setup.setup_relays(futs=required_futs, tentacles=active_tentacles)
             logger.info(
-                f"TEST BEGIN {duration_text()} {artifacts_directory.test_nodeid}"
+                f"TEST BEGIN {duration_text()} {testresults_directory.test_nodeid}"
             )
             yield
 
@@ -244,17 +257,19 @@ def setup_tentacles(
             raise
         finally:
             logger.info(
-                f"TEST TEARDOWN {duration_text()} {artifacts_directory.test_nodeid}"
+                f"TEST TEARDOWN {duration_text()} {testresults_directory.test_nodeid}"
             )
             try:
                 session_setup.function_teardown(active_tentacles=active_tentacles)
             except Exception as e:
                 logger.exception(e)
-            logger.info(f"TEST END {duration_text()} {artifacts_directory.test_nodeid}")
+            logger.info(
+                f"TEST END {duration_text()} {testresults_directory.test_nodeid}"
+            )
 
 
 @pytest.fixture(scope="function")
-def artifacts_directory(request: pytest.FixtureRequest) -> ResultsDir:
+def testresults_directory(request: pytest.FixtureRequest) -> ResultsDir:
     """
     Returns the log directory for the test function referencing this fixture.
     """
@@ -270,6 +285,8 @@ def pytest_sessionstart(session: pytest.Session):
     Called after the Session object has been created and
     before performing collection and entering the run test loop.
     """
+    _TESTBED_LOCK.acquire(FILENAME_TESTBED_LOCK)
+
     if DIRECTORY_TESTRESULTS.exists():
         shutil.rmtree(DIRECTORY_TESTRESULTS, ignore_errors=False)
     DIRECTORY_TESTRESULTS.mkdir(parents=True, exist_ok=True)
@@ -282,28 +299,33 @@ def pytest_sessionstart(session: pytest.Session):
     for query_result_tentacle in query_result_tentacles:
         serial = query_result_tentacle.rp2_serial_number
         assert serial is not None
-        enum_spec = TENTACLES_INVENTORY.get(serial, None)
-        if enum_spec is None:
+        hw_version, enum_tag = TENTACLES_INVENTORY.get(serial, None)
+        if enum_tag is None:
             logger.warning(
                 f"Tentacle with serial {serial} is not specified in TENTACLES_INVENTORY."
             )
             continue
 
-        spec = TENTACLES_SPECS[enum_spec]
+        tentacle_spec = TENTACLES_SPECS[enum_tag]
 
         tentacle = Tentacle[McuConfig, TentacleType, EnumFut](
             tentacle_serial_number=serial,
-            tentacle_spec=spec,
+            tentacle_spec=tentacle_spec,
+            hw_version=hw_version,
         )
         tentacle.assign_connected_hub(query_result_tentacle=query_result_tentacle)
         tentacles.append(tentacle)
 
     if len(tentacles) == 0:
-        raise ValueError(f"No tentacles is connected!")
+        raise ValueError("No tentacles are connected!")
 
-    global TESTBED
+    global TESTBED  # pylint: disable=W0603:global-statement
     assert TESTBED is None
     TESTBED = Testbed(workspace="based-on-connected-boards", tentacles=tentacles)
+
+
+def pytest_sessionfinish(session: pytest.Session):
+    _TESTBED_LOCK.unlink()
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:

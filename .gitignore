@@ -6,3 +6,4 @@ git_cache/**
 downloads/**
 testresults_*/**
 *.log
+testbed.lock

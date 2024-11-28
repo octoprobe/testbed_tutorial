@@ -18,6 +18,7 @@ assert (DIRECTORY_REPO / "pytest.ini").is_file()
 DIRECTORY_DOWNLOADS = DIRECTORY_REPO / "downloads"
 DIRECTORY_TESTRESULTS = DIRECTORY_REPO / "testresults"
 DIRECTORY_GIT_CACHE = DIRECTORY_REPO / "git_cache"
+FILENAME_TESTBED_LOCK = DIRECTORY_REPO / "testbed.lock"
 
 
 class TentacleType(enum.StrEnum):
@@ -54,3 +55,4 @@ class EnumFut(enum.StrEnum):
     FUT_UART = enum.auto()
     FUT_ONEWIRE = enum.auto()
     FUT_TIMER = enum.auto()
+    FUT_EXTMOD_HARDWARE = enum.auto()

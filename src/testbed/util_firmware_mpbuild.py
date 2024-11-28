@@ -1,4 +1,5 @@
 import logging
+import os
 import pathlib
 
 from mpbuild.board_database import Database
@@ -12,6 +13,8 @@ from octoprobe.util_micropython_boards import BoardVariant, board_variants
 from testbed.constants import DIRECTORY_GIT_CACHE
 
 logger = logging.getLogger(__file__)
+
+_ENV_MICROPY_DIR = "MICROPY_DIR"
 
 
 class FirmwareBuilder:
@@ -33,23 +36,32 @@ class FirmwareBuilder:
         )
         self.git_repo.clone()
 
-    def build_firmware(self, firmware_spec: FirmwareSpecBase) -> FirmwareBuildSpec:
+    def build_firmware(
+        self,
+        firmware_spec: FirmwareSpecBase,
+        testresults_mpbuild: pathlib.Path,
+    ) -> FirmwareBuildSpec:
         assert isinstance(firmware_spec, FirmwareBuildSpec)
 
         variant = firmware_spec.board_variant
 
-        spec = self._already_build_firmwares.get(variant.name_normalized, None)
-        if spec is None:
-            spec = build_firmware(
+        firmware_build_spec = self._already_build_firmwares.get(
+            variant.name_normalized, None
+        )
+        if firmware_build_spec is None:
+            firmware_build_spec = build_firmware(
                 micropython_directory=self.git_repo.directory,
                 variant=variant,
+                testresults_mpbuild=testresults_mpbuild,
             )
-        self._already_build_firmwares[variant.name_normalized] = spec
-        return spec
+        self._already_build_firmwares[variant.name_normalized] = firmware_build_spec
+        return firmware_build_spec
 
 
 def build_firmware(
-    micropython_directory: pathlib.Path, variant: BoardVariant
+    micropython_directory: pathlib.Path,
+    variant: BoardVariant,
+    testresults_mpbuild: pathlib.Path,
 ) -> FirmwareBuildSpec:
     """
     This will compile the firmware
@@ -59,15 +71,43 @@ def build_firmware(
     """
     assert isinstance(micropython_directory, pathlib.Path)
     assert isinstance(variant, BoardVariant)
+    assert isinstance(testresults_mpbuild, pathlib.Path)
 
-    logger.info(f"build firmware {variant.name_normalized} in {micropython_directory}")
+    # Prepare environment
+    env_micropy_dir = os.environ.get(_ENV_MICROPY_DIR, None)
+    if env_micropy_dir is not None:
+        logger.error(
+            f"The environment variable '{_ENV_MICROPY_DIR}' is defined: {env_micropy_dir}"
+        )
+        logger.error("This variable is used by mpbuild.")
+        logger.error("It will be REMOVED from the environment now!")
+        del os.environ[_ENV_MICROPY_DIR]
 
+    # Build results
+    testresults_build = testresults_mpbuild / variant.name_normalized
+    testresults_build.mkdir(parents=True, exist_ok=True)
+    prefix = f"Firmware '{variant.name_normalized}'"
+    logger.info(f"{prefix}: build in  {micropython_directory}")
+    logger.info(f"{prefix}: output in {testresults_build}")
+
+    # Call mpbuild
     db = Database(micropython_directory)
-    firmware = build_by_variant_str(
+    firmware, proc = build_by_variant_str(
         db=db,
         variant_str=variant.name_normalized,
         do_clean=False,
     )
+
+    # Store build results
+    (testresults_build / "docker_cmd.txt").write_text(
+        f"{proc.args}\nreturncode={proc.returncode}"
+    )
+    (testresults_build / "docker_stdout.txt").write_text(proc.stdout)
+    (testresults_build / "docker_stderr.txt").write_text(proc.stderr)
+    (testresults_build / firmware.filename.name).write_bytes(
+        firmware.filename.read_bytes()
+    )
+
     return FirmwareBuildSpec(
         board_variant=BoardVariant(
             board=firmware.variant.board.name,
