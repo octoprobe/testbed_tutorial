@@ -126,6 +126,44 @@
 		)
 	)
 	(sheet
+		(at 36.83 114.3)
+		(size 67.31 7.62)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b34c041d-52f1-4fd0-ba12-b4a7db9d208c")
+		(property "Sheetname" "tentacle_MCU_LOLIN_D1_MINI"
+			(at 36.83 113.5884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "tenacle_MCU_LOLIN_D1_MINI.kicad_sch"
+			(at 36.83 122.5046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "testbed"
+				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de"
+					(page "15")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 36.83 67.31)
 		(size 67.31 7.62)
 		(fields_autoplaced yes)
@@ -159,6 +197,44 @@
 			(project "testbed"
 				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de"
 					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 36.83 97.79)
+		(size 67.31 7.62)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "f8b01abc-94f6-4bb9-a276-aefe3964698f")
+		(property "Sheetname" "tentacle_MCU_LOLIN_C3_MINI"
+			(at 36.83 97.0784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "tenacle_MCU_LOLIN_C3_MINI.kicad_sch"
+			(at 36.83 105.9946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "testbed"
+				(path "/188054c4-74b7-429a-b3f5-c6f3151e27de"
+					(page "14")
 				)
 			)
 		)

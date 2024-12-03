@@ -90,7 +90,7 @@ tentacle_spec_mcu_rpi_pico = TentacleSpec(
         EnumFut.FUT_MCU_ONLY: [],
         EnumFut.FUT_I2C: [2, 3, 4, 5],
         EnumFut.FUT_ONEWIRE: [2, 3, 4],
-        EnumFut.FUT_EXTMOD_HARDWARE: [],
+        EnumFut.FUT_EXTMOD_HARDWARE: [2, 4],
     },
     mcu_config=McuConfig(
         trig1="GP20",
@@ -126,7 +126,7 @@ tentacle_spec_mcu_rpi_pico2 = TentacleSpec(
         EnumFut.FUT_MCU_ONLY: [],
         EnumFut.FUT_I2C: [2, 3, 4, 5],
         EnumFut.FUT_ONEWIRE: [2, 3, 4],
-        EnumFut.FUT_EXTMOD_HARDWARE: [],
+        EnumFut.FUT_EXTMOD_HARDWARE: [2, 4],
     },
     mcu_config=McuConfig(
         trig1="GP20",
@@ -160,13 +160,12 @@ tentacle_spec_mcu_lolin_d1_mini = TentacleSpec(
         "--baud=1000000",
         "write_flash",
         "--flash_size=4MB",
-        "-fm",
-        "dio",
+        "--flash_mode=dio",
         "0",
     ],
     relays_closed={
         EnumFut.FUT_MCU_ONLY: [],
-        EnumFut.FUT_EXTMOD_HARDWARE: [],
+        EnumFut.FUT_EXTMOD_HARDWARE: [2, 4],
     },
     mcu_config=McuConfig(
         trig1="-",
@@ -205,7 +204,7 @@ tentacle_spec_mcu_lolin_c3_mini = TentacleSpec(
     ],
     relays_closed={
         EnumFut.FUT_MCU_ONLY: [],
-        EnumFut.FUT_EXTMOD_HARDWARE: [],
+        EnumFut.FUT_EXTMOD_HARDWARE: [2, 4],
     },
     mcu_config=McuConfig(
         trig1="-",
@@ -247,7 +246,13 @@ https://sigrok.org/wiki/Noname_Saleae_Logic_clone
 tentacle_spec_daq_saleae = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_DAQ_SALEAE,
     tentacle_tag=EnumTentacleTag.DAQ_SALEAE,
-    futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
+    futs=[
+        EnumFut.FUT_I2C,
+        EnumFut.FUT_UART,
+        EnumFut.FUT_ONEWIRE,
+        EnumFut.FUT_TIMER,
+        EnumFut.FUT_EXTMOD_HARDWARE,
+    ],
     category="Micropython Board",
     label="daq",
     doc=DOC_TENTACLE_DAQ_SALEAE,
@@ -255,6 +260,7 @@ tentacle_spec_daq_saleae = TentacleSpec(
     relays_closed={
         EnumFut.FUT_I2C: [1, 2, 3, 4],
         EnumFut.FUT_ONEWIRE: [1, 2, 3, 4],
+        EnumFut.FUT_EXTMOD_HARDWARE: [1, 2, 3, 4],
     },
 )  # type: ignore[var-annotated]
 

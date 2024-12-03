@@ -1,0 +1,61 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "db8a53cf-8ef2-4165-badc-ac5c3dcdbbbb")
+	(paper "A4")
+	(title_block
+		(date "2024-07-16")
+		(company "Hans Märki, Märki Informatik")
+		(comment 1 "The MIT License (MIT)")
+	)
+	(lib_symbols)
+	(hierarchical_label "20 {slash} U0RXD {slash} rx"
+		(shape input)
+		(at 82.55 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "034779d9-29a6-449b-ab28-2cff69e21304")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 82.55 99.06 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "06ab8b17-c692-402f-9380-e576860b1a63")
+	)
+	(hierarchical_label "21 {slash} U0TXD {slash} RX"
+		(shape input)
+		(at 82.55 95.25 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "49e33acb-69ea-4b30-92fe-4b9d4adaa2a7")
+	)
+	(hierarchical_label "0 {slash} GPIO0 A0 {slash} trigger1"
+		(shape input)
+		(at 82.55 87.63 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5b54f01c-d3ad-489b-b65b-e5a8e319f019")
+	)
+)

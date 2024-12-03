@@ -19,10 +19,10 @@ Pins assignements
 
 BOOTSEL is NOT required
 
-====  =======  ========  =================[[]]
+====  =======  ========  ===================
 CPU   Pin      signals   rationale
 ====  =======  ========  ===================
 \     GND                GND
-\     21       TX        FUT_EXTMOD_HARDWARE
-\     20       RX        FUT_EXTMOD_HARDWARE
+\     4        TX        FUT_EXTMOD_HARDWARE
+\     5        RX        FUT_EXTMOD_HARDWARE
 ====  =======  ========  ===================

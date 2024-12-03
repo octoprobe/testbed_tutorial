@@ -424,12 +424,28 @@
       "ONEWIRE - DS20"
     ],
     [
+      "f8b01abc-94f6-4bb9-a276-aefe3964698f",
+      "tentacle_MCU_LOLIN_C3_MINI"
+    ],
+    [
       "0a047bfb-db0d-417b-a6f5-d3c18a1bdb3b",
       "UART - PC2"
     ],
     [
+      "b34c041d-52f1-4fd0-ba12-b4a7db9d208c",
+      "tentacle_MCU_LOLIN_D1_MINI"
+    ],
+    [
       "3052a821-cb73-465f-98b8-94e133d23623",
       "ONEWIRE - DS20"
+    ],
+    [
+      "62663647-e6cd-4fac-94bd-ae7d611805a3",
+      "MCU_LOLIN_D1_MINI"
+    ],
+    [
+      "b70093ea-d599-4c26-b7b4-d1100ac3640e",
+      "MCU_LOLIN_C3_MINI"
     ]
   ],
   "text_variables": {}

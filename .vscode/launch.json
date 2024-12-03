@@ -58,7 +58,7 @@
                 "-q",
                 "--git-micropython=https://github.com/micropython/micropython.git@master",
                 "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
-                "tests/tests_github_micropython_org/test_github_micropython_org.py"
+                "tests/micropython_repo/test_run.py"
             ],
             "console": "integratedTerminal",
             "env": {
@@ -77,7 +77,7 @@
                 "-q",
                 "--git-micropython=https://github.com/micropython/micropython.git@master",
                 "--firmware-build-url=MOCK",
-                "tests/tests_github_micropython_org/test_github_micropython_org.py"
+                "tests/micropython_repo/test_run.py"
             ],
             "console": "integratedTerminal",
             "env": {
@@ -96,7 +96,7 @@
                 "-q",
                 "--git-micropython=https://github.com/micropython/micropython.git@v1.24.0",
                 "--firmware-build-url=https://github.com/micropython/micropython.git@v1.23.0",
-                "tests/tests_github_micropython_org/test_github_micropython_org.py"
+                "tests/micropython_repo/test_run.py"
             ],
             "console": "integratedTerminal",
             "env": {
@@ -104,7 +104,7 @@
             },
             "justMyCode": false,
         },
-        {
+        {tests/conftest.py:139
             "name": "pytest RPI_PICO 1.23.0 - test_github_micropython_org --firmware-build-url",
             "type": "debugpy",
             "request": "launch",
@@ -115,7 +115,7 @@
                 "-v",
                 "--git-micropython=https://github.com/micropython/micropython.git@v1.24.0",
                 "--firmware-build-url=https://github.com/micropython/micropython.git@v1.23.0",
-                "tests/tests_github_micropython_org/test_github_micropython_org.py"
+                "tests/micropython_repo/test_run.py"
             ],
             "console": "integratedTerminal",
             "env": {
@@ -134,7 +134,7 @@
                 "-s",
                 "--git-micropython=https://github.com/micropython/micropython.git@master",
                 "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
-                "tests/tests_github_micropython_org/test_github_micropython_org.py"
+                "tests/micropython_repo/test_run.py"
             ],
             "console": "integratedTerminal",
             "env": {

@@ -136,7 +136,11 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
             TESTBED.tentacles,
             required_futs=_required_futs,
         )
-        assert len(tentacles) > 0
+        # assert len(tentacles) > 0
+        if len(tentacles) == 0:
+            msg = "No TENTACLE_DAQ_SALEAE tentacle was selected. Might be the required FUTS specified for TENTACLE_DAQ_SALEAE"
+            raise ValueError(msg)
+
         metafunc.parametrize(
             "daq_saleae",
             tentacles,
