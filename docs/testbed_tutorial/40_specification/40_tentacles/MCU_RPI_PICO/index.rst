@@ -3,7 +3,7 @@ Tentacle `MCU_RPI_PICO` / `MCU_RPI_PICO2`
 
 Supported FUTs: FUT_I2C, FUT_UART, FUT_ONEWIRE, FUT_TIMER, FUT_EXTMOD_HARDWARE
 
-v1.1 connects GP0/GP14 (FUT_EXTMOD_HARDWARE) 
+v1.1 connects GP0/GP1/signal_1 (FUT_EXTMOD_HARDWARE) 
 
 :download:`Schematics </../schematics_kicad/schematics.pdf>`
 

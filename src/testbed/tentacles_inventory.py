@@ -13,13 +13,13 @@ TENTACLES_INVENTORY: dict[str, tuple[str, str]] = {
     "e46340474b164d29": ("v1.0", EnumTentacleTag.DAQ_SALEAE),
     "e46340474b574722": ("v1.0", EnumTentacleTag.DEVICE_POTPOURRY),
     # testbed_au_melbourne_1 Damien
-    "e46340474b4c2731": ("v1.0", EnumTentacleTag.MCU_RPI_PICO2),
+    "e46340474b141c29": ("v1.1", EnumTentacleTag.MCU_RPI_PICO2),
     "e46340474b60452b": ("v0.1", EnumTentacleTag.MCU_LOLIN_D1_MINI),
     "e46340474b583521": ("v0.1", EnumTentacleTag.MCU_LOLIN_C3_MINI),
     "e46340474b283623": ("v1.0", EnumTentacleTag.DAQ_SALEAE),
     "e46340474b0c3523": ("v1.0", EnumTentacleTag.DEVICE_POTPOURRY),
     # testbed_au_melbourne_2
-    "e46340474b141c29": ("v1.0", EnumTentacleTag.MCU_RPI_PICO2),
+    "e46340474b4c2731": ("v1.1", EnumTentacleTag.MCU_RPI_PICO2),
     "e46340474b121931": ("v1.0", EnumTentacleTag.DAQ_SALEAE),
     "e46340474b563b21": ("v1.0", EnumTentacleTag.DEVICE_POTPOURRY),
 }
