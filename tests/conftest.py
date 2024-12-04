@@ -31,8 +31,8 @@ from testbed.util_firmware_specs import (
     get_firmware_specs,
 )
 from testbed.util_github_micropython_org import (
-    DEFAULT_GIT_MICROPYTHON,
-    PYTEST_OPT_GIT_MICROPYTHON,
+    DEFAULT_GIT_MICROPYTHON_TESTS,
+    PYTEST_OPT_GIT_MICROPYTHON_TESTS,
 )
 
 logger = logging.getLogger(__file__)
@@ -354,8 +354,8 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         help="The url to a git repo to be cloned and compiled",
     )
     parser.addoption(
-        PYTEST_OPT_GIT_MICROPYTHON,
+        PYTEST_OPT_GIT_MICROPYTHON_TESTS,
         action="store",
         default=None,
-        help=f"The micropython repo to check out. Syntax {DEFAULT_GIT_MICROPYTHON}",
+        help=f"The micropython repo to check out. This repo will be used for the tests. Syntax {DEFAULT_GIT_MICROPYTHON_TESTS}",
     )

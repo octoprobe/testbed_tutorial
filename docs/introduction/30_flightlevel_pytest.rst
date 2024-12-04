@@ -44,7 +44,7 @@ The arguments are implmented here:
                         A json file specifying the firmware
   --firmware-build-url=FIRMWARE_BUILD_URL
                         The url to a git repo to be cloned and compiled
-  --git-micropython=GIT_MICROPYTHON
+  --git-micropython-tests=GIT_MICROPYTHON
                         The micropython repo to check out. Syntax https://github.com/micropython/micropython.git@master
 
 
@@ -76,11 +76,11 @@ Arguments `--firmware-build-url`
   * install the firmware
   * run the tests
 
-Arguments `--git-micropython`
+Arguments `--git-micropython-tests`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-`$ pytest --git-micropython=https://github.com/micropython/micropython.git@master` will
+`$ pytest --git-micropython-tests=https://github.com/micropython/micropython.git@master` will
 
 * `git clone https://github.com/micropython/micropython.git`
 * `git checkout master`

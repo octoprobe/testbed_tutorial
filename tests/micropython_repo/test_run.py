@@ -9,7 +9,7 @@ from octoprobe.util_subprocess import subprocess_run
 from octoprobe.util_vscode_un_monkey_patch import un_monkey_patch
 
 from testbed.constants import DIRECTORY_GIT_CACHE, EnumFut
-from testbed.util_github_micropython_org import PYTEST_OPT_GIT_MICROPYTHON
+from testbed.util_github_micropython_org import PYTEST_OPT_GIT_MICROPYTHON_TESTS
 
 logger = logging.getLogger(__file__)
 
@@ -21,10 +21,10 @@ def git_micropython(request: pytest.FixtureRequest) -> CachedGitRepo:
     """
     We have to clone the micropython git repo and use the tests from the subfolder "test".
     """
-    git_spec = request.config.getoption(PYTEST_OPT_GIT_MICROPYTHON)
+    git_spec = request.config.getoption(PYTEST_OPT_GIT_MICROPYTHON_TESTS)
     if git_spec is None:
         pytest.skip(
-            "Micropython repo not cloned - argument '{PYTEST_OPT_GIT_MICROPYTHON}'not given to pytest !"
+            "Micropython repo not cloned - argument '{PYTEST_OPT_GIT_MICROPYTHON_TESTS}'not given to pytest !"
         )
 
     git_repo = CachedGitRepo(

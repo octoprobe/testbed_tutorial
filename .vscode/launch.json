@@ -36,7 +36,7 @@
                 // "-q",
                 "-s",
                 "-v",
-                "--git-micropython=https://github.com/dpgeorge/micropython.git@tests-full-test-runner",
+                "--git-micropython-tests=https://github.com/dpgeorge/micropython.git@tests-full-test-runner",
                 "--firmware-build-url=https://github.com/micropython/micropython.git@v1.24.1",
                 // "--firmware-build-url=https://github.com/dpgeorge/micropython.git@rp2-add-rp2350",
                 "tests/micropython_repo/test_run.py::test_extmod_hardware",
@@ -56,7 +56,7 @@
             "args": [
                 "--collect-only",
                 "-q",
-                "--git-micropython=https://github.com/micropython/micropython.git@master",
+                "--git-micropython-tests=https://github.com/micropython/micropython.git@master",
                 "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
                 "tests/micropython_repo/test_run.py"
             ],
@@ -75,7 +75,7 @@
             "args": [
                 "--collect-only",
                 "-q",
-                "--git-micropython=https://github.com/micropython/micropython.git@master",
+                "--git-micropython-tests=https://github.com/micropython/micropython.git@master",
                 "--firmware-build-url=MOCK",
                 "tests/micropython_repo/test_run.py"
             ],
@@ -94,7 +94,7 @@
             "args": [
                 "--collect-only",
                 "-q",
-                "--git-micropython=https://github.com/micropython/micropython.git@v1.24.0",
+                "--git-micropython-tests=https://github.com/micropython/micropython.git@v1.24.0",
                 "--firmware-build-url=https://github.com/micropython/micropython.git@v1.23.0",
                 "tests/micropython_repo/test_run.py"
             ],
@@ -113,7 +113,7 @@
             "args": [
                 "-s",
                 "-v",
-                "--git-micropython=https://github.com/micropython/micropython.git@v1.24.0",
+                "--git-micropython-tests=https://github.com/micropython/micropython.git@v1.24.0",
                 "--firmware-build-url=https://github.com/micropython/micropython.git@v1.23.0",
                 "tests/micropython_repo/test_run.py"
             ],
@@ -132,7 +132,7 @@
             "args": [
                 "-v",
                 "-s",
-                "--git-micropython=https://github.com/micropython/micropython.git@master",
+                "--git-micropython-tests=https://github.com/micropython/micropython.git@master",
                 "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
                 "tests/micropython_repo/test_run.py"
             ],

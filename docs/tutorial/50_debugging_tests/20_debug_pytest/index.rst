@@ -67,7 +67,7 @@ Now lets run the exactly same command in the VSCode debugger.
             "args": [
                 "--collect-only",
                 "-q",
-                "--git-micropython=https://github.com/micropython/micropython.git@master",
+                "--git-micropython-tests=https://github.com/micropython/micropython.git@master",
                 "--firmware-json=${workspaceFolder}/pytest_args_firmware_RPI_PICO_v1.23.0.json",
                 "tests/tests_github_micropython_org/test_github_micropython_org.py"
             ],
