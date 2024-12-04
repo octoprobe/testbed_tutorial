@@ -28,6 +28,7 @@ classifiers = [
 ]
 dependencies = [
     "octoprobe[dev,doc]@git+https://github.com/octoprobe/octoprobe#egg=main",
+    "mpbuild@git+https://github.com/hmaerki/fork_mpbuild#egg=introduce_mpbuild_api2",
 ]
 
 [project.urls]

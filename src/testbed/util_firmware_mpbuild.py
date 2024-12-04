@@ -3,7 +3,7 @@ import os
 import pathlib
 
 from mpbuild.board_database import Database
-from mpbuild.build_api import build_by_variant_str
+from mpbuild.build_api import build_by_variant_normalized
 from octoprobe.lib_tentacle import Tentacle
 from octoprobe.util_cached_git_repo import CachedGitRepo
 from octoprobe.util_constants import TAG_BOARDS
@@ -36,7 +36,7 @@ class FirmwareBuilder:
         )
         self.git_repo.clone()
 
-    def build_firmware(
+    def build(
         self,
         firmware_spec: FirmwareSpecBase,
         testresults_mpbuild: pathlib.Path,
@@ -49,7 +49,7 @@ class FirmwareBuilder:
             variant.name_normalized, None
         )
         if firmware_build_spec is None:
-            firmware_build_spec = build_firmware(
+            firmware_build_spec = build(
                 micropython_directory=self.git_repo.directory,
                 variant=variant,
                 testresults_mpbuild=testresults_mpbuild,
@@ -58,7 +58,7 @@ class FirmwareBuilder:
         return firmware_build_spec
 
 
-def build_firmware(
+def build(
     micropython_directory: pathlib.Path,
     variant: BoardVariant,
     testresults_mpbuild: pathlib.Path,
@@ -79,8 +79,9 @@ def build_firmware(
         logger.error(
             f"The environment variable '{_ENV_MICROPY_DIR}' is defined: {env_micropy_dir}"
         )
-        logger.error("This variable is used by mpbuild.")
-        logger.error("It will be REMOVED from the environment now!")
+        logger.error(
+            "This variable is used by mpbuild. However octoprobe will DISABLE it."
+        )
         del os.environ[_ENV_MICROPY_DIR]
 
     # Build results
@@ -92,9 +93,9 @@ def build_firmware(
 
     # Call mpbuild
     db = Database(micropython_directory)
-    firmware, proc = build_by_variant_str(
+    firmware, proc = build_by_variant_normalized(
         db=db,
-        variant_str=variant.name_normalized,
+        variant_normalized=variant.name_normalized,
         do_clean=False,
     )
 
@@ -110,8 +111,8 @@ def build_firmware(
 
     return FirmwareBuildSpec(
         board_variant=BoardVariant(
-            board=firmware.variant.board.name,
-            variant=firmware.variant.name,
+            board=firmware.board.name,
+            variant="" if firmware.variant is None else firmware.variant,
         ),
         _filename=firmware.filename,
         micropython_version_text=firmware.micropython_version_text,

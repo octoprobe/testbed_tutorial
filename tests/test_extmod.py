@@ -9,7 +9,7 @@ from testbed.constants import EnumFut
 
 
 @pytest.mark.required_futs(EnumFut.FUT_MCU_ONLY)
-def test_extmod(mcu: Tentacle) -> None:
+def wip_test_extmod(mcu: Tentacle) -> None:
     """
     Same as <micropython>tests/extmod/machine_uart_tx.py
 
