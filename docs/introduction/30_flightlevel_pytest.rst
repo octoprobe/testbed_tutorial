@@ -43,10 +43,11 @@ The arguments are implmented here:
   --firmware-json=FIRMWARE_JSON
                         A json file specifying the firmware
   --firmware-build-url=FIRMWARE_BUILD_URL
-                        The url to a git repo to be cloned and compiled
-  --git-micropython-tests=GIT_MICROPYTHON
-                        The micropython repo to check out. Syntax https://github.com/micropython/micropython.git@master
-
+                        The url to a git repo to be cloned and compiled. Syntax: https://github.com/micropython/micropython.git@master
+  --git-micropython-tests=GIT_MICROPYTHON_TESTS
+                        The micropython repo to check out. Will be used for the tests. Syntax: https://github.com/micropython/micropython.git@master
+  --dir-micropython-tests=DIR_MICROPYTHON_TESTS
+                        The directory name to a checked out micropython repo. Will be used for the tests. Syntax: ~/micropython tests/micropython_repo
 
 Arguments `--firmware-json`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,6 +91,14 @@ The pytest wrapper is implemented here:
 
 .. autofunction:: tests.tests_github_micropython_org.test_github_micropython_org::test_perf_bench()
   :noindex:
+
+Arguments `--dir-micropython-tests`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`$ pytest --dir-micropython-tests=~/micropython tests/micropython_repo` will
+
+* Use the `~/micropython` directory to
+* run `tests/run-perfbench.py`
 
 pytest test collection
 ---------------------------------------------------------------

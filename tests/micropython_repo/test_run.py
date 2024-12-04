@@ -1,4 +1,5 @@
 import logging
+import pathlib
 import sys
 
 import pytest
@@ -9,7 +10,10 @@ from octoprobe.util_subprocess import subprocess_run
 from octoprobe.util_vscode_un_monkey_patch import un_monkey_patch
 
 from testbed.constants import DIRECTORY_GIT_CACHE, EnumFut
-from testbed.util_github_micropython_org import PYTEST_OPT_GIT_MICROPYTHON_TESTS
+from testbed.util_github_micropython_org import (
+    PYTEST_OPT_DIR_MICROPYTHON_TESTS,
+    PYTEST_OPT_GIT_MICROPYTHON_TESTS,
+)
 
 logger = logging.getLogger(__file__)
 
@@ -17,10 +21,19 @@ logger = logging.getLogger(__file__)
 
 
 @pytest.fixture(scope="session", autouse=True)
-def git_micropython(request: pytest.FixtureRequest) -> CachedGitRepo:
+def git_micropython_tests(request: pytest.FixtureRequest) -> pathlib.Path:
     """
     We have to clone the micropython git repo and use the tests from the subfolder "test".
     """
+    directory = request.config.getoption(PYTEST_OPT_DIR_MICROPYTHON_TESTS)
+    if directory is not None:
+        _directory = pathlib.Path(directory).expanduser().resolve()
+        if not _directory.is_dir():
+            raise ValueError(
+                f"pytest parameter '{PYTEST_OPT_DIR_MICROPYTHON_TESTS}': Directory does not exist: {_directory}"
+            )
+        return _directory
+
     git_spec = request.config.getoption(PYTEST_OPT_GIT_MICROPYTHON_TESTS)
     if git_spec is None:
         pytest.skip(
@@ -37,12 +50,14 @@ def git_micropython(request: pytest.FixtureRequest) -> CachedGitRepo:
     # Avoid hanger in run-perfbench.py/run-tests.py
     un_monkey_patch()
 
-    return git_repo
+    return git_repo.directory
 
 
 @pytest.mark.required_futs(EnumFut.FUT_MCU_ONLY)
 def test_perf_bench(
-    mcu: Tentacle, testresults_directory: ResultsDir, git_micropython: CachedGitRepo
+    mcu: Tentacle,
+    testresults_directory: ResultsDir,
+    git_micropython_tests: CachedGitRepo,
 ) -> None:
     """
     This tests runs: run-perfbench.py
@@ -60,7 +75,7 @@ def test_perf_bench(
     ]
     stdout = subprocess_run(
         args=args,
-        cwd=git_micropython.directory / "tests",
+        cwd=git_micropython_tests / "tests",
         timeout_s=300.0,
     )
     testresults_directory("run-perfbench.txt").filename.write_text(stdout)
@@ -70,7 +85,7 @@ def _run_tests(
     mcu: Tentacle,
     testresults_directory: ResultsDir,
     test_dir: str,
-    git_micropython: CachedGitRepo,
+    micropython_tests: CachedGitRepo,
 ) -> None:
     """
     This tests runs: run-tests.py
@@ -90,7 +105,7 @@ def _run_tests(
     ]
     stdout = subprocess_run(
         args=args,
-        cwd=git_micropython.directory / "tests",
+        cwd=micropython_tests / "tests",
         timeout_s=60.0,
     )
     testresults_directory(f"run-tests-{test_dir}.txt").filename.write_text(stdout)
@@ -98,25 +113,29 @@ def _run_tests(
 
 @pytest.mark.required_futs(EnumFut.FUT_MCU_ONLY)
 def test_misc(
-    mcu: Tentacle, testresults_directory: ResultsDir, git_micropython: CachedGitRepo
+    mcu: Tentacle,
+    testresults_directory: ResultsDir,
+    git_micropython_tests: CachedGitRepo,
 ) -> None:
     _run_tests(
         mcu=mcu,
         testresults_directory=testresults_directory,
         test_dir="misc",
-        git_micropython=git_micropython,
+        micropython_tests=git_micropython_tests,
     )
 
 
 @pytest.mark.required_futs(EnumFut.FUT_EXTMOD_HARDWARE)
 def test_extmod_hardware(
-    mcu: Tentacle, testresults_directory: ResultsDir, git_micropython: CachedGitRepo
+    mcu: Tentacle,
+    testresults_directory: ResultsDir,
+    git_micropython_tests: CachedGitRepo,
 ) -> None:
     _run_tests(
         mcu=mcu,
         testresults_directory=testresults_directory,
         test_dir="extmod_hardware",
-        git_micropython=git_micropython,
+        micropython_tests=git_micropython_tests,
     )
 
 

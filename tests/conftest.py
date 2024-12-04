@@ -32,6 +32,7 @@ from testbed.util_firmware_specs import (
 )
 from testbed.util_github_micropython_org import (
     DEFAULT_GIT_MICROPYTHON_TESTS,
+    PYTEST_OPT_DIR_MICROPYTHON_TESTS,
     PYTEST_OPT_GIT_MICROPYTHON_TESTS,
 )
 
@@ -351,11 +352,17 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         PYTEST_OPT_BUILD_FIRMWARE,
         action="store",
         default=None,
-        help="The url to a git repo to be cloned and compiled",
+        help=f"The url to a git repo to be cloned and compiled. Syntax: {DEFAULT_GIT_MICROPYTHON_TESTS}",
     )
     parser.addoption(
         PYTEST_OPT_GIT_MICROPYTHON_TESTS,
         action="store",
         default=None,
-        help=f"The micropython repo to check out. This repo will be used for the tests. Syntax {DEFAULT_GIT_MICROPYTHON_TESTS}",
+        help=f"The micropython repo to check out. Will be used for the tests. Syntax: {DEFAULT_GIT_MICROPYTHON_TESTS}",
+    )
+    parser.addoption(
+        PYTEST_OPT_DIR_MICROPYTHON_TESTS,
+        action="store",
+        default=None,
+        help="The directory name to a checked out micropython repo. Will be used for the tests. Syntax: ~/micropython tests/micropython_repo",
     )
