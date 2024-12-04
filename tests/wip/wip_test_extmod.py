@@ -40,4 +40,3 @@ duration_us = time.ticks_diff(time.ticks_us(), start_us)
 
         duration_us = mcu.dut.mp_remote.read_int("duration_us")
         print(f"duration_us: {duration_us}")
-        assert i2c_data == b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"

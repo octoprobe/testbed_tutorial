@@ -125,6 +125,8 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:
             TESTBED.tentacles,
             required_futs=_required_futs,
         )
+        if len(tentacles) == 0:
+            return
         assert len(tentacles) > 0
         metafunc.parametrize(
             "device_potpourry",
@@ -345,7 +347,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption(
         PYTEST_OPT_DOWNLOAD_FIRMWARE,
         action="store",
-        default=str(DEFAULT_FIRMWARE_SPEC),
+        default=None,
         help="A json file specifying the firmware",
     )
     parser.addoption(

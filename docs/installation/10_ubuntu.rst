@@ -57,12 +57,13 @@ python
 
 .. code::
 
-    echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
-    # Log out and in again
     uv venv --python 3.13.0 ~/venv_octoprobe
 
     source ~/venv_octoprobe/bin/activate
     uv pip install -e ~/testbed_tutorial
+
+    echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
+    # Log out and in again
 
 Software requiring root access
 ------------------------------
@@ -83,7 +84,8 @@ Now `op install` will instruct you to:
 
     sudo chown root:root ~/octoprobe_downloads/binaries/aarch64/*
     sudo chmod a+s ~/octoprobe_downloads/binaries/aarch64/*
-    sudo cp -p ~/octoprobe_downloads/binaries/aarch64/* /usr/sbin
+    echo 'PATH="$HOME/octoprobe_downloads/binaries/aarch64:$PATH"' >> ~/.profile
+    
 
 
 Run your first tests

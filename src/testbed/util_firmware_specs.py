@@ -6,6 +6,7 @@ from octoprobe.lib_tentacle import Tentacle
 from octoprobe.util_dut_programmers import (
     FirmwareBuildSpec,
     FirmwareDownloadSpec,
+    FirmwareNoFlashingSpec,
     FirmwareSpecBase,
 )
 from octoprobe.util_micropython_boards import BoardVariant
@@ -28,12 +29,19 @@ def get_firmware_specs(
       The firmware has to be downloaded.
     In case of PYTEST_OPT_FIRMWARE-TODO:
       The firmware has to be compiled.
+    If nothing is specified, we do not flash any firmware: Return None
     """
     assert isinstance(config, pytest.Config)
 
     firmware_git_url = config.getoption(PYTEST_OPT_BUILD_FIRMWARE)
     if firmware_git_url is not None:
+        #
+        # Collect firmware specs by connected tentacles
+        #
         if firmware_git_url == PYTEST_OPT_BUILD_FIRMWARE_MOCK:
+            #
+            # Mocked firmware speces
+            #
             return [
                 FirmwareBuildSpec(
                     BoardVariant.factory("RPI_PICO"),
@@ -55,7 +63,16 @@ def get_firmware_specs(
         return collect_firmware_specs(tentacles=tentacles)
 
     firmware_download_json = config.getoption(PYTEST_OPT_DOWNLOAD_FIRMWARE)
-    assert firmware_download_json is not None
-    spec = FirmwareDownloadSpec.factory(filename=firmware_download_json)
-    spec.download()
-    return [spec]
+    if firmware_download_json is not None:
+        #
+        # Donwnload firmware and return the spec
+        #
+        assert firmware_download_json is not None
+        spec = FirmwareDownloadSpec.factory(filename=firmware_download_json)
+        spec.download()
+        return [spec]
+
+    #
+    # Nothing was specified: We do not flash any firmware
+    #
+    return [FirmwareNoFlashingSpec.factory()]
