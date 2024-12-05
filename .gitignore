@@ -1,9 +1,9 @@
 **/__pycache__/
 schematics_kicad/kicad/testbed-backups/*
 docs/_build/**
-testresults/**
+results/**
+results_*/**
 git_cache/**
 downloads/**
-testresults_*/**
 *.log
 testbed.lock
