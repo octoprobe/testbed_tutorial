@@ -104,7 +104,7 @@
             },
             "justMyCode": false,
         },
-        {tests/conftest.py:139
+        {
             "name": "pytest RPI_PICO 1.23.0 - test_github_micropython_org --firmware-build-url",
             "type": "debugpy",
             "request": "launch",

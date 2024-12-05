@@ -156,6 +156,7 @@ tentacle_spec_mcu_lolin_d1_mini = TentacleSpec(
     doc=DOC_TENTACLE_LOLIN_D1_MINI,
     mcu_usb_id=util_mcu_esp8266.LOLIN_D1_MINI_USB_ID,
     tags="boards=ESP8266_GENERIC,mcu=esp8266,programmer=esptool",
+    micropython_perftest_args=["50", "36"],
     programmer_args=[
         "--baud=1000000",
         "write_flash",

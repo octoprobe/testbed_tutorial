@@ -57,7 +57,7 @@ def git_micropython_tests(request: pytest.FixtureRequest) -> pathlib.Path:
 def test_perf_bench(
     mcu: Tentacle,
     testresults_directory: ResultsDir,
-    git_micropython_tests: CachedGitRepo,
+    git_micropython_tests: pathlib.Path,
 ) -> None:
     """
     This tests runs: run-perfbench.py
@@ -65,13 +65,16 @@ def test_perf_bench(
     * https://github.com/micropython/micropython/blob/master/tests/README.md
     * https://github.com/micropython/micropython/blob/master/tests/run-perfbench.py
     """
+    perftest_args = mcu.tentacle_spec.micropython_perftest_args
+    if perftest_args is None:
+        perftest_args = ["100", "100"]
+
     args = [
         sys.executable,
         "run-perfbench.py",
         "--pyboard",
         f"--device={mcu.dut.get_tty()}",
-        "168",
-        "100",
+        *perftest_args,
     ]
     stdout = subprocess_run(
         args=args,
@@ -85,7 +88,7 @@ def _run_tests(
     mcu: Tentacle,
     testresults_directory: ResultsDir,
     test_dir: str,
-    micropython_tests: CachedGitRepo,
+    micropython_tests: pathlib.Path,
 ) -> None:
     """
     This tests runs: run-tests.py
@@ -115,7 +118,7 @@ def _run_tests(
 def test_misc(
     mcu: Tentacle,
     testresults_directory: ResultsDir,
-    git_micropython_tests: CachedGitRepo,
+    git_micropython_tests: pathlib.Path,
 ) -> None:
     _run_tests(
         mcu=mcu,
@@ -129,7 +132,7 @@ def test_misc(
 def test_extmod_hardware(
     mcu: Tentacle,
     testresults_directory: ResultsDir,
-    git_micropython_tests: CachedGitRepo,
+    git_micropython_tests: pathlib.Path,
 ) -> None:
     _run_tests(
         mcu=mcu,
