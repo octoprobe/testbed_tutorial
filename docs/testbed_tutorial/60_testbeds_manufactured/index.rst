@@ -5,6 +5,13 @@ Testsbeds produced
 
     This page demonstrates how to check if a testbed works correctly.
 
+Tentacles inventory
+-------------------
+
+.. literalinclude:: ../../../src/testbed/tentacles_inventory.py
+   :language: python
+   :linenos:
+
 
 Delivery Inspection / Function check
 ------------------------------------
@@ -25,8 +32,6 @@ Delivery Inspection / Function check
 
 .. code:: 
 
-    # do not forget to update OCTOPROBE_TESTBED
-    export OCTOPROBE_TESTBED=testbed_ch_wetzikon_1.py
     pytest -v -s \
           --firmware-json=pytest_args_firmware_RPI_PICO2_v1.24.0.json \
           tests/test_simple.py::test_i2c_pattern
@@ -46,8 +51,6 @@ Delivery Inspection / Function check
 
 .. code:: 
 
-    # do not forget to update OCTOPROBE_TESTBED
-    export OCTOPROBE_TESTBED=testbed_ch_wetzikon_1.py
     pytest -v -s \
           --firmware-json=pytest_args_firmware_RPI_PICO2_v1.24.0.json \
           tests/test_simple.py
@@ -77,12 +80,3 @@ Expected pulseview screenshot for I2C:
       * are connected correctly via the Octobus
     * The tentacles MCUs etc. are soldered correctly
   
-
-Known testbeds
---------------
-
-* testbed_ch_wetzikon_1.py
-
-  Used for testing by Hans Märki
-
-* 

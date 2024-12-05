@@ -91,13 +91,11 @@ Now `op install` will instruct you to:
 Run your first tests
 --------------------
 
-Add to :code:`~/.profile`:
+Connect tentacles:
 
-.. code::
-
-    export OCTOPROBE_TESTBED=testbed_ch_wetzikon_1.py
-
-Verify if the tentacle serial numbers in above :code:`testbed_ch_wetzikon_1.py` match with the tentacle connected via USB.
+* 1 tentacle_DAQ_SALEAE
+* 1 tentacle_DEVICE_PORTPOURRY
+* 1-n tentacle_MCU_xx
 
 Start the tests
 

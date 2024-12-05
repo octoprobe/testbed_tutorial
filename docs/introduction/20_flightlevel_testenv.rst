@@ -122,21 +122,9 @@ Configure of the testbed-instance
   pyboard and also in Australia using MCUs Esp32, esp8266
   and Arduino Portenta C33.
 
-  * Testbed instance specification
-  
-    * src/testbed/testbed_ch_wetzikon_1.py
-    * src/testbed/testbed_ch_greenliff_1.py
-    * src/testbed/testbed_au_melbourne_1.py
-    * src/testbed/testbed_au_melbourne_2.py
 
-File: src/testbed/testbed_ch_wetzikon_1.py
+* Tentacles inventory
 
-.. literalinclude:: ../../src/testbed/testbed_ch_wetzikon_1.py
+.. literalinclude:: ../../src/testbed/tentacles_inventory.py
    :language: python
    :linenos:
-   :lines: 15-30
-
-In this file we list all tentacles which are connected to our computer.
-
-* Line 6: `tentacle_serial_number="e46340474b174429"`: The effective serial number has to be provided!
-* Line 7: `tentacle_spec=tentacle_spec_mcu_rpi_pico2`: This refers to the tentacle specification further up in this document.
