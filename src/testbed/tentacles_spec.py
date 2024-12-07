@@ -25,12 +25,25 @@ class McuConfig:
     These variables will be replaced in micropython code
     """
 
+    # Used in jinja2 templates to generate micropython code
     trig1: str
     trig2: str
     data1: str
     data2: str
     i2c: str
     onewire: str
+
+    # Used elsewere
+    micropython_perftest_args: list[str] | None = None
+
+    def __post_init__(self) -> None:
+        assert isinstance(self.trig1, str)
+        assert isinstance(self.trig2, str)
+        assert isinstance(self.data1, str)
+        assert isinstance(self.data2, str)
+        assert isinstance(self.i2c, str)
+        assert isinstance(self.onewire, str)
+        assert isinstance(self.micropython_perftest_args, list | None)
 
 
 DOC_TENTACLE_PYBV11 = """
@@ -148,7 +161,6 @@ tentacle_spec_mcu_lolin_d1_mini = TentacleSpec(
     doc=DOC_TENTACLE_LOLIN_D1_MINI,
     mcu_usb_id=util_mcu_esp8266.LOLIN_D1_MINI_USB_ID,
     tags="boards=ESP8266_GENERIC,mcu=esp8266,programmer=esptool",
-    micropython_perftest_args=["50", "36"],
     programmer_args=[
         "--baud=1000000",
         "write_flash",
@@ -167,6 +179,7 @@ tentacle_spec_mcu_lolin_d1_mini = TentacleSpec(
         data2="-",
         i2c="-",
         onewire="-",
+        micropython_perftest_args=["50", "36"],
     ),
 )
 
