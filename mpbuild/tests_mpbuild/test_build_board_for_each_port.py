@@ -5,9 +5,13 @@ Tests the first two variants.
 Goal is a high test coverage of the boards.
 """
 
+import pathlib
+
 from mpbuild.build import MpbuildNotSupportedException
 from mpbuild.build_api import build
-from test_build_some_variants import get_db
+from test_build_some_variants import RESULTS_DIRECTORY, get_db
+
+THIS_FILE = pathlib.Path(__file__)
 
 NUMBER_BOARDS = 1
 NUMBER_VARIANTS = 2
@@ -28,7 +32,12 @@ def main():
                     continue
                 print(f"Testing {board.name}-{variant_name}")
                 try:
-                    firmware, _proc = build(
+                    logfile = (
+                        RESULTS_DIRECTORY
+                        / f"{THIS_FILE.stem}-{board.name}-{variant_name}.txt"
+                    )
+                    firmware = build(
+                        logfile=logfile,
                         board=board,
                         variant=variant_name,
                         do_clean=False,

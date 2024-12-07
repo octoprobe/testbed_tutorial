@@ -93,18 +93,14 @@ def build(
 
     # Call mpbuild
     db = Database(micropython_directory)
-    firmware, proc = build_by_variant_normalized(
+    firmware = build_by_variant_normalized(
+        logfile=testresults_build / "docker_stdout.txt",
         db=db,
         variant_normalized=variant.name_normalized,
         do_clean=False,
     )
 
     # Store build results
-    (testresults_build / "docker_cmd.txt").write_text(
-        f"{proc.args}\nreturncode={proc.returncode}"
-    )
-    (testresults_build / "docker_stdout.txt").write_text(proc.stdout)
-    (testresults_build / "docker_stderr.txt").write_text(proc.stderr)
     (testresults_build / firmware.filename.name).write_bytes(
         firmware.filename.read_bytes()
     )
