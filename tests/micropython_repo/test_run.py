@@ -37,7 +37,7 @@ def git_micropython_tests(request: pytest.FixtureRequest) -> pathlib.Path:
     git_spec = request.config.getoption(PYTEST_OPT_GIT_MICROPYTHON_TESTS)
     if git_spec is None:
         pytest.skip(
-            "Micropython repo not cloned - argument '{PYTEST_OPT_GIT_MICROPYTHON_TESTS}'not given to pytest !"
+            "MicroPython repo not cloned - argument '{PYTEST_OPT_GIT_MICROPYTHON_TESTS}'not given to pytest !"
         )
 
     git_repo = CachedGitRepo(

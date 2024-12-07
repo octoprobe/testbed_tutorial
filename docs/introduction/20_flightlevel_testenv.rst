@@ -76,7 +76,7 @@ File: src/testbed/tentacle_specs.py
          EnumFut.FUT_ONEWIRE,
          EnumFut.FUT_TIMER,
       ],
-      category="Micropython Board",
+      category="MicroPython Board",
       label="pico2",
       doc=DOC_TENTACLE_RPI_PICO2,
       mcu_usb_id=util_mcu_rp2.RPI_PICO2_USB_ID,
