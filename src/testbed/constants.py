@@ -8,6 +8,8 @@ import enum
 import pathlib
 import typing
 
+from octoprobe.util_baseclasses import TENTACLE_TYPE_MCU
+
 if typing.TYPE_CHECKING:
     from octoprobe.lib_tentacle import Tentacle
 
@@ -21,10 +23,10 @@ DIRECTORY_GIT_CACHE = DIRECTORY_REPO / "git_cache"
 FILENAME_TESTBED_LOCK = DIRECTORY_REPO / "testbed.lock"
 
 
-class TentacleType(enum.StrEnum):
-    TENTACLE_MCU = enum.auto()
-    TENTACLE_DEVICE_POTPOURRY = enum.auto()
-    TENTACLE_DAQ_SALEAE = enum.auto()
+class EnumTentacleType(enum.StrEnum):
+    TENTACLE_MCU = TENTACLE_TYPE_MCU
+    TENTACLE_DEVICE_POTPOURRY = "potourry"
+    TENTACLE_DAQ_SALEAE = "daq_saleae"
 
     def get_tentacles_for_type(
         self,

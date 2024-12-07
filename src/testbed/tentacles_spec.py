@@ -6,7 +6,7 @@ import enum
 from octoprobe import util_mcu_esp32C3, util_mcu_esp8266, util_mcu_pyboard, util_mcu_rp2
 from octoprobe.util_baseclasses import TentacleSpec
 
-from testbed.constants import EnumFut, TentacleType
+from testbed.constants import EnumFut, EnumTentacleType
 
 
 class EnumTentacleTag(enum.StrEnum):
@@ -37,7 +37,7 @@ DOC_TENTACLE_PYBV11 = """
 See: https://github.com/octoprobe/testbed_showcase/tree/main/docs/tentacle_MCU_PYBV11
 """
 tentacle_spec_mcu_pybv11 = TentacleSpec(
-    tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_type=EnumTentacleType.TENTACLE_MCU,
     tentacle_tag=EnumTentacleTag.MCU_PYBV11,
     futs=[
         EnumFut.FUT_MCU_ONLY,
@@ -69,7 +69,7 @@ DOC_TENTACLE_RPI_PICO = """
 See: https://github.com/octoprobe/testbed_showcase/tree/main/docs/tentacle_MCU_RPI_PICO
 """
 tentacle_spec_mcu_rpi_pico = TentacleSpec(
-    tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_type=EnumTentacleType.TENTACLE_MCU,
     tentacle_tag=EnumTentacleTag.MCU_RPI_PICO,
     futs=[
         EnumFut.FUT_MCU_ONLY,
@@ -103,7 +103,7 @@ DOC_TENTACLE_RPI_PICO2 = """
 See: https://github.com/octoprobe/testbed_showcase/tree/main/docs/tentacle_MCU_RPI_PICO
 """
 tentacle_spec_mcu_rpi_pico2 = TentacleSpec(
-    tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_type=EnumTentacleType.TENTACLE_MCU,
     tentacle_tag=EnumTentacleTag.MCU_RPI_PICO2,
     futs=[
         EnumFut.FUT_MCU_ONLY,
@@ -139,7 +139,7 @@ See: https://www.wemos.cc/en/latest/tutorials/d1/get_started_with_micropython_d1
 esptool.py --port PORT_NAME --baud 1000000 write_flash --flash_size=4MB -fm dio 0 FIRMWARE.bin
 """
 tentacle_spec_mcu_lolin_d1_mini = TentacleSpec(
-    tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_type=EnumTentacleType.TENTACLE_MCU,
     tentacle_tag=EnumTentacleTag.MCU_LOLIN_D1_MINI,
     futs=[
         EnumFut.FUT_MCU_ONLY,
@@ -175,7 +175,7 @@ DOC_TENTACLE_LOLIN_C3_MINI = """
 See: https://www.wemos.cc/en/latest/c3/c3_mini.html
 """
 tentacle_spec_mcu_lolin_c3_mini = TentacleSpec(
-    tentacle_type=TentacleType.TENTACLE_MCU,
+    tentacle_type=EnumTentacleType.TENTACLE_MCU,
     tentacle_tag=EnumTentacleTag.MCU_LOLIN_C3_MINI,
     futs=[
         EnumFut.FUT_MCU_ONLY,
@@ -216,7 +216,7 @@ I2C EEPROM AT24C08
   https://www.aliexpress.com/item/1005004987470850.html
 """
 tentacle_spec_device_potpourry = TentacleSpec(
-    tentacle_type=TentacleType.TENTACLE_DEVICE_POTPOURRY,
+    tentacle_type=EnumTentacleType.TENTACLE_DEVICE_POTPOURRY,
     tentacle_tag=EnumTentacleTag.DEVICE_POTPOURRY,
     futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
     doc=DOC_TENTACLE_DEVICE_POTPOURRY,
@@ -233,7 +233,7 @@ https://www.aliexpress.com/item/4000146595503.html
 https://sigrok.org/wiki/Noname_Saleae_Logic_clone
 """
 tentacle_spec_daq_saleae = TentacleSpec(
-    tentacle_type=TentacleType.TENTACLE_DAQ_SALEAE,
+    tentacle_type=EnumTentacleType.TENTACLE_DAQ_SALEAE,
     tentacle_tag=EnumTentacleTag.DAQ_SALEAE,
     futs=[
         EnumFut.FUT_I2C,
