@@ -17,7 +17,7 @@ Best practices for debugging
 Debug pytest using the VSCode debugger
 --------------------------------------
 
-Start with this VSCode workspace: `<repo>/testbed_tutorial.code-workspace`
+Start with this VSCode workspace: `<repo>/testbed_showcase.code-workspace`
 
 Use the VSCode pytest test explorer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -27,7 +27,7 @@ Use the VSCode pytest test explorer
 
 The setup is a bit tricky! These config parameters have to be set correctly:
 
-`testbed_tutorial.code-workspace`:
+`testbed_showcase.code-workspace`:
 
 .. code-block:: json
 

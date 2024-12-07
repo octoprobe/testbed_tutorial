@@ -21,10 +21,10 @@ Octoprobe may fail an many levels at it uses heavely usb and talks to many proce
 
 pytest brings in a lot of complexity. It is non trivial to write fixtures and understand testcollection.
 
-Why should I start with ``testbed_tutorial``
+Why should I start with ``testbed_showcase``
 --------------------------------------------
 
-``testbed_tutorial`` should run out of the box and it includes all layers of Octoprobe and pytest.
+``testbed_showcase`` should run out of the box and it includes all layers of Octoprobe and pytest.
 
-With ``testbed_tutorial`` running, you have a reference to derive your tests or extensions.
+With ``testbed_showcase`` running, you have a reference to derive your tests or extensions.
 

@@ -1,4 +1,4 @@
-Testbed `testbed_tutorial`
+Testbed `testbed_showcase`
 ==========================
 
 .. toctree::
