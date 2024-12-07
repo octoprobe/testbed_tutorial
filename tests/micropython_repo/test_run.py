@@ -76,12 +76,12 @@ def test_perf_bench(
         f"--device={mcu.dut.get_tty()}",
         *perftest_args,
     ]
-    stdout = subprocess_run(
+    subprocess_run(
         args=args,
         cwd=git_micropython_tests / "tests",
+        logfile=testresults_directory("run-perfbench.txt").filename,
         timeout_s=300.0,
     )
-    testresults_directory("run-perfbench.txt").filename.write_text(stdout)
 
 
 def _run_tests(
@@ -106,12 +106,12 @@ def _run_tests(
         f"--test-dirs={test_dir}",
         # "misc/cexample_class.py",
     ]
-    stdout = subprocess_run(
+    subprocess_run(
         args=args,
         cwd=micropython_tests / "tests",
+        logfile=testresults_directory(f"run-tests-{test_dir}.txt").filename,
         timeout_s=60.0,
     )
-    testresults_directory(f"run-tests-{test_dir}.txt").filename.write_text(stdout)
 
 
 @pytest.mark.required_futs(EnumFut.FUT_MCU_ONLY)
