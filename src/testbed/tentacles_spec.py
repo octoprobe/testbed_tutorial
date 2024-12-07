@@ -10,13 +10,13 @@ from testbed.constants import EnumFut, TentacleType
 
 
 class EnumTentacleTag(enum.StrEnum):
-    DAQ_SALEAE = "DAQ_SALEAE"
-    DEVICE_POTPOURRY = "DEVICE_POTPOURRY"
-    MCU_PYBV11 = "MCU_PYBV11"
-    MCU_RPI_PICO = "MCU_RPI_PICO"
-    MCU_RPI_PICO2 = "MCU_RPI_PICO2"
-    MCU_LOLIN_D1_MINI = "MCU_LOLIN_D1_MINI"
-    MCU_LOLIN_C3_MINI = "MCU_LOLIN_C3_MINI"
+    DAQ_SALEAE = "daq_saleae"
+    DEVICE_POTPOURRY = "potpourry"
+    MCU_LOLIN_C3_MINI = "lolin_C3"
+    MCU_LOLIN_D1_MINI = "lolin_D1"
+    MCU_PYBV11 = "pybv11"
+    MCU_RPI_PICO = "pico"
+    MCU_RPI_PICO2 = "pico2"
 
 
 @dataclasses.dataclass
@@ -46,8 +46,6 @@ tentacle_spec_mcu_pybv11 = TentacleSpec(
         EnumFut.FUT_ONEWIRE,
         EnumFut.FUT_TIMER,
     ],
-    category="MicroPython Board",
-    label="pyboard",
     doc=DOC_TENTACLE_PYBV11,
     mcu_usb_id=util_mcu_pyboard.PYBOARD_USB_ID,
     tags="boards=PYBV11:PYBV11-DP:PYBV11-THREAD:PYBV11-DP_THREAD,mcu=stm32,programmer=dfu-util",
@@ -81,8 +79,6 @@ tentacle_spec_mcu_rpi_pico = TentacleSpec(
         EnumFut.FUT_TIMER,
         EnumFut.FUT_EXTMOD_HARDWARE,
     ],
-    category="MicroPython Board",
-    label="pico",
     doc=DOC_TENTACLE_RPI_PICO,
     mcu_usb_id=util_mcu_rp2.RPI_PICO_USB_ID,
     tags="boards=RPI_PICO,mcu=rp2,programmer=picotool",
@@ -117,8 +113,6 @@ tentacle_spec_mcu_rpi_pico2 = TentacleSpec(
         EnumFut.FUT_TIMER,
         EnumFut.FUT_EXTMOD_HARDWARE,
     ],
-    category="MicroPython Board",
-    label="pico2",
     doc=DOC_TENTACLE_RPI_PICO2,
     mcu_usb_id=util_mcu_rp2.RPI_PICO2_USB_ID,
     tags="boards=RPI_PICO2:RPI_PICO2-RISCV,mcu=rp2,programmer=picotool",
@@ -151,8 +145,6 @@ tentacle_spec_mcu_lolin_d1_mini = TentacleSpec(
         EnumFut.FUT_MCU_ONLY,
         EnumFut.FUT_EXTMOD_HARDWARE,
     ],
-    category="MicroPython Board",
-    label="LolinD1",
     doc=DOC_TENTACLE_LOLIN_D1_MINI,
     mcu_usb_id=util_mcu_esp8266.LOLIN_D1_MINI_USB_ID,
     tags="boards=ESP8266_GENERIC,mcu=esp8266,programmer=esptool",
@@ -189,8 +181,6 @@ tentacle_spec_mcu_lolin_c3_mini = TentacleSpec(
         EnumFut.FUT_MCU_ONLY,
         EnumFut.FUT_EXTMOD_HARDWARE,
     ],
-    category="MicroPython Board",
-    label="LolinC3",
     doc=DOC_TENTACLE_LOLIN_C3_MINI,
     mcu_usb_id=util_mcu_esp32C3.LOLIN_C3_MINI_USB_ID,
     tags="boards=LOLIN_C3_MINI,mcu=esp32,programmer=esptool",
@@ -229,8 +219,6 @@ tentacle_spec_device_potpourry = TentacleSpec(
     tentacle_type=TentacleType.TENTACLE_DEVICE_POTPOURRY,
     tentacle_tag=EnumTentacleTag.DEVICE_POTPOURRY,
     futs=[EnumFut.FUT_I2C, EnumFut.FUT_UART, EnumFut.FUT_ONEWIRE, EnumFut.FUT_TIMER],
-    category="MicroPython Board",
-    label="potpourry",
     doc=DOC_TENTACLE_DEVICE_POTPOURRY,
     tags="",
     relays_closed={
@@ -254,8 +242,6 @@ tentacle_spec_daq_saleae = TentacleSpec(
         EnumFut.FUT_TIMER,
         EnumFut.FUT_EXTMOD_HARDWARE,
     ],
-    category="MicroPython Board",
-    label="daq",
     doc=DOC_TENTACLE_DAQ_SALEAE,
     tags="daq=saleae_clone",
     relays_closed={
