@@ -7,3 +7,4 @@ git_cache/**
 downloads/**
 *.log
 testbed.lock
+mpbuild/tests_mpbuild/results/*.txt

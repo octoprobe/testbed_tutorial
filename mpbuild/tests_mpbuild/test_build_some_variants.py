@@ -5,10 +5,14 @@ Goal is a high test coverage.
 """
 
 import os
-from pathlib import Path
+import pathlib
 
 from mpbuild.board_database import Database
 from mpbuild.build_api import build_by_variant_normalized
+
+THIS_FILE = pathlib.Path(__file__)
+RESULTS_DIRECTORY = THIS_FILE.parent / "results"
+RESULTS_DIRECTORY.mkdir(parents=True, exist_ok=True)
 
 MICROPY_DIR = "MICROPY_DIR"
 
@@ -32,7 +36,7 @@ _VARIANTS_TO_TEST = (
 
 def get_db() -> Database:
     try:
-        mpy_root_directory = Path(os.environ[MICROPY_DIR])
+        mpy_root_directory = pathlib.Path(os.environ[MICROPY_DIR])
         return Database(mpy_root_directory=mpy_root_directory)
     except KeyError as e:
         raise SystemExit(
@@ -45,7 +49,9 @@ def main():
 
     for variant_normalized in _VARIANTS_TO_TEST:
         print(f"Testing {variant_normalized}")
-        firmware, _proc = build_by_variant_normalized(
+        logfile = RESULTS_DIRECTORY / f"{THIS_FILE.stem}-{variant_normalized}.txt"
+        firmware = build_by_variant_normalized(
+            logfile=logfile,
             db=db,
             variant_normalized=variant_normalized,
             do_clean=False,
