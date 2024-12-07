@@ -9,7 +9,7 @@ Github runners will be selected by github by finding matching tags.
 Tags of a github runner could be:
 
 * octoprobe: A octoprobe runner!
-* testbed_tutorial:  The testbed connected to the runner.
+* testbed_showcase:  The testbed connected to the runner.
 * MCU_PICO2, MCU_PYBV11: The connected mcu boards. This allows github to run tests on various runners if the support different MCUs.
 
 WIP: Trigger testrun by PR (Pull Requst)

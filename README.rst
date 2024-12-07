@@ -1,4 +1,4 @@
-Testbed `testbed_tutorial`
+Testbed `testbed_showcase`
 ==========================
 
-`Documentation <http://www.octoprobe.org/testbed_tutorial>`_
+`Documentation <http://www.octoprobe.org/testbed_showcase>`_

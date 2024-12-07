@@ -18,7 +18,7 @@ Flightlevel: pytest
 
 Be warned that pytest is quite a complex beast.
 If you are not familiar with pytest, take time to read
-a pytest tutorial about test collection and fixtures.
+a pytest showcase about test collection and fixtures.
 This time is a good investment as pytest is extremly powerful
 and widely used.
 
@@ -89,7 +89,7 @@ Arguments `--git-micropython-tests`
 
 The pytest wrapper is implemented here:
 
-.. autofunction:: tests.tests_github_micropython_org.test_github_micropython_org::test_perf_bench()
+.. autofunction:: tests.micropython_repo.test_run::test_perf_bench()
   :noindex:
 
 Arguments `--dir-micropython-tests`

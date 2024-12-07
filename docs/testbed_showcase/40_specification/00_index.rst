@@ -1,4 +1,4 @@
-Specifiation of  `testbed_tutorial`
+Specifiation of  `testbed_showcase`
 ===================================
 
 Table of contents

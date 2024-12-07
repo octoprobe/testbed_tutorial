@@ -1,7 +1,7 @@
 Design decisions
 ================
 
-Every testbed requires a unique name. This here is called `testbed_tutorial`.
+Every testbed requires a unique name. This here is called `testbed_showcase`.
 
 .. note::
   
@@ -11,7 +11,7 @@ Every testbed requires a unique name. This here is called `testbed_tutorial`.
   * `testbed_I2C_multicontroller`: In multicontroller (multimaster) mode many special situations an race condition may occur. This testbed could provide the hardware to create error conditions like shortening the bus. It may be tested if and how the software recovers from these errors.
   * ...
 
-`testbed_tutorial` is designed to demonstrates the various aspects of octoprobe. But also allows to write/run meaningful tests.
+`testbed_showcase` is designed to demonstrates the various aspects of octoprobe. But also allows to write/run meaningful tests.
 
 .. rubric:: Block diagram
 
@@ -35,11 +35,11 @@ Every testbed requires a unique name. This here is called `testbed_tutorial`.
 
 
 Signals
-  See :doc:`/testbed_tutorial/40_specification/10_octobus-signals`
+  See :doc:`/testbed_showcase/40_specification/10_octobus-signals`
 
 Tentacle Roles
-  See :doc:`/testbed_tutorial/40_specification/20_tentacle-roles`
+  See :doc:`/testbed_showcase/40_specification/20_tentacle-roles`
 
 FUTs (*FUT*: Feature Under Test)
-  See :doc:`/testbed_tutorial/40_specification/30_feature-under-test`
+  See :doc:`/testbed_showcase/40_specification/30_feature-under-test`
 

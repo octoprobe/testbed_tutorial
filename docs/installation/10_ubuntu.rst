@@ -45,12 +45,12 @@ Installation: APT
 On Raspbian: Skip python3.12-venv
 
 
-git clone testbed_tutorial
+git clone testbed_showcase
 --------------------------
 
 .. code::
 
-    git clone https://github.com/octoprobe/testbed_tutorial.git
+    git clone https://github.com/octoprobe/testbed_showcase.git
 
 python
 ------
@@ -60,7 +60,7 @@ python
     uv venv --python 3.13.0 ~/venv_octoprobe
 
     source ~/venv_octoprobe/bin/activate
-    uv pip install -e ~/testbed_tutorial
+    uv pip install -e ~/testbed_showcase
 
     echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
     # Log out and in again
@@ -101,5 +101,5 @@ Start the tests
 
 .. code:: 
 
-   cd ~/testbed_tutorial
+   cd ~/testbed_showcase
    pytest --firmware-json=pytest_args_firmware_RPI_PICO2_v1.24.0.json tests/test_simple.py::test_i2c

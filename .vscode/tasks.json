@@ -60,7 +60,7 @@
         {
             "label": "sphinx-intersphinx",
             "type": "shell",
-            "command": "python -m sphinx.ext.intersphinx http://octoprobe.org/testbed_tutorial/objects.inv",
+            "command": "python -m sphinx.ext.intersphinx http://octoprobe.org/testbed_showcase/objects.inv",
             "options": {
                 "cwd": "${workspaceFolder}",
             },
