@@ -57,7 +57,7 @@ python
 
 .. code::
 
-    uv venv --python 3.13.0 ~/testenv_showcase/venv
+    uv venv --python 3.13.1 --prompt=testenv_showcase ~/testenv_showcase/venv
 
     source ~/testenv_showcase/venv/bin/activate
     uv pip install -e ~/testbed_showcase
