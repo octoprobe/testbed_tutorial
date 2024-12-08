@@ -5,6 +5,7 @@ results/**
 results_*/**
 git_cache/**
 downloads/**
+venv/** */
 *.log
 testbed.lock
 mpbuild/tests_mpbuild/results/*.txt

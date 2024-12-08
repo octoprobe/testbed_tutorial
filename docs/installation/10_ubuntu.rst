@@ -57,12 +57,12 @@ python
 
 .. code::
 
-    uv venv --python 3.13.0 ~/venv_octoprobe
+    uv venv --python 3.13.0 ~/testenv_showcase/venv
 
-    source ~/venv_octoprobe/bin/activate
+    source ~/testenv_showcase/venv/bin/activate
     uv pip install -e ~/testbed_showcase
 
-    echo 'source ~/venv_octoprobe/bin/activate' >> ~/.profile
+    echo 'source ~/testenv_showcase/venv/bin/activate' >> ~/.profile
     # Log out and in again
 
 Software requiring root access
